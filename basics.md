@@ -6,13 +6,8 @@ A series of simple examples are provided showing how to retrieve, filter, aggreg
 
 Data can be retrieved by selecting
 
-
 * Database & Table (separated by a period.  e.g. `LSE_SAMPLE.TRD`).
-
-
 * Symbol or Symbols using the field `SYMBOL_NAME`
-
-
 * Time Range using field `TIMESTAMP` with `>=` and `<` or Time equal to, using `TIMESTAMP =`
 
 All three must be provided for results to be retrieved.
@@ -96,162 +91,44 @@ The full list of 200+ Global Equities, Futures, Options & Indices databases is a
 
 The list of sample databases are additionally included below:
 
-## **OneTick Cloud Sample Databases**
+#### **OneTick Cloud Sample Databases**
 
-| Database
-
- | Description
-
- | Available Tables
-
- |
-| --------------- | ----------------------- | ---------------- | --------------- | --------------- | --------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | -------------- | ------------ | ------------ | ------------- | ------------------ | ------------- | ----------- | ----------------- | ---------------- | --------------------- | --------------------- | ------------ | ------------ | ----------------- | ----------- | ------------ | ----------- |  |  |  |  |  |  |  |  |  |  |
-| CA_COMP_SAMPLE
-
-  | Consolidated Trades & Quotes Across All Canadian Venues
-
- | QTE, NBBO, STAT, TRD
-
- |
-| CA_COMP_SAMPLE_BARS
-
- | Consolidated Canadian Trade & Quote 1 Minute Bars
-
-       | QTE_1M, TRD_1M
-
-       |
-| EU_COMP_SAMPLE
-
-      | Consolidated Trades & Quotes Across All European Venues
-
- | QTE, STAT, TRD
-
-       |
-| EU_COMP_SAMPLE_BARS
-
- | Consolidated European Trade & Quote 1 Minute Bars
-
-       | QTE_1M, TRD_1M
-
-       |
-| LSE_SAMPLE
-
-          | London Stock Exchange Trades, Quotes & Book Depth
-
-       | DAY, IND, MKT, PRL_FULL, QTE, STAT, TRD
-
- |
-| LSE_SAMPLE_BARS
-
-     | LSE Trade & Quote 1 Minute Bars
-
-                         | QTE_1M, TRD_1M, DAY
-
-                     |
-| TDI_FUT_SAMPLE
-
-      | Global Futures  Trades & Quotes
-
-                         | QTE, STAT, TRD
-
-                          |
-| TDI_FUT_SAMPLE_BARS
-
- | Global Futures Trades & Quote 1 Minute Bars
-
-             | QTE_1M, TRD_1M
-
-                          |
-| US_COMP_SAMPLE
-
-      | Consolidated Trades & Quotes Across All US Venues
-
-       | QTE, STAT, TRD
-
-                          |
+| Database            | Description                                             | Available Tables                        |
+|---------------------|---------------------------------------------------------|-----------------------------------------|
+| CA_COMP_SAMPLE      | Consolidated Trades & Quotes Across All Canadian Venues | QTE, NBBO, STAT, TRD                    |
+| CA_COMP_SAMPLE_BARS | Consolidated Canadian Trade & Quote 1 Minute Bars       | QTE_1M, TRD_1M                          |
+| EU_COMP_SAMPLE      | Consolidated Trades & Quotes Across All European Venues | QTE, STAT, TRD                          |
+| EU_COMP_SAMPLE_BARS | Consolidated European Trade & Quote 1 Minute Bars       | QTE_1M, TRD_1M                          |
+| LSE_SAMPLE          | London Stock Exchange Trades, Quotes & Book Depth       | DAY, IND, MKT, PRL_FULL, QTE, STAT, TRD |
+| LSE_SAMPLE_BARS     | LSE Trade & Quote 1 Minute Bars                         | QTE_1M, TRD_1M, DAY                     |
+| TDI_FUT_SAMPLE      | Global Futures  Trades & Quotes                         | QTE, STAT, TRD                          |
+| TDI_FUT_SAMPLE_BARS | Global Futures Trades & Quote 1 Minute Bars             | QTE_1M, TRD_1M                          |
+| US_COMP_SAMPLE      | Consolidated Trades & Quotes Across All US Venues       | QTE, STAT, TRD                          |
 |                     |                                                         |                                         |
-| SYMBOL_UNIVERSE
+| SYMBOL_UNIVERSE     | Symbol Universe across all available Venues             | STAT                                    |
+| OQD_MKT_CAL         | Market Holidays & Trading Hours                         | MKTCAL                                  |
 
-     | Symbol Universe across all available Venues
-
-             | STAT
-
-                                    |
-| OQD_MKT_CAL
-
-         | Market Holidays & Trading Hours
-
-                         | MKTCAL
-
-                                  |
 Data is stored in standardized tables
 
-## **OneTick Cloud Standard Tables**
+#### **OneTick Cloud Standard Tables**
 
-| Table
+| Table    | Description                                                                                |
+|----------|--------------------------------------------------------------------------------------------|
+| DAY      | End of Day Record typically covering Closing Price & Open Interest for Derivatives Markets |
+| IND      | Indicative Prices occuring during Auction phases                                           |
+| QTE      | Quote Events                                                                               |
+| STAT     | Static Reference Data for the Instrument                                                   |
+| TRD      | Trade Events                                                                               |
+| NBBO     | National Best Bid & Offer Quotes                                                           |
+| PRL      | Book Depth - Market By Level                                                               |
+| PRL_FULL | Book Depth - Market by Order                                                               |
+| MKTCAL   | Market Holiday & Trading Hours                                                             |
+| TRD_1M   | 1 Minute Trade Bar                                                                         |
+| QTE_1M   | 1 Minute Quote Bar                                                                         |
 
-               | Description
-
-                                             |
-| ------------------- | ------------------------------------------------------- |
-| DAY
-
-                 | End of Day Record typically covering Closing Price & Open Interest for Derivatives Markets
-
- |
-| IND
-
-                 | Indicative Prices occuring during Auction phases
-
-                                           |
-| QTE
-
-                 | Quote Events
-
-                                                                               |
-| STAT
-
-                | Static Reference Data for the Instrument
-
-                                                   |
-| TRD
-
-                 | Trade Events
-
-                                                                               |
-| NBBO
-
-                | National Best Bid & Offer Quotes
-
-                                                           |
-| PRL
-
-                 | Book Depth - Market By Level
-
-                                                               |
-| PRL_FULL
-
-            | Book Depth - Market by Order
-
-                                                               |
-| MKTCAL
-
-              | Market Holiday & Trading Hours
-
-                                                             |
-| TRD_1M
-
-              | 1 Minute Trade Bar
-
-                                                                         |
-| QTE_1M
-
-              | 1 Minute Quote Bar
-
-                                                                         |
 ## Field Selection
 
-All of the fields in a table can be retrieved by using the `\*` syntax.
+All of the fields in a table can be retrieved by using the `*` syntax.
 
 ```sql
 select *
@@ -261,7 +138,7 @@ and TIMESTAMP >= '2024-01-03 00:00:00 UTC'
 and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 ```
 
-A limited set of fields can be specified by replacing the `\*` with the comma separated set of fields.
+A limited set of fields can be specified by replacing the `*` with the comma separated set of fields.
 
 ```sql
 select  PRICE, SIZE, EXCHANGE
@@ -496,24 +373,3 @@ Retrieves valid quotes for a specified market phase or trading session by joinin
  )
  where OMD_STATUS = 'T'
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

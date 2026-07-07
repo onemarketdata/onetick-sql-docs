@@ -2,39 +2,51 @@
 
 The following aggregations are supported:
 
-AT_HIGH,
-AT_LOW,
-AVG,
-CORR,
-COUNT,
-EXP_TW_AVERAGE,
-EXP_W_AVERAGE,
-FIRST,
-FIRST_TIME,
-HIGH_TIME,
-LAST,
-LAST_TIME,
-LOW_TIME,
-MAX,
-MEDIAN,
-MIN,
-PERCENTILE_CONT,
-PERCENTILE_DISC,
-STANDARDIZED_MOMENT - KURTOSIS,
-STANDARDIZED_MOMENT - SKEWNESS,
-STDDEV,
-STDDEVP,
-SUM,
-TW_AVG,
-VAR,
-VARP,
-VWAP.
+[AT_HIGH](),
+[AT_LOW](),
+[AVG](),
+[CORR](),
+[COUNT](),
+[EXP_TW_AVERAGE](),
+[EXP_W_AVERAGE](),
+[FIRST](),
+[FIRST_TIME](),
+[HIGH_TIME](),
+[LAST](),
+[LAST_TIME](),
+[LOW_TIME](),
+[MAX](),
+[MEDIAN](),
+[MIN](),
+[PERCENTILE_CONT](),
+[PERCENTILE_DISC](),
+[STANDARDIZED_MOMENT - KURTOSIS](),
+[STANDARDIZED_MOMENT - SKEWNESS](),
+[STDDEV](),
+[STDDEVP](),
+[SUM](),
+[TW_AVG](),
+[VAR](),
+[VARP](),
+[VWAP]().
 
 ## AT_HIGH
 
 Returns the target field value at the first high of another fields set of values. If all values inside the group are NaN the aggregate returns NaN.
 
-Simple Syntax:`AT_HIGH([High Field Name],[Target Field Name])`Window Syntax:`AT_HIGH([High Field Name,[Target Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`AT_HIGH([High Field Name],[Target Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`AT_HIGH([High Field Name],[Target Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`AT_HIGH([High Field Name,[Target Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`AT_HIGH([High Field Name],[Target Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select AT_HIGH(PRICE,SIZE) as SIZE_AT_HIGH_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -71,7 +83,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the target field value at the first Low of another fields set of values. If all values inside the group are NaN the aggregate returns NaN.
 
-Simple Syntax:`AT_LOW([Low Field Name],[Target Field Name])`Window Syntax:`AT_LOW([Low Field Name,[Target Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`AT_LOW([Low Field Name],[Target Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`AT_LOW([Low Field Name],[Target Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`AT_LOW([Low Field Name,[Target Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`AT_LOW([Low Field Name],[Target Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select AT_LOW(PRICE,SIZE) as SIZE_AT_LOW_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -108,7 +132,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the average of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
 
-Simple Syntax:`AVG([Field Name])`Window Syntax:`AVG([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`AVG([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`AVG([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`AVG([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`AVG([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select AVG(PRICE) as AVG_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -145,7 +181,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the correlation of non-NaN pairs of values. If all values inside the group are NaN the aggregate returns NaN.
 
-Simple Syntax:`CORR([Field Name 1],[Field Name 2])`Window Syntax:`CORR([Field Name 1],[Field Name 2]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`CORR([Field Name 1],[Field Name 2]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`CORR([Field Name 1],[Field Name 2])`
+<br/>
+Window Syntax:
+<br/>
+`CORR([Field Name 1],[Field Name 2]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`CORR([Field Name 1],[Field Name 2]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select CORRELATION(PRICE,SIZE) as CORR_PAIR
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -182,7 +230,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the count of values.
 
-Simple Syntax:`COUNT([Field Name])` or `COUNT(\*)`Window Syntax:`COUNT([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`COUNT([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`COUNT([Field Name])` or `COUNT(*)`
+<br/>
+Window Syntax:
+<br/>
+`COUNT([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`COUNT([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select COUNT(PRICE) as COUNT_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -220,7 +280,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 Returns the Exponential Weighted Average of a set of values.
 It expects the field to aggregate upon, plus the `DECAY` value, which has a decay value type of Lambda.
 
-Simple Syntax:`EXP_W_AVERAGE([Field Name],DECAY=[Lambda Value])`Window Syntax:`EXP_W_AVERAGE([Field Name],DECAY=[Lambda Value]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`EXP_W_AVERAGE([Field Name],DECAY=[Lambda Value]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`EXP_W_AVERAGE([Field Name],DECAY=[Lambda Value])`
+<br/>
+Window Syntax:
+<br/>
+`EXP_W_AVERAGE([Field Name],DECAY=[Lambda Value]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`EXP_W_AVERAGE([Field Name],DECAY=[Lambda Value]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select EXP_W_AVERAGE(PRICE,DECAY=0.1) as EXP_W_AVG_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -258,7 +330,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 Returns the Exponential Time Weighted Average of a set of values.
 It expects the field to aggregate upon, plus the `DECAY` value, which has a decay value type of half life in seconds.
 
-Simple Syntax:`EXP_TW_AVERAGE([Field Name],DECAY=[Half life in seconds])`Window Syntax:`EXP_TW_AVERAGE([Field Name],DECAY=[Half life in seconds]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`EXP_TW_AVERAGE([Field Name],DECAY=[Half life in seconds]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`EXP_TW_AVERAGE([Field Name],DECAY=[Half life in seconds])`
+<br/>
+Window Syntax:
+<br/>
+`EXP_TW_AVERAGE([Field Name],DECAY=[Half life in seconds]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`EXP_TW_AVERAGE([Field Name],DECAY=[Half life in seconds]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select EXP_TW_AVERAGE(PRICE,DECAY=0.1) as EXP_W_AVG_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -295,7 +379,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the First value of a set of values
 
-Simple Syntax:`FIRST([Field Name])`Window Syntax:`FIRST([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`FIRST([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`FIRST([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`FIRST([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`FIRST([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select FIRST(PRICE) as FIRST_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -332,7 +428,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the Timestamp of the first value of a set of values
 
-Simple Syntax:`FIRST_TIME([Field Name])` or `FIRST_TIME(\*)`Window Syntax:`FIRST_TIME([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`FIRST_TIME([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`FIRST_TIME([Field Name])` or `FIRST_TIME(*)`
+<br/>
+Window Syntax:
+<br/>
+`FIRST_TIME([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`FIRST_TIME([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select FIRST_TIME(PRICE) as FIRST_TIME_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -369,7 +477,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the First Timestamp of the maximum value of a set of values
 
-Simple Syntax:`HIGH_TIME([Field Name])`Window Syntax:`HIGH_TIME([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`HIGH_TIME([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`HIGH_TIME([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`HIGH_TIME([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`HIGH_TIME([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select HIGH_TIME(PRICE) as HIGH_TIME_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -406,7 +526,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the Last value of a set of values
 
-Simple Syntax:`LAST([Field Name])`Window Syntax:`LAST([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`LAST([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`LAST([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`LAST([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`LAST([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select LAST(PRICE) as LAST_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -443,7 +575,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the Timestamp of the last value of a set of values
 
-Simple Syntax:`LAST_TIME([Field Name])` or `LAST_TIME(\*)`Window Syntax:`LAST_TIME([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`LAST_TIME([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`LAST_TIME([Field Name])` or `LAST_TIME(*)`
+<br/>
+Window Syntax:
+<br/>
+`LAST_TIME([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`LAST_TIME([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select LAST_TIME(PRICE) as LAST_TIME_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -480,7 +624,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the First Timestamp of the minimum value of a set of values
 
-Simple Syntax:`LOW_TIME([Field Name])`Window Syntax:`LOW_TIME([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`LOW_TIME([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`LOW_TIME([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`LOW_TIME([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`LOW_TIME([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select LOW_TIME(PRICE) as LOW_TIME_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -517,7 +673,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the maximum of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
 
-Simple Syntax:`MAX([Field Name])`Window Syntax:`MAX([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`MAX([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`MAX([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`MAX([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`MAX([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select MAX(PRICE) as MAX_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -554,7 +722,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the Median of a set of values.
 
-Simple Syntax:`MEDIAN([Field Name])`Window Syntax:`MEDIAN([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`MEDIAN([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`MEDIAN([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`MEDIAN([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`MEDIAN([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select MEDIAN(PRICE) as MEDIAN_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -591,7 +771,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the minimum of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
 
-Simple Syntax:`MIN([Field Name])`Window Syntax:`MIN([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`MIN([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`MIN([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`MIN([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`MIN([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select MIN(PRICE) as MIN_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -629,7 +821,11 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 Returns the percentile of non-NaN values based on a continuous distribution.  If all values inside the group are NaN the aggregate returns NaN.
 The Percentile is written as a decimal.  e.g. 0.9 = 90%, 0.5 = 50%, 0.1 = 10%
 
-Simple Syntax:`PERCENTILE_CONT([Percentile]) WITHIN GROUP (ORDER BY [Field Name] asc)````sql
+Simple Syntax:
+<br/>
+`PERCENTILE_CONT([Percentile]) WITHIN GROUP (ORDER BY [Field Name] asc)`
+<br/>
+```sql
 select PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY PRICE asc) as P90C
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -642,7 +838,11 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 Returns the percentile of non-NaN values based on a discrete distribution.  If all values inside the group are NaN the aggregate returns NaN.
 The Percentile is written as a decimal.  e.g. 0.9 = 90%, 0.5 = 50%, 0.1 = 10%
 
-Simple Syntax:`PERCENTILE_DISC([Percentile]) WITHIN GROUP (ORDER BY [Field Name] asc)````sql
+Simple Syntax:
+<br/>
+`PERCENTILE_DISC([Percentile]) WITHIN GROUP (ORDER BY [Field Name] asc)`
+<br/>
+```sql
 select PERCENTILE_DISC(0.9) WITHIN GROUP (ORDER BY PRICE asc) as P90C
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -653,9 +853,21 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ## STANDARDIZED_MOMENT - SKEWNESS
 
 Returns the Skewness of a set of values. using the `STANDARDIZED_MOMENT` aggregate.
-It expects the field to aggregate upon, plus the `degree" value.   \`\`3` for Skewness.
+It expects the field to aggregate upon, plus the `degree" value.   ``3` for Skewness.
 
-Simple Syntax:`STANDARDIZED_MOMENT([Field Name],degree=3)`Window Syntax:`STANDARDIZED_MOMENT([Field Name],degree=3) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`STANDARDIZED_MOMENT([Field Name],degree=3) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`STANDARDIZED_MOMENT([Field Name],degree=3)`
+<br/>
+Window Syntax:
+<br/>
+`STANDARDIZED_MOMENT([Field Name],degree=3) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`STANDARDIZED_MOMENT([Field Name],degree=3) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select STANDARDIZED_MOMENT(PRICE,degree=3) as SKEWNESS_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -693,7 +905,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 Returns the Kurtosis of a set of values, using the `STANDARDIZED_MOMENT` aggregate.
 It expects the field to aggregate upon, plus the `degree` value.   `4` for Kurtosis.
 
-Simple Syntax:`STANDARDIZED_MOMENT([Field Name],degree=4)`Window Syntax:`STANDARDIZED_MOMENT([Field Name],degree=4) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`STANDARDIZED_MOMENT([Field Name],degree=4) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`STANDARDIZED_MOMENT([Field Name],degree=4)`
+<br/>
+Window Syntax:
+<br/>
+`STANDARDIZED_MOMENT([Field Name],degree=4) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`STANDARDIZED_MOMENT([Field Name],degree=4) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select STANDARDIZED_MOMENT(PRICE,degree=4) as KURTOSIS_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -730,7 +954,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the Sample Standard Deviation of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
 
-Simple Syntax:`STDDEV([Field Name])`Window Syntax:`STDDEV([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`STDDEV([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`STDDEV([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`STDDEV([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`STDDEV([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select STDDEV(PRICE) as STDDEV_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -767,7 +1003,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the Population Standard Deviation of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
 
-Simple Syntax:`STDDEVP([Field Name])`Window Syntax:`STDDEVP([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`STDDEVP([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`STDDEVP([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`STDDEVP([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`STDDEVP([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select STDDEVP(PRICE) as STDDEVP_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -804,7 +1052,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the sum of non-NaN values. If all values inside the group are NaN the aggregate returns 0.
 
-Simple Syntax:`SUM([Field Name])`Window Syntax:`SUM([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`SUM([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`SUM([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`SUM([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`SUM([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select SUM(SIZE) as SUM_SIZE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -841,7 +1101,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the Time Weighted Average (TWAP) of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
 
-Simple Syntax:`TW_AVG([Field Name])`Window Syntax:`TW_AVG([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`TW_AVG([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`TW_AVG([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`TW_AVG([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`TW_AVG([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select TW_AVG(PRICE) as TW_AVG_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -878,7 +1150,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the Sample Variance of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
 
-Simple Syntax:`VAR([Field Name])`Window Syntax:`VAR([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`VAR([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`VAR([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`VAR([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`VAR([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select VAR(PRICE) as VAR_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -915,7 +1199,19 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 Returns the Population Variance of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
 
-Simple Syntax:`VARP([Field Name])`Window Syntax:`VARP([Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`VARP([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`VARP([Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`VARP([Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`VARP([Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select VARP(PRICE) as VARP_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -951,9 +1247,25 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ## VWAP
 
 Returns the Weighted Average, typically VWAP of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
-It can also be calculated using the Product of the two fields, divided by the sum of the two fields. e,g.  `SUM(PRICE\*SIZE)/SUM(SIZE)`
+It can also be calculated using the Product of the two fields, divided by the sum of the two fields. e,g.  `SUM(PRICE*SIZE)/SUM(SIZE)`
 
-Simple Syntax:`VWAP(price_field_name=[Field Name],size_field_name=[Weight Field Name])`Alternative Syntax:`SUM([Field Name]\*[Weight Field Name])/SUM([Weight Field Name])`Window Syntax:`VWAP(price_field_name=[Field Name],size_field_name=[Weight Field Name]) OVER(order by TIMESTAMP asc)`Moving Window Syntax:`VWAP(price_field_name=[Field Name],size_field_name=[Weight Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)````sql
+Simple Syntax:
+<br/>
+`VWAP(price_field_name=[Field Name],size_field_name=[Weight Field Name])`
+<br/>
+Alternative Syntax:
+<br/>
+`SUM([Field Name]*[Weight Field Name])/SUM([Weight Field Name])`
+<br/>
+Window Syntax:
+<br/>
+`VWAP(price_field_name=[Field Name],size_field_name=[Weight Field Name]) OVER(order by TIMESTAMP asc)`
+<br/>
+Moving Window Syntax:
+<br/>
+`VWAP(price_field_name=[Field Name],size_field_name=[Weight Field Name]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+<br/>
+```sql
 select VWAP(price_field_name=PRICE,size_field_name=SIZE) as VWAP_PRICE
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
@@ -985,24 +1297,3 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

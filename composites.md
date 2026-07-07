@@ -10,42 +10,20 @@ Consolidating trades, quotes, and providing an NBBO and daily rollup.
 
 This is available for:
 
-
 * `AU_COMP` - Consolidated Across All Australian Equity Venues
-
-
 * `CA_COMP` - Consolidated Across All Canadian Equity Venues
-
-
 * `EU_COMP` - Consolidated Across All European Equity Venues
-
-
 * `IN_COMP` - Consolidated Across All Indian Equity Venues
-
-
 * `JP_COMP` - Consolidated Across All Japanese Equity Venues
-
-
 * `KR_COMP` - Consolidated Across All Korean Equity Venues
-
-
 * `MX_COMP` - Consolidated Across All Mexican Equity Venues
-
-
 * `TW_COMP` - Consolidated Across All Taiwanese Equity Venues
-
-
 * `US_COMP` - Consolidated Across All US Equity Venues
 
 Samples of the Composite datasets covering the first 3 months of 2024 are available for:
 
-
 * `CA_COMP_SAMPLE` - Consolidated Trades & Quotes Across All Canadian Venues
-
-
 * `EU_COMP_SAMPLE` - Consolidated Trades & Quotes Across All European Venues
-
-
 * `US_COMP_SAMPLE` - Consolidated Trades & Quotes Across All US Venues
 
 Data is aggregated by venue in fields such as `QUOTE_VENUE`, `TRADE_VENUE`, or `EXCHANGE` (for US_COMP).
@@ -105,46 +83,19 @@ In US_COMP, venues are identified by the `EXCHANGE` field, while other composite
 
 Each daily bar includes comprehensive volume and price information:
 
-
 * `VOLUME` - Total volume
-
-
 * `VOLUME_ODD_LOT` - Volume from odd-lot trades (< 100 shares)
-
-
 * `VOLUME_ROUND_LOT` - Volume from round-lot trades (>= 100 shares)
-
-
 * `VOLUME_OFF_EXCHANGE` - Volume from off-exchange trades
-
-
 * `VOLUME_PRE_MARKET` - Pre-market volume (before market open)
-
-
 * `VOLUME_POST_MARKET` - Post-market volume (after market close)
-
-
 * `VOLUME_OPENING_AUCTION` - Volume from opening auction
-
-
 * `VOLUME_CLOSING_AUCTION` - Volume from closing auction
-
-
 * `OPEN_PRICE` - Opening price
-
-
 * `CLOSE_PRICE` - Closing price
-
-
 * `PRICE_OPENING_AUCTION` - Opening auction execution price
-
-
 * `PRICE_CLOSING_AUCTION` - Closing auction execution price
-
-
 * `HIGH_PRICE` - Highest price during the day
-
-
 * `LOW_PRICE` - Lowest price during the day
 
 ```sql
@@ -203,16 +154,9 @@ Useful for understanding order execution quality, market impact analysis, and tr
 
 The analysis joins trade data with prevailing NBBO quotes and classifies each trade into one of four categories:
 
-
 * `VOLUME_AT_MID` - Volume executed at the midpoint price
-
-
 * `VOLUME_INSIDE_NBBO` - Volume executed strictly inside the bid-ask spread (between bid and ask, but not at either)
-
-
 * `VOLUME_AT_NBBO` - Volume executed at the bid or ask price
-
-
 * `VOLUME_OUTSIDE_NBBO` - Volume executed outside the NBBO (below bid or above ask)
 
 ```sql
@@ -473,24 +417,3 @@ Returns pre-calculated Daily OHLCV data from the European Composite for specifie
  and TIMESTAMP < '2024-01-04 00:00:00 Europe/London'
  LIMIT 1000
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

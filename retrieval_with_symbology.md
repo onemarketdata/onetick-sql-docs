@@ -6,16 +6,9 @@ A series of simple examples are provided showing how to retrieve data with a spe
 
 Data is generally retrieved by specifying
 
-
 * Database & Table (separated by a period.  e.g. `LSE_SAMPLE.TRD`).
-
-
 * Symbol or Symbols using the field `SYMBOL_NAME`
-
-
 * Time Range using field `TIMESTAMP`
-
-
 * Limiting the volume of returned records with `LIMIT`
 
 Where the Symbol typically represents the exchange ticker symbol for the instrument.
@@ -33,13 +26,8 @@ LIMIT 10
 
 Symbols can be retrieved by Bloomberg Symbol with:
 
-
 * Prefixing the Database name with `BSYM::`
-
-
 * Specifying the `SYMBOL_NAME` as the full Bloomberg Symbol
-
-
 * Specifying the Date when the symbol is active (as symbols can change across time), using `SYMBOL_DATE`
 
 ```sql
@@ -55,13 +43,8 @@ LIMIT 10
 
 Symbols can be retrieved by FGI Composite with:
 
-
 * Prefixing the Database name with `FGC::`
-
-
 * Specifying the `SYMBOL_NAME` as the FIGI Symbol
-
-
 * Specifying the Date when the symbol is active (as symbols can change across time), using `SYMBOL_DATE`
 
 ```sql
@@ -77,13 +60,8 @@ LIMIT 10
 
 Symbols can be retrieved by CUSIP with:
 
-
 * Prefixing the Database name with `CUS::`
-
-
 * Specifying the `SYMBOL_NAME` as the CUSIP
-
-
 * Specifying the Date when the symbol is active (as symbols can change across time), using `SYMBOL_DATE`
 
 ```sql
@@ -98,14 +76,8 @@ LIMIT 10
 ## ISIN Symbol Retrieval
 
 > Symbols can be retrieved by ISIN with:
-
-
 * Prefixing the Database name with `ISN::`
-
-
 * Specifying the `SYMBOL_NAME` as the ISIN
-
-
 * Specifying the Date when the symbol is active (as symbols can change across time), using `SYMBOL_DATE`
 
 ```sql
@@ -121,13 +93,8 @@ LIMIT 10
 
 Symbols can be retrieved by SEDOL with:
 
-
 * Prefixing the Database name with `SED::`
-
-
 * Specifying the `SYMBOL_NAME` as the SEDOL
-
-
 * Specifying the Date when the symbol is active (as symbols can change across time), using `SYMBOL_DATE`
 
 ```sql
@@ -138,24 +105,3 @@ and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 and SYMBOL_DATE = 20240104
 LIMIT 10
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

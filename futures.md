@@ -6,28 +6,20 @@ This section contains examples of querying futures market data from OneTick Clou
 
 OneTick Cloud uses a hierarchical symbol naming convention for futures:
 
-
-* **Futures Contracts**: `[Product Code]\\[Expiry Month & Year]` - e.g., `CL\\N26` for Crude Oil June 2026
-
-
-* **Futures Spreads**: `[Product Code]\\[Expiry Month & Year]\\[Expiry Month & Year]` - e.g., `CL\\N26\\Z26` for a Crude Oil spread between June and December 2026
+* **Futures Contracts**: `[Product Code]\[Expiry Month & Year]` - e.g., `CL\N26` for Crude Oil June 2026
+* **Futures Spreads**: `[Product Code]\[Expiry Month & Year]\[Expiry Month & Year]` - e.g., `CL\N26\Z26` for a Crude Oil spread between June and December 2026
 
 Wildcards can be used to retrieve multiple contracts:
 
-
-* `CL\\____` - Returns all Crude Oil futures (4 underscores for month+year)
-
-
-* `CL\\\\%` - Returns all Crude Oil contracts (futures and spreads)
-
-
+* `CL\____` - Returns all Crude Oil futures (4 underscores for month+year)
+* `CL\\%` - Returns all Crude Oil contracts (futures and spreads)
 * `CL________` - Returns all Crude Oil spreads (8 underscores)
 
 ## Point in Time Trade Snapshot for Futures Product
 
 Retrieves a snapshot of trade data at a specific point in time for all contracts in a futures product, looking back a specified number of seconds to find the prevailing trade.
 
-Calculates Point in Time Trade Snapshot for Futures Product (Futures Chain). A specific point in time is selected with the TIMESTAMP equal to a specified value. All Futures Symbols are retrieved with SYMBOL_NAME LIKE ‘[Product Code]\\____’. A Lookback is defined in seconds, to check for the prevailing trade before the selected time, upto the lookback period.
+Calculates Point in Time Trade Snapshot for Futures Product (Futures Chain). A specific point in time is selected with the TIMESTAMP equal to a specified value. All Futures Symbols are retrieved with SYMBOL_NAME LIKE ‘[Product Code]\\_\_\_\_’. A Lookback is defined in seconds, to check for the prevailing trade before the selected time, upto the lookback period.
 
 ```sql
  select *
@@ -111,24 +103,3 @@ Return the Volume and Open Interest (OI) for the first 1000 Crude Oil Futures co
  and s.init_lookback = 86400   -- Lookback 3
  order by EXPIRATION_DATE asc
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

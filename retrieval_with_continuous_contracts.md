@@ -6,21 +6,13 @@ Additionally continuous contracts are available representing the front month rol
 
 Continuous Contracts are queried with:
 
-
-* `[Product Code]\\\\1` to `[Product Code]\\\\12`.  - Front Month to Twelfth Month
-
-
+* `[Product Code]\\1` to `[Product Code]\\12`.  - Front Month to Twelfth Month
 * `[Product Code]_r_vol` - Front Month based on Maximum Volume
-
-
 * `[Product Code]_r_oi` - Front Month based on Maximum Open Interest
 
 Continuous Contracts are also queried with the Bloomberg symbology `BSYM`:
 
-
 * `[Bloomberg Product Code]1` to `[Bloomberg Product Code]12`.  - Front Month to Twelfth Month
-
-
 * `[Bloomberg Product Code]A` - Front Month based on Maximum Volume
 
 ## Retrieval of Futures Contracts
@@ -29,41 +21,22 @@ Futures Contracts represent specific expiration months and are identified by the
 
 Daily data retrieval requires:
 
-
 * Database & DAY Table (separated by a period, e.g. `CME_SAMPLE_DAILY.DAY`)
-
-
-* Symbol using the field `SYMBOL_NAME`, formatted as `[Product Code]\\\\[Expiry Month][Expiry Year]`
-
-
+* Symbol using the field `SYMBOL_NAME`, formatted as `[Product Code]\\[Expiry Month][Expiry Year]`
 * Appropriate filters on `TIMESTAMP` and `symbol_date` for accurate contract identification
 
 Common Futures Product Codes include:
 
-
 * `ES` - E-mini S&P 500 Futures
-
-
 * `NQ` - E-mini Nasdaq-100 Futures
-
-
 * `YM` - E-mini Dow Jones Futures
-
-
 * `GC` - Gold Futures
-
-
 * `CL` - Crude Oil Futures
-
-
 * `NG` - Natural Gas Futures
 
 Expiry Month Codes (for contract specification):
 
-
 * `F` - January, `G` - February, `H` - March, `J` - April, `K` - May, `M` - June
-
-
 * `N` - July, `Q` - August, `U` - September, `V` - October, `X` - November, `Z` - December
 
 ```sql
@@ -97,14 +70,11 @@ and symbol_date = 20240401                  -- Specifies date for cont contract 
 
 Daily Data is retrieved by specifying:
 
-
 * Database & DAY Table (separated by a period.  e.g. `ICE_EU_COM_SAMPLE_DAILY.DAY`).
-
-
 * Symbol or Symbols using the field `SYMBOL_NAME`, with the continuous contract definiition.
 
-The Symbol represents the Continuous contract with the `[Product Code]\\\\1` to `[Product Code]\\\\12` syntax.
-For Brent Crude the Product Code is `BRN`, producing `BRN\\\\1`
+The Symbol represents the Continuous contract with the `[Product Code]\\1` to `[Product Code]\\12` syntax.
+For Brent Crude the Product Code is `BRN`, producing `BRN\\1`
 
 ```sql
 select * from ICE_EU_COM_SAMPLE_DAILY.DAY
@@ -119,10 +89,7 @@ and symbol_date = 20240401                  -- Specifies date for cont contract 
 
 Daily Data is retrieved by specifying:
 
-
 * Database & DAY Table (separated by a period.  e.g. `ICE_EU_COM_SAMPLE_DAILY.DAY`).
-
-
 * Symbol or Symbols using the field `SYMBOL_NAME`, with the continuous contract definiition.
 
 The Symbol represents the Continuous contract with the `[Product Code]_r_vol` syntax.
@@ -141,10 +108,7 @@ and symbol_date = 20240401                  -- Specifies date for cont contract 
 
 Daily Data is retrieved by specifying:
 
-
 * Database & DAY Table (separated by a period.  e.g. `ICE_EU_COM_SAMPLE_DAILY.DAY`).
-
-
 * Symbol or Symbols using the field `SYMBOL_NAME`, with the continuous contract definiition.
 
 The Symbol represents the Continuous contract with the `[Product Code]_r_oi` syntax.
@@ -163,10 +127,7 @@ and symbol_date = 20240401                  -- Specifies date for cont contract 
 
 Furures Contracts can be retrieved by Bloomberg Symbol with:
 
-
 * Prefixing the Database name with `BSYM::` - Setting the `BSYM` symbology
-
-
 * Specifying the `SYMBOL_NAME` as the full Bloomberg Symbol
 
 ```sql
@@ -182,10 +143,7 @@ LIMIT 10
 
 Daily Data is retrieved by specifying:
 
-
 * Symbology `BSYM`, Database & DAY Table (separated by a period.  e.g. `BSYM::ICE_EU_COM_SAMPLE_DAILY.DAY`).
-
-
 * Symbol or Symbols using the field `SYMBOL_NAME`, with the Bloomberg continuous contract definiition.
 
 The Symbol represents the Continuous contract with the `[Bloomberg Product Code]1` to `[Bloomberg Product Code]12` syntax.
@@ -203,10 +161,7 @@ and symbol_date = 20240401                 -- Specifies date for cont contract l
 
 Daily Data is retrieved by specifying:
 
-
 * Symbology `BSYM`, Database & DAY Table (separated by a period.  e.g. `BSYM::ICE_EU_COM_SAMPLE_DAILY.DAY`).
-
-
 * Symbol or Symbols using the field `SYMBOL_NAME`, with the continuous contract definiition.
 
 The Symbol represents the Continuous contract with the `[Product Code]A` syntax.
@@ -220,24 +175,3 @@ and TIMESTAMP < '2024-04-01 00:00:00 UTC'
 and UPDATE_TYPE = 'Summary'
 and symbol_date = 20240401                  -- Specifies date for cont contract lookup
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

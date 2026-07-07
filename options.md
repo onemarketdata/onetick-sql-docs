@@ -54,22 +54,11 @@ OPRA (Options Price Reporting Authority) provides consolidated options pricing a
 OPRA data includes both intraday trades and end-of-day summaries with comprehensive Greeks and contract metadata.
 OPRA options data is available in multiple databases and granularities:
 
-
 * `US_OPTIONS_SAMPLE` - Real-time trade data for options contracts
-
-
 * `US_OPTIONS_EOD_SAMPLE` - End-of-day summary data with Greeks and aggregated metrics
-
-
 * `US_OPTIONS_SAMPLE.TRD` - Individual options trades
-
-
 * `US_OPTIONS_SAMPLE.STAT` - Options contract metadata (strike, expiration, call/put indicator)
-
-
 * `US_OPTIONS_EOD_SAMPLE.DAY` - Daily aggregated options data
-
-
 * `US_OPTIONS_EOD_SAMPLE.STAT` - Static contract information
 
 ## OPRA Snapshot - Prevailing Prices at Specified Time
@@ -323,24 +312,3 @@ from (
 )
 group by STRIKE_PRICE
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

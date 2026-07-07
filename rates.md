@@ -7,23 +7,15 @@ The RATES database contains daily and statistical interest rate information for 
 
 The RATES database provides data through the following tables:
 
-
 * `RATES.DAY` - Daily interest rates table containing closing rates and statistics
-
-
 * `RATES.STAT` - Statistical records for interest rates with symbol information and metadata
 
 ## Retrieval of All Interest Rate Symbols
 
 Daily Data is retrieved by specifying:
 
-
 * Database & STAT Table (separated by a period, e.g. `RATES.STAT`).
-
-
 * Symbol selection using `SYMBOL_NAME` to return all available rates
-
-
 * Timestamp range to filter for a specific date
 
 The STAT table returns all available interest rate symbols and their associated names for a specific date.
@@ -41,13 +33,8 @@ WHERE
 
 Daily Data is retrieved by specifying:
 
-
 * Database & DAY Table (separated by a period, e.g. `RATES.DAY`).
-
-
 * Symbol using the field `SYMBOL_NAME`, with a specific interest rate identifier
-
-
 * Timestamp range to filter for the desired time period
 
 Interest rate symbols are typically named with the rate index followed by an underscore and the rate descriptor.
@@ -63,24 +50,3 @@ WHERE
   AND TIMESTAMP < TODAY()                 -- End date: up to today (exclusive)
 LIMIT 100000                              -- Limit results to 100,000 rows to avoid excessive data retrieval
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

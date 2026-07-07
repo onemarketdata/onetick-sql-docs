@@ -417,7 +417,7 @@ Returns the RSI together with the RS (Average Gain over Average Loss) from 1 Min
 
 The Stochastic Oscillator compares a closing price to the price range over a specified period. It includes %K (raw value) and %D (smoothed value), with values above 80 indicating overbought and values below 20 indicating oversold conditions.
 
-Returns the Stochastic Oscillator. The period is set to minutes in this case but could equally be seconds or days. Uses a 14 period `MAX()` to calculate the highest price traded during the period and a 14 period `MIN()` to calculate the lowest price. `%K` is calculated as `100 \* (PRICE - MLOW) / (MHIGH - MLOW)` and `%D` is calculated as a 3 period `AVG()` moving average.
+Returns the Stochastic Oscillator. The period is set to minutes in this case but could equally be seconds or days. Uses a 14 period `MAX()` to calculate the highest price traded during the period and a 14 period `MIN()` to calculate the lowest price. `%K` is calculated as `100 * (PRICE - MLOW) / (MHIGH - MLOW)` and `%D` is calculated as a 3 period `AVG()` moving average.
 
 ```sql
  -- Calculates Stochastic Oscillator from Trade Data
@@ -444,7 +444,7 @@ Returns the Stochastic Oscillator. The period is set to minutes in this case but
  )
 ```
 
-Returns the Stochastic Oscillator from 1 Minute Trade Bars. The period is set to minutes, given the data is 1 minute bars. Uses a 14 period `MAX()` to calculate the highest price traded during the period and a 14 period `MIN()` to calculate the lowest price. `%K` is calculated as `100 \* (LAST - MLOW) / (MHIGH - MLOW)` and `%D` is calculated as a 3 period `AVG()` moving average.
+Returns the Stochastic Oscillator from 1 Minute Trade Bars. The period is set to minutes, given the data is 1 minute bars. Uses a 14 period `MAX()` to calculate the highest price traded during the period and a 14 period `MIN()` to calculate the lowest price. `%K` is calculated as `100 * (LAST - MLOW) / (MHIGH - MLOW)` and `%D` is calculated as a 3 period `AVG()` moving average.
 
 ```sql
  -- Calculates Stochastic Oscillator from 1 Minute Trade Bars
@@ -891,24 +891,3 @@ VPIN is an advanced metric that estimates the probability of informed trading ba
    group by VOL_BIN
  )
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

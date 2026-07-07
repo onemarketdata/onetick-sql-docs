@@ -4,16 +4,9 @@ This section contains examples of handling trade corrections, deleted records, a
 
 OneTick maintains a complete audit trail of all trade data including:
 
-
 * Original trades
-
-
 * Corrected trades
-
-
 * Deleted trades
-
-
 * Metadata about when corrections occurred
 
 The examples in this section show how to query and analyze this temporal data.
@@ -69,24 +62,3 @@ Set `AS_OF_TIME` to a date after corrections were applied to retrieve the correc
  and TIMESTAMP < '2024-01-06 00:00:00 UTC'
  limit 10
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

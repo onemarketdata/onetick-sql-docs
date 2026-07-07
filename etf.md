@@ -7,19 +7,10 @@ ETF data is queried using Bloomberg symbology (`BSYM`) to access the `OQD_ETF` d
 
 The OQD_ETF database provides data through the following tables:
 
-
 * `OQD_ETF.DES` - ETF descriptive information and metadata
-
-
 * `OQD_ETF.DAY` - Daily ETF price and performance metrics
-
-
 * `OQD_ETF.CONSTITUENTS` - Constituent holdings and weights
-
-
 * `OQD_ETF.CASH` - Cash and cash equivalents held in the portfolio
-
-
 * `OQD_ETF.PCF` - Portfolio composition and holding details
 
 ## Retrieval of ETF Universe
@@ -86,24 +77,3 @@ and TIMESTAMP >= '2024-08-08 00:00:00 UTC'
 and TIMESTAMP < '2024-08-09 00:00:00 UTC'
 LIMIT 100
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

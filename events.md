@@ -7,17 +7,13 @@ Earnings annoucements are recorded in the EVENT table and can be combined with m
 
 Earnings annoucement events are available in the daily market data databases:
 
-
 * `US_COMP_DAILY.EVENT` - US earnings events
 
 ## Event Types
 
 The EVENT table records two primary event types:
 
-
 * `EARNING_DATE` - Earnings announcement dates
-
-
 * `COMPANY_CONFERENCE_CALL` - Scheduled conference call dates
 
 These events are useful for analyzing market behavior around significant corporate announcements.
@@ -144,24 +140,3 @@ and TIMESTAMP >= '2024-02-14 00:00:00 America/New_York'
 and TIMESTAMP < '2024-02-15 00:00:00 America/New_York'
 and EVENT_TYPE = 'EARNING_DATE'
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

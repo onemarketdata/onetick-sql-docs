@@ -13,17 +13,12 @@ This includes both query execution, plus over 80 examples covering data retrieva
 
 SQL Queries can be issued via REST to a OneTick server.  The REST query includes the parameters:
 
-
 * `query_type` equal to `sql`
-
-
-* `time_zone` equal to the desired time zone for the returned data. (e.g. `America\\\\New_York`)
-
-
+* `time_zone` equal to the desired time zone for the returned data. (e.g. `America\\New_York`)
 * `statement` equal to the desired SQL Statement
 
 e.g.
-`https://rest.cloud.onetick.com/omdwebapi/rest/?params={"query_type":"sql","response":"csv","compression":"none","limit":"10000","all_times_are_readable":"false","show_times_as_nanos":"true","timezone":"Europe/London","statement":"SELECT \* FROM LSE_SAMPLE_BARS.TRD_1M WHERE SYMBOL_NAME='VOD' and TIMESTAMP >= '2024-01-03 00:00:00 UTC' and TIMESTAMP < '2024-01-04 00:00:00 UTC' LIMIT 10"}`
+`https://rest.cloud.onetick.com/omdwebapi/rest/?params={"query_type":"sql","response":"csv","compression":"none","limit":"10000","all_times_are_readable":"false","show_times_as_nanos":"true","timezone":"Europe/London","statement":"SELECT * FROM LSE_SAMPLE_BARS.TRD_1M WHERE SYMBOL_NAME='VOD' and TIMESTAMP >= '2024-01-03 00:00:00 UTC' and TIMESTAMP < '2024-01-04 00:00:00 UTC' LIMIT 10"}`
 
 REST Queries can be issued via Python by specifying the SQL `statement`, building the `params` dictionary, and executing the REST request.
 [OneTick Cloud](https://www.onetick.com/cloud-services) requires the specification of a `client_id` and `client_secret` which can be retrieved from your [profile](https://authdash.cloud.onetick.com/web_dashboard/?dash=sub_profile), after registering.
@@ -162,24 +157,3 @@ with adbc_driver_flightsql.dbapi.connect(flight_address, db_kwargs=db_kwargs) as
         df = arrow_table.to_pandas()
         print(df)
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>

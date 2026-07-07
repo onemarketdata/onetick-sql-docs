@@ -7,10 +7,7 @@ TCA compares executed trade prices against market conditions to measure trading 
 
 TCA analysis uses proprietary order and trade data stored in secure sample databases:
 
-
 * `S_ORDERS_LSE_SAMPLE` - Sample LSE order flow dataset (encrypted and secured)
-
-
 * `S_ORDERS_US_COMP_SAMPLE` - Sample US trades dataset (encrypted and secured)
 
 These datasets are joined with market data benchmarks to calculate performance metrics.
@@ -70,16 +67,9 @@ The effective spread is calculated as:
 
 Where:
 
-
 * `Direction` = 1 for buy orders, -1 for sell orders
-
-
 * `Quantity` = Total filled quantity
-
-
 * `VWAP_Price` = Volume-weighted average price of fills
-
-
 * `Mid_Price_at_Arrival` = Mid-price when the order arrived in the market
 
 ```sql
@@ -112,24 +102,3 @@ from
 ) t
 where EXEC_QTY > 0
 ```
-
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>
