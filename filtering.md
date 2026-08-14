@@ -146,3 +146,60 @@ limit 5
 |  2 | 2024-01-03 00:47:09.486020152 |   50.49 |    100 | @FT    |
 |  3 | 2024-01-03 00:47:58.373425468 |   50.48 |    200 | @ T    |
 |  4 | 2024-01-03 00:50:55.662956337 |   50.47 |    100 | @ T    |
+
+## Filtering Trades on the Trading Session
+
+Trades can be filtered to a specific trading session using the `TRADE_PERIOD` field, which identifies the session each trade belongs to:
+
+* `O` - Opening Auction
+* `-` - Continuous Trading
+* `C` - Closing Auction
+* `L` - Late Session
+
+```sql
+select * from CA_COMP_SAMPLE.TRD
+where SYMBOL_NAME='TD'
+and TIMESTAMP >= '2024-01-03 00:00:00 America/Toronto'
+and TIMESTAMP < '2024-01-04 00:00:00 America/Toronto'
+and TRADE_PERIOD='-'
+```
+
+```sql
+select * from CA_COMP_SAMPLE.TRD
+where SYMBOL_NAME='TD'
+and TIMESTAMP >= '2024-01-03 00:00:00 America/Toronto'
+and TIMESTAMP < '2024-01-04 00:00:00 America/Toronto'
+and TRADE_PERIOD='O'
+```
+
+```sql
+select * from CA_COMP_SAMPLE.TRD
+where SYMBOL_NAME='TD'
+and TIMESTAMP >= '2024-01-03 00:00:00 America/Toronto'
+and TIMESTAMP < '2024-01-04 00:00:00 America/Toronto'
+and TRADE_PERIOD='C'
+```
+
+## Filtering Indicative Prices on the Auction
+
+The `IND` table holds the Auction Values, including the Indicative (theoretical) Price and Indicative Size across the Opening and Closing Auctions.
+The indicative prices can be filtered to a specific auction using the `AUCTION_TYPE` field:
+
+* `O` - Opening Auction
+* `C` - Closing Auction
+
+```sql
+select * from LSE_SAMPLE.IND
+where SYMBOL_NAME='VOD'
+and TIMESTAMP >= '2024-01-03 00:00:00 Europe/London'
+and TIMESTAMP < '2024-01-04 00:00:00 Europe/London'
+and AUCTION_TYPE='O'
+```
+
+```sql
+select * from LSE_SAMPLE.IND
+where SYMBOL_NAME='VOD'
+and TIMESTAMP >= '2024-01-03 00:00:00 Europe/London'
+and TIMESTAMP < '2024-01-04 00:00:00 Europe/London'
+and AUCTION_TYPE='C'
+```

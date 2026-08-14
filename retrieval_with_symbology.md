@@ -105,3 +105,50 @@ and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 and SYMBOL_DATE = 20240104
 LIMIT 10
 ```
+
+## Reallocated Symbol Retrieval
+
+Symbols can be reallocated to a different instrument across a relatively small time period.
+For example, `SPCX` has represented two instruments in 2026:
+
+* January 2026 to mid June 2026 - the SPAC and New Issue ETF
+* Mid June 2026 onwards - SpaceX
+
+A simple retrieval by symbol combines the history across both instruments.
+
+```sql
+select * from US_COMP_DAILY.DAY
+where SYMBOL_NAME = 'SPCX'
+and TIMESTAMP >= '2026-01-01 00:00:00 UTC'
+and TIMESTAMP < '2026-07-01 00:00:00 UTC'
+and EXCHANGE = ''
+limit 1000
+```
+
+## Reallocated Symbol Retrieval, specifying the ETF
+
+Specifying the `SYMBOL_DATE` as a January date, when the ETF was active, ensures just the ETF history is retrieved.
+
+```sql
+select * from US_COMP_DAILY.DAY
+where SYMBOL_NAME = 'SPCX'
+and TIMESTAMP >= '2026-01-01 00:00:00 UTC'
+and TIMESTAMP < '2026-07-01 00:00:00 UTC'
+and EXCHANGE = ''
+and SYMBOL_DATE = 20260101
+limit 1000
+```
+
+## Reallocated Symbol Retrieval, specifying the Latest Instrument
+
+Specifying the `SYMBOL_DATE` as a July date, when SpaceX is active, ensures just the SpaceX history is retrieved.
+
+```sql
+select * from US_COMP_DAILY.DAY
+where SYMBOL_NAME = 'SPCX'
+and TIMESTAMP >= '2026-01-01 00:00:00 UTC'
+and TIMESTAMP < '2026-07-01 00:00:00 UTC'
+and EXCHANGE = ''
+and SYMBOL_DATE = 20260701
+limit 1000
+```

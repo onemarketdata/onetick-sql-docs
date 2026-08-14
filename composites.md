@@ -417,3 +417,122 @@ Returns pre-calculated Daily OHLCV data from the European Composite for specifie
  and TIMESTAMP < '2024-01-04 00:00:00 Europe/London'
  LIMIT 1000
 ```
+
+## Odd Lots
+
+The US Composite provides data from the US Consolidated Tape, known as the SIP.
+Historically Quotes and NBBO have been provided based on round lots, and odd lot quotes have not been distributed.
+Regulation has since been updated so that odd lot quotes are additionally distributed, adding the Best Odd Lot Order (BOLO).
+OneTick combines the BOLO with the round lot data to create the `NBBO_COMP` (NBBO with odd lots) and `QTE_COMP` (exchange quotes with odd lots) tables, which are available from June 2026 onwards.
+
+## US Odd Lot NBBO Retrieval
+
+Retrieve the US NBBO including odd lots from the `NBBO_COMP` table.
+
+```sql
+select * from US_COMP.NBBO_COMP
+where SYMBOL_NAME='CSCO'
+and TIMESTAMP >= '2026-07-23 09:30:00 America/New_York'
+and TIMESTAMP < '2026-07-23 16:00:00 America/New_York'
+limit 1000
+```
+
+## US Odd Lot Quote Retrieval
+
+Retrieve the US exchange quotes including odd lots from the `QTE_COMP` table.
+
+```sql
+select * from US_COMP.QTE_COMP
+where SYMBOL_NAME='CSCO'
+and TIMESTAMP >= '2026-07-23 09:30:00 America/New_York'
+and TIMESTAMP < '2026-07-23 16:00:00 America/New_York'
+limit 1000
+```
+
+## Joining NBBOs With and Without Odd Lots
+
+The NBBO with odd lots (`NBBO_COMP`) is joined to the NBBO without odd lots (`NBBO`) using `sametime_as_existing` to align the two quote streams.
+This returns the two sets of quotes: the wider spread without odd lots and the narrower spread with odd lots.
+
+```sql
+select n.BID_PRICE as BID_PRICE, n.ASK_PRICE as ASK_PRICE, n.BID_SIZE_TOTAL as BID_SIZE_TOTAL, n.ASK_SIZE_TOTAL as ASK_SIZE_TOTAL,
+c.BID_PRICE as BID_PRICE_COMP, c.ASK_PRICE as ASK_PRICE_COMP, c.BID_SIZE_TOTAL as BID_SIZE_TOTAL_COMP, c.ASK_SIZE_TOTAL as ASK_SIZE_TOTAL_COMP
+from US_COMP.NBBO n, US_COMP.NBBO_COMP c
+where c.SYMBOL_NAME ='CSCO' and c.SYMBOL_NAME = n.SYMBOL_NAME
+and n.SYMBOL_NAME='CSCO'
+and sametime_as_existing(c.timestamp, n.timestamp, 0) = TRUE
+and TIMESTAMP >= '2026-07-23 09:30:00 America/New_York'
+and TIMESTAMP < '2026-07-23 16:00:00 America/New_York'
+limit 1000
+```
+
+## Joining NBBOs With and Without Odd Lots and Calculating Skews and Liquidity
+
+The two NBBOs are compared to produce the Bid and Ask Skews (`BID_SKEW`, `ASK_SKEW`) and Percentage Skews (`PCNT_BID_SKEW`, `PCNT_ASK_SKEW`).
+Additional liquidity visible in the odd lot quote is calculated by comparing the Bid and Ask Sizes between the two sets of quotes.
+This is not the full additional liquidity, as there may be price levels between the two sets of quotes.
+
+```sql
+select n.BID_PRICE as BID_PRICE, n.ASK_PRICE as ASK_PRICE, n.BID_SIZE_TOTAL as BID_SIZE_TOTAL, n.ASK_SIZE_TOTAL as ASK_SIZE_TOTAL,
+c.BID_PRICE as BID_PRICE_COMP, c.ASK_PRICE as ASK_PRICE_COMP, c.BID_SIZE_TOTAL as BID_SIZE_TOTAL_COMP, c.ASK_SIZE_TOTAL as ASK_SIZE_TOTAL_COMP,
+c.BID_PRICE - n.BID_PRICE as BID_SKEW,
+n.ASK_PRICE - c.ASK_PRICE as ASK_SKEW,
+100 * (c.BID_PRICE - n.BID_PRICE) / n.BID_PRICE as PCNT_BID_SKEW,
+100 * (n.ASK_PRICE - c.ASK_PRICE) / n.ASK_PRICE as PCNT_ASK_SKEW,
+case
+when c.BID_PRICE = n.BID_PRICE then c.BID_SIZE_TOTAL - n.BID_SIZE_TOTAL
+else c.BID_SIZE_TOTAL
+end as BID_SIZE_ADDITION,
+case
+when c.ASK_PRICE = n.ASK_PRICE then c.ASK_SIZE_TOTAL - n.ASK_SIZE_TOTAL
+else c.ASK_SIZE_TOTAL
+end as ASK_SIZE_ADDITION
+from US_COMP.NBBO n, US_COMP.NBBO_COMP c
+where c.SYMBOL_NAME ='CSCO' and c.SYMBOL_NAME = n.SYMBOL_NAME
+and n.SYMBOL_NAME='CSCO'
+and sametime_as_existing(c.timestamp, n.timestamp, 0) = TRUE
+and TIMESTAMP >= '2026-07-23 09:30:00 America/New_York'
+and TIMESTAMP < '2026-07-23 16:00:00 America/New_York'
+limit 1000
+```
+
+## TWAP Bars for Spreads, Skews and Added Liquidity Comparing NBBOs With and Without Odd Lots
+
+The joined NBBOs are used to calculate Spreads, Skews and added visible Liquidity, which are then aggregated into 1 minute Time Weighted Averages using `TW_AVG` and `time_bucket`.
+
+```sql
+select
+TW_AVG(SPREAD) as TWA_SPREAD,
+TW_AVG(SREAD_COMP) as TWA_SREAD_COMP,
+TW_AVG(PCNT_BID_SKEW) as TWA_PCNT_BID_SKEW,
+TW_AVG(PCNT_ASK_SKEW) as TWA_PCNT_ASK_SKEW,
+TW_AVG(BID_SIZE_ADDITION) as TWA_BID_SIZE_ADDITION,
+TW_AVG(ASK_SIZE_ADDITION) as TWA_ASK_SIZE_ADDITION
+from
+(
+  select n.BID_PRICE as BID_PRICE, n.ASK_PRICE as ASK_PRICE,
+  n.BID_SIZE_TOTAL as BID_SIZE_TOTAL, n.ASK_SIZE_TOTAL as ASK_SIZE_TOTAL,
+  n.ASK_PRICE - n.BID_PRICE as SPREAD,
+  c.ASK_PRICE - c.BID_PRICE as SREAD_COMP,
+  c.BID_PRICE as BID_PRICE_COMP, c.ASK_PRICE as ASK_PRICE_COMP, c.BID_SIZE_TOTAL as BID_SIZE_TOTAL_COMP, c.ASK_SIZE_TOTAL as ASK_SIZE_TOTAL_COMP,
+  c.BID_PRICE - n.BID_PRICE as BID_SKEW,
+  n.ASK_PRICE - c.ASK_PRICE as ASK_SKEW,
+  100 * (c.BID_PRICE - n.BID_PRICE) / n.BID_PRICE as PCNT_BID_SKEW,
+  100 * (n.ASK_PRICE - c.ASK_PRICE) / n.ASK_PRICE as PCNT_ASK_SKEW,
+  case
+  when c.BID_PRICE = n.BID_PRICE then c.BID_SIZE_TOTAL - n.BID_SIZE_TOTAL
+  else c.BID_SIZE_TOTAL
+  end as BID_SIZE_ADDITION,
+  case
+  when c.ASK_PRICE = n.ASK_PRICE then c.ASK_SIZE_TOTAL - n.ASK_SIZE_TOTAL
+  else c.ASK_SIZE_TOTAL
+  end as ASK_SIZE_ADDITION
+  from US_COMP.NBBO n, US_COMP.NBBO_COMP c
+  where c.SYMBOL_NAME ='CSCO' and c.SYMBOL_NAME = n.SYMBOL_NAME
+  and n.SYMBOL_NAME='CSCO'
+  and sametime_as_existing(c.timestamp, n.timestamp, 0) = TRUE
+  and TIMESTAMP >= '2026-07-23 09:30:00 America/New_York'
+  and TIMESTAMP < '2026-07-23 16:00:00 America/New_York'
+)
+group by time_bucket(INTERVAL '1' MINUTE)
+```

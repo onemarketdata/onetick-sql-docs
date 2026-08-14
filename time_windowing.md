@@ -189,20 +189,25 @@ LIMIT 10
 Values can be retrieved relative to the current row by a specified number of records using the `LAG` and `LEAD` functions.
 : They require the field, and assume a 1 record offset, or additionally the number of records to shift is also included.
   <br/>
-  * `LAG(MID_PRICE)` - Return the `MID_PRICE` shifted back 1 record
-  * `LAG(MID_PRICE,5)` - Return the `MID_PRICE` shifted back 5 records
+  * `LAG(PRICE) OVER(ORDER BY TIMESTAMP)` - Return the `PRICE` shifted back 1 record
+  * `LAG(PRICE,5) OVER(ORDER BY TIMESTAMP)` - Return the `PRICE` shifted back 5 records
 
 ```sql
 select TIMESTAMP, PRICE, SIZE, TRADE_ID, TRADE_VENUE,
-LAG(PRICE) as PRICE_1_BACK,LAG(TRADE_ID) as TRADE_ID_1_BACK,
-LAG(PRICE,5) as PRICE_5_BACK,LAG(TRADE_ID,5) as TRADE_ID_5_BACK,
-LEAD(PRICE) as PRICE_1_FWD,LEAD(TRADE_ID) as TRADE_ID_1_FWD,
-LEAD(PRICE,5) as PRICE_5_FWD,LEAD(TRADE_ID,5) as TRADE_ID_5_FWD
+LAG(PRICE) OVER(ORDER BY TIMESTAMP) as PRICE_1_BACK,
+LAG(TRADE_ID) OVER(ORDER BY TIMESTAMP) as TRADE_ID_1_BACK,
+LAG(PRICE,5) OVER(ORDER BY TIMESTAMP) as PRICE_5_BACK,
+LAG(TRADE_ID,5) OVER(ORDER BY TIMESTAMP) as TRADE_ID_5_BACK,
+LEAD(PRICE) OVER(ORDER BY TIMESTAMP) as PRICE_1_FWD,
+LEAD(TIMESTAMP) OVER(ORDER BY TIMESTAMP) as NEXT_TIMESTAMP,
+LEAD(TRADE_ID) OVER(ORDER BY TIMESTAMP) as TRADE_ID_1_FWD,
+LEAD(PRICE,5) OVER(ORDER BY TIMESTAMP) as PRICE_5_FWD,
+LEAD(TRADE_ID,5) OVER(ORDER BY TIMESTAMP) as TRADE_ID_5_FWD
 from LSE_SAMPLE.TRD
 where symbol_name = 'VOD'
 and TIMESTAMP >= '2024-01-03 08:00:00 UTC'
 and TIMESTAMP < '2024-01-04 16:00:00 UTC'
-LIMIT 10
+limit 1000
 ```
 
 #### Trades with shifts 1 and 5 records before and after each trade retrieval results
@@ -293,6 +298,8 @@ LIMIT 1000
 Returns OHLC bars with the last price filled forward into subsequent time buckets even when no trades occur. Uses `TIME_SERIES_TYPE='STATE_TS'` on the `LAST` aggregate function to extend the previous bar’s closing price forward. Useful for creating complete time series where every bucket has a value, even during low-volume periods.
 
 ```sql
+ -- Returns OHLC prices with the Last Price Filled Forward into 5-minute buckets
+
  SELECT
  FIRST(PRICE) as FIRST_PRICE,
  MAX(PRICE) as HIGH_PRICE,

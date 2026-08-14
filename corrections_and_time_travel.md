@@ -24,6 +24,19 @@ Demonstrates how to retrieve trades with corrections already applied. Deleted tr
  limit 10
 ```
 
+## Hidden Records Including Corrections
+
+Retrieve all records, including the hidden ticks that define trade corrections, using `SHOW_HIDDEN_TICKS()` in the FROM clause. The table is specified after `SHOW_HIDDEN_TICKS()` separated by a semicolon (e.g. `OTQ_CHAIN."SHOW_HIDDEN_TICKS();TRD"`), and the `SYMBOL_NAME` filter must include the database name in `[Database]::[Symbol]` format (e.g. `LSE_SAMPLE::VOD`). Corrected trades are identified by their `DELETED_TIME` and `TICK_STATUS` fields (0=Default, 1=Deleted, 2=Updated, 3=Insert Corrected, 4=Canceled, 5=Corrected, 6=New Correction, 7=New cancellation). `DELETED_TIME` corresponds to the time the record was corrected, which may be days after the original record.
+
+```sql
+ select TRADE_ID,PRICE,SIZE,TRADE_TYPE,TRADE_VENUE,TICK_STATUS,DELETED_TIME
+ from OTQ_CHAIN."SHOW_HIDDEN_TICKS();TRD"
+ where SYMBOL_NAME = 'LSE_SAMPLE::VOD'
+ and TIMESTAMP >= '2024-01-04 11:04:00 UTC'
+ and TIMESTAMP < '2024-01-06 00:00:00 UTC'
+ limit 10
+```
+
 ## Trade Corrections
 
 Use `SHOW_CORRECTED_TICKS();TRD` syntax in the FROM clause with database and symbol format `LSE_SAMPLE::VOD`. Corrected trades are identified by their `DELETED_TIME` and `TICK_STATUS` fields (0=Default, 1=Deleted, 2=Updated, 3=Insert Corrected, 4=Canceled, 5=Corrected, 6=New Correction, 7=New cancellation).
