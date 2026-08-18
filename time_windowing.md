@@ -1,3 +1,5 @@
+<a id="windowing"></a>
+
 # Windowing
 
 A series of time windowing examples are provided showing how to aggregate across time windows, and retrieve time and record relative values, using OneTick Cloud sample databases.
@@ -12,6 +14,8 @@ e.g. `OVER (order by TIMESTAMP asc range interval '1' minute preceding)`
 Rolling record windows can be defined by specifyiing a row count within the `OVER` clause.
 
 e.g. `OVER (order by TIMESTAMP asc rows 50 preceding)`
+
+<a id="accumulative-sum"></a>
 
 ## Accumulative Sum
 
@@ -41,6 +45,8 @@ LIMIT 10
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:10.119 | 70.146  |     840 |      256,064 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:10.933 | 70.132  |     344 |      256,408 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:20.863 | 70.19   |   4,012 |      260,420 |
+
+<a id="rolling-sum"></a>
 
 ## Rolling Sum
 
@@ -72,6 +78,8 @@ LIMIT 1000
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:10.933 | 70.132  |     344 |              256,408 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:20.863 | 70.19   |   4,012 |              260,420 |
 
+<a id="moving-average-in-time"></a>
+
 ## Moving Average in Time
 
 Simple moving averages are returned with the `OVER` clause, including the `range interval`.
@@ -102,6 +110,8 @@ LIMIT 10
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:10.933 | 70.132  |      70.083  |      70.083  |
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:20.863 | 70.19   |      70.0937 |      70.0937 |
 
+<a id="moving-average-in-records"></a>
+
 ## Moving Average in Records
 
 Moving averages can be calculated based on a number of `rows`, rather than a `range interval`.
@@ -130,6 +140,8 @@ LIMIT 10
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:10.933 | 70.132  |      70.1211 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:20.863 | 70.19   |      70.1355 |
 
+<a id="exponential-moving-average"></a>
+
 ## Exponential Moving Average
 
 Exponential moving averages are calculated using specialized window functions that apply exponential decay to historical data points.
@@ -147,6 +159,8 @@ where symbol_name = 'VOD'
 and TIMESTAMP >= '2024-01-03 08:00:00 UTC'
 and TIMESTAMP < '2024-01-04 16:00:00 UTC'
 ```
+
+<a id="time-shifts"></a>
 
 ## Time Shifts
 
@@ -183,6 +197,8 @@ LIMIT 10
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:10.119 | 70.146  |     840 | 390726911293870192 | XLON          |          70.104 |                  |                  |         70.19  |           70.19 |           70.08 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:10.933 | 70.132  |     344 | 953676864715182192 | XLON          |          70.137 |                  |                  |         70.19  |           70.23 |           70.08 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:20.863 | 70.19   |   4,012 |    911727684224102 | XLON          |          70.132 |           70.146 |                  |         70.265 |           70.3  |           70.44 |
+
+<a id="record-shifts-lag-lead"></a>
 
 ## Record Shifts / Lag & Lead
 
@@ -225,6 +241,8 @@ limit 1000
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:10.933 | 70.132  |     344 | 953676864715182192 | XLON          |        70.146  | 390726911293870192 |         70.104 |  25706436899852400 |       70.19   |    911727684224102 |       70.23   |    911727684224190 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:20.863 | 70.19   |   4,012 |    911727684224102 | XLON          |        70.132  | 953676864715182192 |         70.137 | 892755055723892848 |       70.24   |    911727684224103 |       70.23   |    911727684224191 |
 
+<a id="time-weighted-average-price-twap"></a>
+
 ## Time-Weighted Average Price (TWAP)
 
 Time-Weighted Average Price calculates the average price weighted by the time intervals between trades.
@@ -237,6 +255,8 @@ and TIMESTAMP >= '2024-01-03 09:30:00 America/New_York'
 and TIMESTAMP < '2024-01-03 16:00:00 America/New_York'
 LIMIT 1000
 ```
+
+<a id="time-weighted-average-size-twas"></a>
 
 ## Time-Weighted Average Size (TWAS)
 
@@ -292,6 +312,8 @@ and TIMESTAMP >= '2024-01-03 09:30:00 America/New_York'
 and TIMESTAMP < '2024-01-03 16:00:00 America/New_York'
 LIMIT 1000
 ```
+
+<a id="dynamic-bar-creation-with-fill-forward"></a>
 
 ## Dynamic Bar Creation with Fill Forward
 

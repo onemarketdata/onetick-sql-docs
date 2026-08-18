@@ -1,6 +1,10 @@
+<a id="symbol-universe"></a>
+
 # Symbol Universe
 
 A series of simple examples are provided showing how to retrieve symbol metadata and reference data from the Symbol Universe datasets.
+
+<a id="symbol-universe-for-database"></a>
 
 ## Symbol Universe for Database
 
@@ -14,6 +18,8 @@ and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 LIMIT 100
 ```
 
+<a id="symbol-universe-for-database-and-security-type"></a>
+
 ## Symbol Universe for Database and Security Type
 
 Returns static symbol information and security descriptors for London Stock Exchange equity instruments. This query filters by LSE Equity classification to retrieve equity-specific symbol attributes from SYMBOL_UNIVERSE.STAT including exchange symbols, database symbols, instrument identifiers (ISIN, SEDOL, CUSIP), currency, and trading venue information.
@@ -25,6 +31,8 @@ and TIMESTAMP >= '2024-01-03 00:00:00 UTC'
 and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 LIMIT 100
 ```
+
+<a id="symbol-universe-with-mask"></a>
 
 ## Symbol Universe with Mask
 
@@ -40,6 +48,8 @@ and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 LIMIT 100
 ```
 
+<a id="symbol-universe-for-futures-retrieval"></a>
+
 ## Symbol Universe for Futures Retrieval
 
 Retrieves symbol universe data for all futures contracts under a specific product code, useful for discovering available contract expirations and contract specifications.
@@ -54,6 +64,8 @@ Return all futures contracts and spreads under a futures product code, useful fo
  limit 1000
 ```
 
+<a id="symbol-universe-for-futures-chain-retrieval"></a>
+
 ## Symbol Universe for Futures Chain Retrieval
 
 Retrieves symbol universe data for individual futures contracts in a product chain, excluding spreads.
@@ -67,6 +79,8 @@ Return all individual futures contracts (excluding spreads) under a futures prod
  and TIMESTAMP < '2026-06-12 00:00:00 UTC'
  limit 1000
 ```
+
+<a id="symbol-universe-for-nymex-futures-retrieval"></a>
 
 ## Symbol Universe for NYMEX Futures Retrieval
 

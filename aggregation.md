@@ -1,3 +1,5 @@
+<a id="aggregation"></a>
+
 # Aggregation
 
 The following aggregations are supported:
@@ -34,6 +36,8 @@ Results can be grouped using `GROUP BY` with either:
 
 A series of simple examples are provided below showing how to retrieve aggregated market data from [OneTick Cloud](https://www.onetick.com/cloud-services).
 
+<a id="common-aggregations"></a>
+
 ## Common Aggregations
 
 Common aggregation methods include `SUM()`, `AVG()`, `MIN()`, `MAX()`, `COUNT()`, `VAR()`, `VARP()`, `STDDEV()`, `STDDEVP()`.
@@ -56,6 +60,8 @@ and TIMESTAMP < '2024-01-04 16:00:00 UTC'
 | Symbol          | Timestamp           |   MEAN_PRICE |   STDDEV_PRICE |   MAX_PRICE |   MIN_PRICE |   COUNT_PRICE |
 |-----------------|---------------------|--------------|----------------|-------------|-------------|---------------|
 | LSE_SAMPLE::VOD | 2024-01-04 16:00:00 |      69.7709 |        4.87754 |     71.0166 |       0.812 |        11,925 |
+
+<a id="group-by-field"></a>
 
 ## Group by Field
 
@@ -82,6 +88,8 @@ group by TRADE_CURRENCY
 |-----------------|---------------------|------------------|--------------|----------------|-------------|-------------|---------------|
 | LSE_SAMPLE::VOD | 2024-01-04 16:00:00 | EUR              |     0.817847 |      0.0025159 |      0.825  |       0.812 |            59 |
 | LSE_SAMPLE::VOD | 2024-01-04 16:00:00 | GBX              |    70.1138   |      0.385602  |     71.0166 |      68.05  |        11,866 |
+
+<a id="group-by-time-bucket"></a>
 
 ## Group by Time Bucket
 
@@ -118,6 +126,8 @@ LIMIT 10
 | LSE_SAMPLE::VOD | 2024-01-03 08:45:00 |      69.6323 |      8.37524   |     70.72   |      0.8195 |           138 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:50:00 |      70.6536 |      0.0184115 |     70.7    |     70.62   |            47 |
 
+<a id="group-by-record-bucket"></a>
+
 ## Group by Record Bucket
 
 Data can be grouped by count of records, with the `ticks_bucket` function, which specifies the number of records to group on `ticks_bucket(1000)`.
@@ -151,6 +161,8 @@ LIMIT 10
 | LSE_SAMPLE::VOD | 2024-01-04 09:31:44.801 |      69.0323 |        7.5246  |     70.74   |      0.812  |         1,000 |
 | LSE_SAMPLE::VOD | 2024-01-04 12:12:21.302 |      69.4393 |        4.86809 |     69.97   |      0.813  |         1,000 |
 | LSE_SAMPLE::VOD | 2024-01-04 14:30:00.962 |      69.7273 |        5.3608  |     70.55   |      0.816  |         1,000 |
+
+<a id="generating-bars"></a>
 
 ## Generating Bars
 
@@ -192,6 +204,8 @@ LIMIT 10
 | LSE_SAMPLE::VOD | 2024-01-03 08:40:00 |      70.51   |       70.4798 |      70.54   |     70.4598 |    152,794 |            45 | 2024-01-03 08:35:01.445 | 2024-01-03 08:39:25.268 | 2024-01-03 08:38:29.489 | 2024-01-03 08:39:31.358 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:45:00 |      70.65   |       70.55   |      70.72   |      0.8195 |    926,490 |           138 | 2024-01-03 08:40:03.746 | 2024-01-03 08:43:02.677 | 2024-01-03 08:41:00.810 | 2024-01-03 08:44:26.284 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:50:00 |      70.63   |       70.67   |      70.7    |     70.62   |    130,943 |            47 | 2024-01-03 08:45:20.921 | 2024-01-03 08:46:04.406 | 2024-01-03 08:47:56.618 | 2024-01-03 08:49:28.304 |
+
+<a id="ranking-row-numbering"></a>
 
 ## Ranking & Row Numbering
 

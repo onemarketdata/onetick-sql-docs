@@ -1,70 +1,74 @@
+<a id="functions-string"></a>
+
 # Functions - String
 
 The following string functions are supported:
 
-[ASCII](),
-[BASE16_DECODE](),
-[BASE16_ENCODE](),
-[BASE64_DECODE](),
-[BASE64_ENCODE](),
-[CHAR](),
-[CHAR_UTF8](),
-[CHARACTER_LENGTH](),
-[CHAR_LENGTH](),
-[CHAR_LENGTH_UTF8](),
-[CONCAT](),
-[DECIMAL_TO_STRING](),
-[INSERT](),
-[INSERT_UTF8](),
-[INSTR](),
-[INSTR_UTF8](),
-[IS_CHARACTER_PRESENT](),
-[LCASE](),
-[LCASE_UTF8](),
-[LEFT](),
-[LEFT_UTF8](),
-[LENGTH](),
-[LOCATE](),
-[LOCATE_UTF8](),
-[LOWER](),
-[LOWER_UTF8](),
-[LTRIM](),
-[OCTET_LENGTH](),
-[PARSE_TIME](),
-[PARSE_NSECTIME](),
-[POSITION](),
-[POSITION_UTF8](),
-[REGEX_EXTRACT](),
-[REGEX_EXTRACT_UTF8](),
-[REGEX_MATCH](),
-[REGEX_MATCH_UTF8](),
-[REGEX_REPLACE](),
-[REGEX_REPLACE_UTF8](),
-[REPEAT](),
-[REPLACE](),
-[RIGHT](),
-[RIGHT_UTF8](),
-[RTRIM](),
-[SPACE](),
-[STR](),
-[STRCMP](),
-[STRLEN](),
-[STR_TO_UTF8](),
-[STRING_TO_DECIMAL](),
-[SUBSTR](),
-[SUBSTR_UTF8](),
-[SUBSTRING](),
-[SUBSTRING_UTF8](),
-[TOKEN](),
-[TOSTRING](),
-[TRIM](),
-[UCASE](),
-[UCASE_UTF8](),
-[UPPER](),
-[UPPER_UTF8](),
-[URLENCODE](),
-[URLDECODE](),
-[UTF8_TO_STR]().
+[ASCII](#ascii),
+[BASE16_DECODE](#base16-decode),
+[BASE16_ENCODE](#base16-encode),
+[BASE64_DECODE](#base64-decode),
+[BASE64_ENCODE](#base64-encode),
+[CHAR](#char),
+[CHAR_UTF8](#char-utf8),
+[CHARACTER_LENGTH](#character-length),
+[CHAR_LENGTH](#char-length),
+[CHAR_LENGTH_UTF8](#char-length-utf8),
+[CONCAT](#concat),
+[DECIMAL_TO_STRING](#decimal-to-string),
+[INSERT](#insert),
+[INSERT_UTF8](#insert-utf8),
+[INSTR](#instr),
+[INSTR_UTF8](#instr-utf8),
+[IS_CHARACTER_PRESENT](#is-character-present),
+[LCASE](#lcase),
+[LCASE_UTF8](#lcase-utf8),
+[LEFT](#left),
+[LEFT_UTF8](#left-utf8),
+[LENGTH](#length),
+[LOCATE](#locate),
+[LOCATE_UTF8](#locate-utf8),
+[LOWER](#lower),
+[LOWER_UTF8](#lower-utf8),
+[LTRIM](#ltrim),
+[OCTET_LENGTH](#octet-length),
+[PARSE_TIME](#parse-time),
+[PARSE_NSECTIME](#parse-nsectime),
+[POSITION](#position),
+[POSITION_UTF8](#position-utf8),
+[REGEX_EXTRACT](#regex-extract),
+[REGEX_EXTRACT_UTF8](#regex-extract-utf8),
+[REGEX_MATCH](#regex-match),
+[REGEX_MATCH_UTF8](#regex-match-utf8),
+[REGEX_REPLACE](#regex-replace),
+[REGEX_REPLACE_UTF8](#regex-replace-utf8),
+[REPEAT](#repeat),
+[REPLACE](#replace),
+[RIGHT](#right),
+[RIGHT_UTF8](#right-utf8),
+[RTRIM](#rtrim),
+[SPACE](#space),
+[STR](#str),
+[STRCMP](#strcmp),
+[STRLEN](#strlen),
+[STR_TO_UTF8](#str-to-utf8),
+[STRING_TO_DECIMAL](#string-to-decimal),
+[SUBSTR](#substr),
+[SUBSTR_UTF8](#substr-utf8),
+[SUBSTRING](#substring),
+[SUBSTRING_UTF8](#substring-utf8),
+[TOKEN](#token),
+[TOSTRING](#tostring),
+[TRIM](#trim),
+[UCASE](#ucase),
+[UCASE_UTF8](#ucase-utf8),
+[UPPER](#upper),
+[UPPER_UTF8](#upper-utf8),
+[URLENCODE](#urlencode),
+[URLDECODE](#urldecode),
+[UTF8_TO_STR](#utf8-to-str).
+
+<a id="ascii"></a>
 
 ## ASCII
 
@@ -98,6 +102,8 @@ limit 10
 |  8 | 2024-01-03 00:13:16.630750984 | 50.49   |      3 | P          |        80 |
 |  9 | 2024-01-03 00:14:14.187418230 | 50.49   |    100 | P          |        80 |
 
+<a id="base16-decode"></a>
+
 ## BASE16_DECODE
 
 Decodes the string with Base16 algorithm in accordance with RFC 4648.
@@ -120,6 +126,8 @@ limit 1
 |    | Timestamp                     |   EXPRESSION | S_BASE16_DECODE   |
 |----|-------------------------------|--------------|-------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |     40465449 | @FTI              |
+
+<a id="base16-encode"></a>
 
 ## BASE16_ENCODE
 
@@ -144,6 +152,8 @@ limit 1
 |----|-------------------------------|--------|-------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   |          40465449 |
 
+<a id="base64-decode"></a>
+
 ## BASE64_DECODE
 
 Decodes the string with Base64 algorithm in accordance with RFC 4648.
@@ -166,6 +176,8 @@ limit 1
 |    | Timestamp                     | EXPRESSION   | S_BASE64_DECODE   |
 |----|-------------------------------|--------------|-------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | QEZUSQ==     | @FTI              |
+
+<a id="base64-encode"></a>
 
 ## BASE64_ENCODE
 
@@ -190,6 +202,8 @@ limit 1
 |----|-------------------------------|--------|-------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | QEZUSQ==          |
 
+<a id="char"></a>
+
 ## CHAR
 
 Returns a 1-character string with the character corresponding to the ASCII code passed as a parameter.
@@ -212,6 +226,8 @@ limit 1
 |    | Timestamp                     | S_CHAR   |
 |----|-------------------------------|----------|
 |  0 | 2024-01-03 00:00:40.413537416 | D        |
+
+<a id="char-utf8"></a>
 
 ## CHAR_UTF8
 
@@ -236,6 +252,8 @@ limit 1
 |----|-------------------------------|---------------|
 |  0 | 2024-01-03 00:00:40.413537416 | €             |
 
+<a id="character-length"></a>
+
 ## CHARACTER_LENGTH
 
 Returns the length of the string. If a byte with value 0 is present in the string, its position (0-based) is returned.
@@ -258,6 +276,8 @@ limit 1
 |    | Timestamp                     | EXPRESSION   |   N_CHARACTER_LENGTH |
 |----|-------------------------------|--------------|----------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | OneTick SQL  |                   11 |
+
+<a id="char-length"></a>
 
 ## CHAR_LENGTH
 
@@ -282,6 +302,8 @@ limit 1
 |----|-------------------------------|--------------|-----------------|
 |  0 | 2024-01-03 00:00:40.413537416 | OneTick SQL  |              11 |
 
+<a id="char-length-utf8"></a>
+
 ## CHAR_LENGTH_UTF8
 
 Returns the length of the UTF8 string. If a byte with value 0 is present in the string, its position (0-based) is returned.
@@ -304,6 +326,8 @@ limit 1
 |    | Timestamp                     |   N_CHAR_LENGTH_UTF8 |
 |----|-------------------------------|----------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |                   26 |
+
+<a id="concat"></a>
 
 ## CONCAT
 
@@ -328,6 +352,8 @@ limit 1
 |----|-------------------------------|------------|--------|-----------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | Q          | @FTI   | [Q@FTI](mailto:Q@FTI) |
 
+<a id="decimal-to-string"></a>
+
 ## DECIMAL_TO_STRING
 
 Converts decimal number into a string. Precision, defaulting to 8, specifies the number of decimal digits after the decimal point.
@@ -350,6 +376,8 @@ limit 1
 |    | Timestamp                     |   S_DECIMAL_TO_STRING |
 |----|-------------------------------|-----------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |               3.14159 |
+
+<a id="insert"></a>
 
 ## INSERT
 
@@ -374,6 +402,8 @@ limit 1
 |----|-------------------------------|--------|------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | @XFTI      |
 
+<a id="insert-utf8"></a>
+
 ## INSERT_UTF8
 
 Returns a UTF8 string where `length` characters have been deleted from `value1`, beginning at `start`, and where `value2` has been inserted into string, beginning at `start`.
@@ -396,6 +426,8 @@ limit 1
 |    | Timestamp                     | COND   | S_INSERT_UTF8   |
 |----|-------------------------------|--------|-----------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | @€FTI           |
+
+<a id="instr"></a>
 
 ## INSTR
 
@@ -420,6 +452,8 @@ limit 1
 |----|-------------------------------|--------|-----------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   |         2 |
 
+<a id="instr-utf8"></a>
+
 ## INSTR_UTF8
 
 If a `substring` is found in the UTF8 string `value`, returns the index of the first character of the substring in the value (0-based). Otherwise, returns -1.
@@ -442,6 +476,8 @@ limit 1
 |    | Timestamp                     | COND   |   N_INSTR_UTF8 |
 |----|-------------------------------|--------|----------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   |             -1 |
+
+<a id="is-character-present"></a>
 
 ## IS_CHARACTER_PRESENT
 
@@ -523,6 +559,8 @@ limit 10
 |  8 | 2024-01-03 11:09:22.666731671 |   50.19 |    181 | @FT    |
 |  9 | 2024-01-03 11:09:22.671341239 |   50.2  |    199 | @ T    |
 
+<a id="lcase"></a>
+
 ## LCASE
 
 Converts a string to lower case.
@@ -545,6 +583,8 @@ limit 1
 |    | Timestamp                     | COND   | S_LCASE   |
 |----|-------------------------------|--------|-----------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | @fti      |
+
+<a id="lcase-utf8"></a>
 
 ## LCASE_UTF8
 
@@ -569,6 +609,8 @@ limit 1
 |----|-------------------------------|--------|----------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | @fti           |
 
+<a id="left"></a>
+
 ## LEFT
 
 Returns the leftmost count of characters from a string value.
@@ -591,6 +633,8 @@ limit 1
 |    | Timestamp                     | COND   | S_LEFT   |
 |----|-------------------------------|--------|----------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | @        |
+
+<a id="left-utf8"></a>
 
 ## LEFT_UTF8
 
@@ -615,6 +659,8 @@ limit 1
 |----|-------------------------------|--------|---------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | @             |
 
+<a id="length"></a>
+
 ## LENGTH
 
 Returns the length of the string. If a byte with value 0 is present in the string, its position (0-based) is returned.
@@ -637,6 +683,8 @@ limit 1
 |    | Timestamp                     | EXPRESSION   |   N_LENGTH |
 |----|-------------------------------|--------------|------------|
 |  0 | 2024-01-03 00:00:40.413537416 | OneTick SQL  |         11 |
+
+<a id="locate"></a>
 
 ## LOCATE
 
@@ -663,6 +711,8 @@ limit 1
 |----|-------------------------------|--------|------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   |          4 |
 
+<a id="locate-utf8"></a>
+
 ## LOCATE_UTF8
 
 Returns the starting position of the first occurrence of `value1` within `value2`.
@@ -688,6 +738,8 @@ limit 1
 |----|-------------------------------|--------|-----------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   |               4 |
 
+<a id="lower"></a>
+
 ## LOWER
 
 Converts a string to lower case.
@@ -710,6 +762,8 @@ limit 1
 |    | Timestamp                     | COND   | S_LOWER   |
 |----|-------------------------------|--------|-----------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | @fti      |
+
+<a id="lower-utf8"></a>
 
 ## LOWER_UTF8
 
@@ -734,6 +788,8 @@ limit 1
 |----|-------------------------------|--------|----------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | @fti           |
 
+<a id="ltrim"></a>
+
 ## LTRIM
 
 Removes the leading white spaces from a string. See also RTRIM and TRIM.
@@ -757,6 +813,8 @@ limit 1
 |----|-------------------------------|--------------|-----------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI         | @FTI      |
 
+<a id="octet-length"></a>
+
 ## OCTET_LENGTH
 
 Returns the length of the string. If a byte with value 0 is present in the string, its position (0-based) is returned.
@@ -779,6 +837,8 @@ limit 1
 |    | Timestamp                     | EXPRESSION   |   N_OCTET_LENGTH |
 |----|-------------------------------|--------------|------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | OneTick SQL  |               11 |
+
+<a id="parse-nsectime"></a>
 
 ## PARSE_NSECTIME
 
@@ -818,6 +878,8 @@ limit 1
 |----|-------------------------------|---------|--------|----------------------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 | 2025-04-01 14:11:12.345678 |
 
+<a id="parse-time"></a>
+
 ## PARSE_TIME
 
 Parses the formatted time string, converting it to the number of milliseconds since 1970/01/01 GMT. Timezone parameter is optional, by default UTC timezone is used.
@@ -856,6 +918,8 @@ limit 1
 |----|-------------------------------|---------|--------|-------------------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 | 2025-04-01 14:11:12.345 |
 
+<a id="position"></a>
+
 ## POSITION
 
 Returns the position of `value1` in `value2`. The lowest valid value of position is 1. If `value1` was not found in `value2`, 0 is returned.
@@ -883,6 +947,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    |            0 |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   |            4 |
 
+<a id="position-utf8"></a>
+
 ## POSITION_UTF8
 
 Returns the position of `value1` in `value2`. The lowest valid value of position is 1. If `value1` was not found in `value2`, 0 is returned.
@@ -909,6 +975,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 | @ TI   |                 4 |
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    |                 0 |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   |                 4 |
+
+<a id="regex-extract"></a>
 
 ## REGEX_EXTRACT
 
@@ -944,6 +1012,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    |                   |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   | I                 |
 
+<a id="regex-extract-utf8"></a>
+
 ## REGEX_EXTRACT_UTF8
 
 Matches the UTF8 `text` against the regular expression specified by the `pattern` parameter. The expressions are specified via the POSIX extended regular expression syntax.
@@ -978,6 +1048,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    |                        |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   | I                      |
 
+<a id="regex-match"></a>
+
 ## REGEX_MATCH
 
 Matches the `text` against the regular expression specified by the `pattern` parameter. The expressions are specified via the POSIX extended regular expression syntax.
@@ -1007,6 +1079,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    |               0 |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   |               1 |
 
+<a id="regex-match-utf8"></a>
+
 ## REGEX_MATCH_UTF8
 
 Matches the UTF8 `text` against the regular expression specified by the `pattern` parameter. The expressions are specified via the POSIX extended regular expression syntax.
@@ -1035,6 +1109,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 | @ TI   |                    1 |
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    |                    0 |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   |                    1 |
+
+<a id="regex-replace"></a>
 
 ## REGEX_REPLACE
 
@@ -1071,6 +1147,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    | @ T               |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   | @ TX              |
 
+<a id="regex-replace-utf8"></a>
+
 ## REGEX_REPLACE_UTF8
 
 Matches the  UTF8 `text` against the regular expression specified by the `pattern` parameter. The expressions are specified via the POSIX extended regular expression syntax.
@@ -1106,6 +1184,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    | @ T                    |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   | @ TX                   |
 
+<a id="repeat"></a>
+
 ## REPEAT
 
 Returns a string composed of the `value` repeated `count` times.
@@ -1128,6 +1208,8 @@ limit 1
 |    | TIMESTAMP                     | S_REPEAT                            |
 |----|-------------------------------|-------------------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | ONETICKONETICKONETICKONETICKONETICK |
+
+<a id="replace"></a>
 
 ## REPLACE
 
@@ -1156,6 +1238,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 | @ T         | @ TRADING  |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI        | @ TRADINGI |
 
+<a id="right"></a>
+
 ## RIGHT
 
 Returns the rightmost `count` of characters from `value`.
@@ -1182,6 +1266,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 | @ TI      | TI |
 |  3 | 2024-01-03 00:03:34.026458843 | @ T       | T  |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI      | TI |
+
+<a id="right-utf8"></a>
 
 ## RIGHT_UTF8
 
@@ -1210,6 +1296,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 | @ T            | T  |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI           | TI |
 
+<a id="rtrim"></a>
+
 ## RTRIM
 
 Removes the trailing  white spaces from a string. See also LTRIM and TRIM.
@@ -1233,6 +1321,8 @@ limit 1
 |----|-------------------------------|--------------|-----------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI         | @FTI      |
 
+<a id="space"></a>
+
 ## SPACE
 
 Returns a string consisting of `count` spaces.
@@ -1255,6 +1345,8 @@ limit 1
 |    | Timestamp                     | S_SPACE   |
 |----|-------------------------------|-----------|
 |  0 | 2024-01-03 00:00:40.413537416 |           |
+
+<a id="str"></a>
 
 ## STR
 
@@ -1285,6 +1377,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |   50.51 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |   50.49 |
 
+<a id="strcmp"></a>
+
 ## STRCMP
 
 Compares the strings `value1` and `value2`. Returns 0 if they are equal, -1 if `value1` is lexicographically smaller than `value2`, 1 otherwise.
@@ -1307,6 +1401,8 @@ limit 1
 |    | Timestamp                     |   N_STRCMP |
 |----|-------------------------------|------------|
 |  0 | 2024-01-03 00:00:40.413537416 |          1 |
+
+<a id="strlen"></a>
 
 ## STRLEN
 
@@ -1331,6 +1427,8 @@ limit 1
 |----|-------------------------------|--------------|------------|
 |  0 | 2024-01-03 00:00:40.413537416 | OneTick SQL  |         11 |
 
+<a id="str-to-utf8"></a>
+
 ## STR_TO_UTF8
 
 Returns the specified string re-encoded from `encoding` to UTF-8.
@@ -1354,6 +1452,8 @@ limit 1
 |----|-------------------------------|--------|-----------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | @FTI            |
 
+<a id="string-to-decimal"></a>
+
 ## STRING_TO_DECIMAL
 
 Converts the floating point number from the `string` representation into decimal. Valid input examples would be “3.14”, “.0314E2”, “NAN”, “INF”.
@@ -1376,6 +1476,8 @@ limit 1
 |    | Timestamp                     |   N_STRING_TO_DECIMAL |
 |----|-------------------------------|-----------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |           1.23457e+07 |
+
+<a id="substr"></a>
 
 ## SUBSTR
 
@@ -1406,6 +1508,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    | T          |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   | T          |
 
+<a id="substr-utf8"></a>
+
 ## SUBSTR_UTF8
 
 For a positive `start_index` returns `num_bytes` of the input UTF8 string `value`, starting from the position specified by `start_index` (0-based).
@@ -1434,6 +1538,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 | @ TI   | T               |
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    | T               |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   | T               |
+
+<a id="substring"></a>
 
 ## SUBSTRING
 
@@ -1464,6 +1570,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    | T             |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   | T             |
 
+<a id="substring-utf8"></a>
+
 ## SUBSTRING_UTF8
 
 For a positive `start_index` returns `num_bytes` of the input UTF8 string `value`, starting from the position specified by `start_index` (0-based).
@@ -1492,6 +1600,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 | @ TI   | T                  |
 |  3 | 2024-01-03 00:03:34.026458843 | @ T    | T                  |
 |  4 | 2024-01-03 00:03:34.026459421 | @ TI   | T                  |
+
+<a id="token"></a>
 
 ## TOKEN
 
@@ -1522,6 +1632,8 @@ limit 1
 |----|-------------------------------|--------------|-----------|------------|------------|------------|------------|
 |  0 | 2024-01-03 00:00:40.413537416 | A:B:C:D      | A         | B          | D          |            |            |
 
+<a id="tostring"></a>
+
 ## TOSTRING
 
 Converts the `number` into a string in specified `base` representation. `Base` should be one of 2, 8, 10, 16 or 36; assuming 10, if not specified.
@@ -1548,6 +1660,8 @@ limit 1
 |----|-------------------------------|---------|--------------|---------------|---------------|
 |  0 | 2024-01-03 00:00:40.413537416 |   50.56 |        50.56 |         50.56 |          50.6 |
 
+<a id="trim"></a>
+
 ## TRIM
 
 Removes white spaces from both sides of the string. See also LTRIM and RTRIM.
@@ -1570,6 +1684,8 @@ limit 1
 |    | Timestamp                     | EXPRESSION   | S_TRIM   |
 |----|-------------------------------|--------------|----------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI         | @FTI     |
+
+<a id="ucase"></a>
 
 ## UCASE
 
@@ -1594,6 +1710,8 @@ limit 1
 |----|-------------------------------|--------------|-----------|
 |  0 | 2024-01-03 00:00:40.413537416 | Ucase        | UCASE     |
 
+<a id="ucase-utf8"></a>
+
 ## UCASE_UTF8
 
 Converts a UTF8 string to upper case.
@@ -1616,6 +1734,8 @@ limit 1
 |    | Timestamp                     | EXPRESSION   | S_UCASE_UTF8   |
 |----|-------------------------------|--------------|----------------|
 |  0 | 2024-01-03 00:00:40.413537416 | Ucasé€       | UCASÉ€         |
+
+<a id="upper"></a>
 
 ## UPPER
 
@@ -1640,6 +1760,8 @@ limit 1
 |----|-------------------------------|--------------|-----------|
 |  0 | 2024-01-03 00:00:40.413537416 | Upper        | UPPER     |
 
+<a id="upper-utf8"></a>
+
 ## UPPER_UTF8
 
 Converts a UTF8 string `value` to upper case.
@@ -1662,6 +1784,8 @@ limit 1
 |    | Timestamp                     | EXPRESSION   | S_UPPER_UTF8   |
 |----|-------------------------------|--------------|----------------|
 |  0 | 2024-01-03 00:00:40.413537416 | Upper€       | UPPER€         |
+
+<a id="urlencode"></a>
 
 ## URLENCODE
 
@@ -1686,6 +1810,8 @@ limit 1
 |----|-------------------------------|--------|---------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | %40FTI        |
 
+<a id="urldecode"></a>
+
 ## URLDECODE
 
 Inverse of URLENCODE.
@@ -1708,6 +1834,8 @@ limit 1
 |    | Timestamp                     | COND   | EXPRESSION   | S_URLDECODE   |
 |----|-------------------------------|--------|--------------|---------------|
 |  0 | 2024-01-03 00:00:40.413537416 | @FTI   | %40%20T%20   | @ T           |
+
+<a id="utf8-to-str"></a>
 
 ## UTF8_TO_STR
 

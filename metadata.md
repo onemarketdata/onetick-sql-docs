@@ -1,6 +1,10 @@
+<a id="metadata"></a>
+
 # Metadata
 
 A series of simple examples are provided showing how to retrieve metadata about each database or table.
+
+<a id="database-listing"></a>
 
 ## Database Listing
 
@@ -12,6 +16,8 @@ select * from OTQ_CHAIN."SHOW_DB_LIST"
 where SYMBOL_NAME = 'DB_INFO::'
 ```
 
+<a id="database-authorized-listing"></a>
+
 ## Database Authorized Listing
 
 The list of authorised Databases, including restrictions around time ranges can be retrieved through the following SQL query.
@@ -21,6 +27,8 @@ The `SYMBOL_NAME` where clause needs to be specified.
 SELECT * FROM OTQ_CHAIN."ACCESS_INFO(INFO_TYPE='DATABASES')"
 where SYMBOL_NAME = 'DB_INFO::'
 ```
+
+<a id="database-symbol-listing"></a>
 
 ## Database Symbol Listing
 
@@ -37,6 +45,8 @@ and TIMESTAMP >= '2024-01-03 00:00:00 UTC'
 and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 ```
 
+<a id="table-listing"></a>
+
 ## Table Listing
 
 The list of tables for a specified database can be retrieved through the following SQL query.
@@ -46,6 +56,8 @@ The Database as the `SYMBOL_NAME` field, suffixed with `::`
 select * from OTQ_CHAIN."DB/SHOW_TICK_TYPES"
 where SYMBOL_NAME = 'LSE_SAMPLE::'
 ```
+
+<a id="field-listing"></a>
 
 ## Field Listing
 

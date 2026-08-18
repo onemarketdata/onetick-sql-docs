@@ -1,43 +1,47 @@
+<a id="functions-numeric"></a>
+
 # Functions - Numeric
 
 The following numeric functions are supported:
 
-[ABS](),
-[ATOF](),
-[ATOL](),
-[CEIL](),
-[CEILING](),
-[CONVERT_32ND_TO_DOUBLE](),
-[CONVERT_DOUBLE_TO_32ND](),
-[DECIMAL](),
-[DECIMAL_COMPARE](),
-[DECIMAL_INFINITY](),
-[DECIMAL_NAN](),
-[DECIMAL_PI](),
-[DECIMAL_TO_STRING](),
-[DIV](),
-[DOUBLE_COMPARE](),
-[EXP](),
-[FLOOR](),
-[FRAND](),
-[GCD](),
-[INFINITY](),
-[LOG](),
-[LOG_10](),
-[MOD](),
-[NAN](),
-[PI](),
-[POWER](),
-[RAND](),
-[REPLACE_NAN](),
-[ROUND](),
-[ROUND_DOUBLE](),
-[ROUND_DECIMAL](),
-[SIGN](),
-[SQRT](),
-[STRING_TO_DECIMAL](),
-[TOSTRING](),
-[TRUNCATE]()
+[ABS](#abs),
+[ATOF](#atof),
+[ATOL](#atol),
+[CEIL](#ceil),
+[CEILING](#ceiling),
+[CONVERT_32ND_TO_DOUBLE](#convert-32nd-to-double),
+[CONVERT_DOUBLE_TO_32ND](#convert-double-to-32nd),
+[DECIMAL](#decimal),
+[DECIMAL_COMPARE](#decimal-compare),
+[DECIMAL_INFINITY](#decimal-infinity),
+[DECIMAL_NAN](#decimal-nan),
+[DECIMAL_PI](#decimal-pi),
+[DECIMAL_TO_STRING](#decimal-to-string),
+[DIV](#div),
+[DOUBLE_COMPARE](#double-compare),
+[EXP](#exp),
+[FLOOR](#floor),
+[FRAND](#frand),
+[GCD](#gcd),
+[INFINITY](#infinity),
+[LOG](#log),
+[LOG_10](#log-10),
+[MOD](#mod),
+[NAN](#nan),
+[PI](#pi),
+[POWER](#power),
+[RAND](#rand),
+[REPLACE_NAN](#replace-nan),
+[ROUND](#round),
+[ROUND_DOUBLE](#round-double),
+[ROUND_DECIMAL](#round-decimal),
+[SIGN](#sign),
+[SQRT](#sqrt),
+[STRING_TO_DECIMAL](#string-to-decimal),
+[TOSTRING](#tostring),
+[TRUNCATE](#truncate)
+
+<a id="abs"></a>
 
 ## ABS
 
@@ -65,6 +69,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 |   50.52 |        0.02 |    0.02 |
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |        0.01 |    0.01 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |       -0.01 |    0.01 |
+
+<a id="atof"></a>
 
 ## ATOF
 
@@ -94,6 +100,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |      1.23 |            |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |      1.23 |            |
 
+<a id="atol"></a>
+
 ## ATOL
 
 Converts the integer number from the string representation into a long integer.
@@ -122,6 +130,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |        1 |         0 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |        1 |         0 |
 
+<a id="ceil"></a>
+
 ## CEIL
 
 Returns a long integer value representing the smallest integer that is greater than or equal to the number.
@@ -148,6 +158,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 |   50.52 |     26 |       51 |
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |       51 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |       51 |
+
+<a id="ceiling"></a>
 
 ## CEILING
 
@@ -176,6 +188,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |          51 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |          51 |
 
+<a id="convert-32nd-to-double"></a>
+
 ## CONVERT_32ND_TO_DOUBLE
 
 Converts 32nds format `32nds_string` to double. If throw_if_not_convertible flag is set to true, the function will throw an exception on error, otherwise it will return NaN. throw_if_not_convertible parameter is optional, with default value true.
@@ -199,6 +213,8 @@ limit 1
 |----|-------------------------------|--------------|-----------|
 |  0 | 2024-01-03 00:00:40.413537416 | 99-30        |   99.9375 |
 
+<a id="convert-double-to-32nd"></a>
+
 ## CONVERT_DOUBLE_TO_32ND
 
 Converts double number to 32nds format string. If throw_if_not_convertible flag is set is to true, function will throw an exception if it can not convert double to a 32nds string, otherwise it will return a string whose double implementation is close to the given number. throw_if_not_convertible parameter is optional, with default value true.
@@ -221,6 +237,8 @@ limit 1
 |    | Timestamp                     | S_32NDS   |
 |----|-------------------------------|-----------|
 |  0 | 2024-01-03 00:00:40.413537416 | 99-16     |
+
+<a id="decimal"></a>
 
 ## DECIMAL
 
@@ -248,6 +266,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 |   50.52 |     26 |     50.52 |       26 |
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |     50.51 |      123 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |     50.49 |        3 |
+
+<a id="decimal-compare"></a>
 
 ## DECIMAL_COMPARE
 
@@ -278,6 +298,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |          -1 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |           1 |
 
+<a id="decimal-infinity"></a>
+
 ## DECIMAL_INFINITY
 
 Returns decimal positive infinity.
@@ -300,6 +322,8 @@ limit 1
 |    | Timestamp                     |   D_INFINITY |
 |----|-------------------------------|--------------|
 |  0 | 2024-01-03 00:00:40.413537416 |          inf |
+
+<a id="decimal-nan"></a>
 
 ## DECIMAL_NAN
 
@@ -324,6 +348,8 @@ limit 1
 |----|-------------------------------|---------|
 |  0 | 2024-01-03 00:00:40.413537416 |         |
 
+<a id="decimal-pi"></a>
+
 ## DECIMAL_PI
 
 Returns decimal PI.
@@ -347,6 +373,8 @@ limit 1
 |----|-------------------------------|---------|
 |  0 | 2024-01-03 00:00:40.413537416 | 3.14159 |
 
+<a id="decimal-to-string"></a>
+
 ## DECIMAL_TO_STRING
 
 Converts decimal `number` into a string. `precision`, defaulting to 8, specifies the number of decimal digits after the decimal point.
@@ -369,6 +397,8 @@ limit 1
 |    | Timestamp                     |   S_DECIMAL_TO_STRING |
 |----|-------------------------------|-----------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |               3.14159 |
+
+<a id="div"></a>
 
 ## DIV
 
@@ -396,6 +426,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 |   50.52 |     26 |       1 |
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |       0 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |      16 |
+
+<a id="double-compare"></a>
 
 ## DOUBLE_COMPARE
 
@@ -426,6 +458,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |          -1 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |           1 |
 
+<a id="exp"></a>
+
 ## EXP
 
 Computes the natural exponential of the number.
@@ -453,6 +487,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |  2.61952e+53 |         |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 | 20.0855      |         |
 
+<a id="floor"></a>
+
 ## FLOOR
 
 Returns a long integer value representing the largest integer that is less than or equal to the number.
@@ -479,6 +515,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 |   50.52 |        50 |
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |        50 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |        50 |
+
+<a id="frand"></a>
 
 ## FRAND
 
@@ -509,6 +547,8 @@ limit 1
 |----|-------------------------------|-----------|
 |  0 | 2024-01-03 00:00:40.413537416 |  0.478635 |
 
+<a id="gcd"></a>
+
 ## GCD
 
 Computes the greatest common divisor.
@@ -532,6 +572,8 @@ limit 1
 |----|-------------------------------|---------|
 |  0 | 2024-01-03 00:00:40.413537416 |      15 |
 
+<a id="infinity"></a>
+
 ## INFINITY
 
 Returns positive infinity. Comparison of INFINITY() to positive infinite value returns true.
@@ -554,6 +596,8 @@ limit 1
 |    | Timestamp                     |   N_INFINITY |
 |----|-------------------------------|--------------|
 |  0 | 2024-01-03 00:00:40.413537416 |          inf |
+
+<a id="log"></a>
 
 ## LOG
 
@@ -582,6 +626,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 | 4.81218 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 | 1.09861 |
 
+<a id="log-10"></a>
+
 ## LOG_10
 
 Computes the base-10 logarithm of a `number`.
@@ -608,6 +654,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 |   50.52 |     26 |  1.41497  |
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |  2.08991  |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |  0.477121 |
+
+<a id="mod"></a>
 
 ## MOD
 
@@ -636,6 +684,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |      50 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |       2 |
 
+<a id="nan"></a>
+
 ## NAN
 
 Returns NaN. Comparison of NAN() to NaN returns true.
@@ -659,6 +709,8 @@ limit 1
 |----|-------------------------------|---------|--------|---------|
 |  0 | 2024-01-03 00:00:40.413537416 |         |        |         |
 
+<a id="pi"></a>
+
 ## PI
 
 Returns PI = 3.14159265358979.
@@ -681,6 +733,8 @@ limit 1
 |    | Timestamp                     |   PRICE | SIZE   | N_PI   |
 |----|-------------------------------|---------|--------|--------|
 |  0 | 2024-01-03 00:00:40.413537416 | 3.14159 |        |        |
+
+<a id="power"></a>
 
 ## POWER
 
@@ -709,6 +763,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |     15129 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |         9 |
 
+<a id="rand"></a>
+
 ## RAND
 
 Returns a pseudo-random value in the range between `min` and `max`. The parameter seed is optional.
@@ -736,6 +792,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |  7.66881 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |  7.96396 |
 
+<a id="replace-nan"></a>
+
 ## REPLACE_NAN
 
 Returns `number2` if `number1` is NaN.
@@ -762,6 +820,8 @@ limit 5
 |  2 | 2024-01-03 00:32:00.925415781 |         |      1 |             0   |
 |  3 | 2024-01-03 01:14:00.628316297 |  2159.1 |      1 |          2159.1 |
 |  4 | 2024-01-03 01:16:22.723165427 |         |      1 |             0   |
+
+<a id="round"></a>
 
 ## ROUND
 
@@ -791,6 +851,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |        51 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |        50 |
 
+<a id="round-decimal"></a>
+
 ## ROUND_DECIMAL
 
 Returns the same `number` rounded in the specified `precision` with specified `rounding_method`.  Rounding method parameter is optional (by default rounding method = UPWARD).
@@ -819,6 +881,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |              50.5 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |              50.5 |
 
+<a id="round-double"></a>
+
 ## ROUND_DOUBLE
 
 Returns the same `number` rounded to the specified number of decimal digits (`precision`) after the decimal point with specified rounding method. `rounding_method` parameter is optional. The precision should be an integer from [-12, 12].
@@ -845,6 +909,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 |   50.52 |     26 |             50.5 |
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |             50.5 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |             50.5 |
+
+<a id="sign"></a>
 
 ## SIGN
 
@@ -873,6 +939,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |        90 |        1 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |       -30 |       -1 |
 
+<a id="sqrt"></a>
+
 ## SQRT
 
 Computes the square root of the number.
@@ -900,6 +968,8 @@ limit 5
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 | 11.0905  |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |  1.73205 |
 
+<a id="string-to-decimal"></a>
+
 ## STRING_TO_DECIMAL
 
 Converts the floating point number from the string representation into decimal. Valid input examples would be “3.14”, “.0314E2”, “NAN”, “INF”.
@@ -922,6 +992,8 @@ limit 1
 |    | Timestamp                     |   N_STRING_TO_DECIMAL |
 |----|-------------------------------|-----------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |           1.23457e+07 |
+
+<a id="tostring"></a>
 
 ## TOSTRING
 
@@ -954,6 +1026,8 @@ limit 5
 |  2 | 2024-01-03 00:03:34.026455739 |   50.52 |     26 |        50.52 |         50.52 |          50.5 |
 |  3 | 2024-01-03 00:03:34.026458843 |   50.51 |    123 |        50.51 |         50.51 |          50.5 |
 |  4 | 2024-01-03 00:03:34.026459421 |   50.49 |      3 |        50.49 |         50.49 |          50.5 |
+
+<a id="truncate"></a>
 
 ## TRUNCATE
 

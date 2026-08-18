@@ -1,12 +1,16 @@
+<a id="functions-financial"></a>
+
 # Functions - Financial
 
 The following financial functions are supported:
 
-[GET_SYMBOLOGY_MAPPING](),
-[CORP_ACTIONS](),
-[MKT_ACTIVITY](),
-[TICK_SHIFT](),
-[TIME_SHIFT]().
+[GET_SYMBOLOGY_MAPPING](#get-symbology-mapping),
+[CORP_ACTIONS](#corp-actions),
+[MKT_ACTIVITY](#mkt-activity),
+[TICK_SHIFT](#tick-shift),
+[TIME_SHIFT](#time-shift).
+
+<a id="get-symbology-mapping"></a>
 
 ## GET_SYMBOLOGY_MAPPING
 
@@ -30,6 +34,8 @@ limit 1
 |    | Timestamp                     |   PRICE | SIZE         | S_GET_SYMBOLOGY_MAPPING   |
 |----|-------------------------------|---------|--------------|---------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |   50.56 | BBG000C3J3C9 |                           |
+
+<a id="corp-actions"></a>
 
 ## CORP_ACTIONS
 
@@ -81,6 +87,8 @@ and TIMESTAMP < '2024-03-10 00:00:00.000 UTC'
 | 17 | 2024-03-07 01:15:00 |   60.57 |     60.57   |
 | 18 | 2024-03-08 01:15:00 |   60.36 |     60.36   |
 | 19 | 2024-03-09 01:15:00 |   60.12 |     60.12   |
+
+<a id="mkt-activity"></a>
 
 ## MKT_ACTIVITY
 
@@ -158,6 +166,8 @@ limit 10
 |  8 | 2024-01-03 14:30:00.128498068 |   50.17 |      5 | @F I   | Z          | Rr             |
 |  9 | 2024-01-03 14:30:00.135190071 |   50.13 |     46 | @FTI   | Q          | Rr             |
 
+<a id="tick-shift"></a>
+
 ## TICK_SHIFT
 
 Returns the value of the specified field from a tick preceding the current one by offset.
@@ -192,6 +202,8 @@ limit 10
 |  7 | 2024-01-03 00:12:17.787582635 | 50.49   |      1 | D          |        50.4897 |                    50.4897 |
 |  8 | 2024-01-03 00:13:16.630750984 | 50.49   |      3 | P          |        50.49   |                    50.49   |
 |  9 | 2024-01-03 00:14:14.187418230 | 50.49   |    100 | P          |        50.49   |                    50.49   |
+
+<a id="time-shift"></a>
 
 ## TIME_SHIFT
 

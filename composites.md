@@ -1,7 +1,11 @@
+<a id="composite-market-data-analysis"></a>
+
 # Composite Market Data Analysis
 
 A series of simple examples are provided showing how to analyze consolidated market data across multiple venues using OneTick Cloud composite databases.
 Composite databases aggregate trades and quotes from multiple exchanges and venues into a single unified dataset.
+
+<a id="composite-databases"></a>
 
 ## Composite Databases
 
@@ -28,6 +32,8 @@ Samples of the Composite datasets covering the first 3 months of 2024 are availa
 
 Data is aggregated by venue in fields such as `QUOTE_VENUE`, `TRADE_VENUE`, or `EXCHANGE` (for US_COMP).
 
+<a id="quote-count-per-venue"></a>
+
 ## Quote Count Per Venue
 
 The number of quotes received from each venue can be calculated by aggregating quote data.
@@ -42,6 +48,8 @@ and TIMESTAMP < '2024-01-03 16:00:00 UTC'
 group by QUOTE_VENUE
 ```
 
+<a id="trade-count-per-venue"></a>
+
 ## Trade Count Per Venue
 
 The number of trades executed on each venue can be calculated by aggregating trade data.
@@ -55,6 +63,8 @@ and TIMESTAMP >= '2024-01-03 09:30:00 UTC'
 and TIMESTAMP < '2024-01-03 16:00:00 UTC'
 group by TRADE_VENUE
 ```
+
+<a id="volume-traded-across-all-symbols-per-venue"></a>
 
 ## Volume Traded Across All Symbols Per Venue
 
@@ -74,6 +84,8 @@ and EXCHANGE!=''
 and EXCHANGE!='PRIM'
 group by EXCHANGE
 ```
+
+<a id="daily-composite-trade-bars"></a>
 
 ## Daily Composite Trade Bars
 
@@ -106,6 +118,8 @@ and TIMESTAMP < '2024-01-04 00:00:00 America/New_York'
 limit 1000
 ```
 
+<a id="daily-quote-nbbo-composite-bars"></a>
+
 ## Daily Quote NBBO Composite Bars
 
 Returns aggregated Daily NBBO (National Best Bid and Offer) data from composite quote databases.
@@ -119,6 +133,8 @@ and TIMESTAMP >= '2024-01-03 00:00:00 America/New_York'
 and TIMESTAMP < '2024-01-04 00:00:00 America/New_York'
 limit 1000
 ```
+
+<a id="daily-trade-nbbo-composite-bars"></a>
 
 ## Daily Trade NBBO Composite Bars
 
@@ -134,6 +150,8 @@ and TIMESTAMP < '2024-01-04 00:00:00 America/New_York'
 limit 1000
 ```
 
+<a id="nbbo-retrieval-from-composite"></a>
+
 ## NBBO Retrieval from Composite
 
 Retrieves the consolidated National Best Bid and Offer (NBBO) quote data from the composite. For the US, NBBOs are pre-calculated by the consolidated tape. For other regions, NBBOs are constructed by OneTick across all venues that contribute to the composite. NBBO records include bid and ask prices, sizes, and the exchanges providing the best bid and offer.
@@ -145,6 +163,8 @@ Retrieves the consolidated National Best Bid and Offer (NBBO) quote data from th
  and TIMESTAMP < '2024-01-04 00:00:00 UTC'
  limit 1000
 ```
+
+<a id="trade-volume-to-nbbo-calculation"></a>
 
 ## Trade Volume to NBBO Calculation
 
@@ -204,6 +224,8 @@ GROUP BY t.SYMBOL_NAME, t.EXCHANGE
 ORDER BY TRD_COUNT DESC
 ```
 
+<a id="point-in-time-trade-and-nbbo-snapshot-for-composite"></a>
+
 ## Point in Time Trade and NBBO Snapshot for Composite
 
 Retrieves a combined snapshot of trade and NBBO quote data at a specific point in time for a composite dataset, using a lookback period to find the most recent data.
@@ -222,6 +244,8 @@ A specific point in time is selected with `TIMESTAMP` equal to a specified value
  and n.init_lookback = 86400           --how many seconds to look back for prevailing NBBO Quote
 ```
 
+<a id="spread-and-mid-from-composite-quotes-per-venue"></a>
+
 ## Spread and Mid from Composite Quotes Per Venue
 
 Calculates bid-ask spread and mid-price from composite quotes by venue/exchange, providing venue-level pricing analysis.
@@ -239,6 +263,8 @@ Composite datasets include both quotes per venue/exchange and an NBBO. The `QTE`
  and BID_SIZE > 0 and ASK_SIZE > 0
  limit 1000
 ```
+
+<a id="rolling-spread-and-mid-statistics-from-composite-nbbo"></a>
 
 ## Rolling Spread and Mid Statistics from Composite NBBO
 
@@ -269,6 +295,8 @@ Composite datasets include both quotes per venue/exchange and an NBBO. The NBBO 
  )
 ```
 
+<a id="spread-and-mid-from-composite-nbbo"></a>
+
 ## Spread and Mid from Composite NBBO
 
 Calculates bid-ask spread and mid-price from composite NBBO (National Best Bid and Offer) data, providing consolidated pricing metrics across all venues.
@@ -286,6 +314,8 @@ Composite datasets include both quotes per venue/exchange and an NBBO. The NBBO 
  and BID_SIZE > 0 and ASK_SIZE > 0
  limit 1000
 ```
+
+<a id="spread-and-mid-statistics-from-composite-nbbo"></a>
 
 ## Spread and Mid Statistics from Composite NBBO
 
@@ -315,6 +345,8 @@ Composite datasets include both quotes per venue/exchange and an NBBO. The NBBO 
    and BID_SIZE > 0 and ASK_SIZE > 0
  )
 ```
+
+<a id="spread-and-mid-statistics-from-composite-venues"></a>
 
 ## Spread and Mid Statistics from Composite Venues
 
@@ -347,9 +379,13 @@ Composite datasets include both quotes per venue/exchange and an NBBO. The QTE t
  group by EXCHANGE
 ```
 
+<a id="european-composite-data"></a>
+
 ## European Composite Data
 
 The European Composite (`EU_COMP`) consolidates trades and quotes across multiple European venues. Symbols in `EU_COMP` are defined as ISINs rather than ticker symbols, as ticker symbols are not consistent across European venues. Trades include additional MiFID-related fields such as trading venue, currency, trade period, and book type.
+
+<a id="european-composite-trade-data-retrieval"></a>
 
 ## European Composite Trade Data Retrieval
 
@@ -362,6 +398,8 @@ Retrieves trade records from the European Composite across multiple venues. Symb
  and TIMESTAMP < '2024-01-03 16:00:00 Europe/London'
  LIMIT 1000
 ```
+
+<a id="european-composite-bar-creation"></a>
 
 ## European Composite Bar Creation
 
@@ -383,6 +421,8 @@ Returns OHLC prices for the European Composite aggregated by venue and currency 
  and TIMESTAMP < '2024-01-03 10:27:48 Europe/London'
  group by TRADE_VENUE, CURRENCY
 ```
+
+<a id="european-composite-bar-creation-with-fill-forward"></a>
 
 ## European Composite Bar Creation with Fill Forward
 
@@ -406,6 +446,8 @@ Returns OHLC prices for the European Composite with the last price filled forwar
  group by time_bucket(INTERVAL '5' MINUTE), TRADE_VENUE, CURRENCY
 ```
 
+<a id="european-trade-daily-composite-bars"></a>
+
 ## European Trade Daily Composite Bars
 
 Returns pre-calculated Daily OHLCV data from the European Composite for specified symbols and date ranges. Multiple rows are returned per day representing different venues and currencies. The composite aggregate is represented by empty string values for `VENUE_ID` and `CURRENCY` fields.
@@ -418,12 +460,16 @@ Returns pre-calculated Daily OHLCV data from the European Composite for specifie
  LIMIT 1000
 ```
 
+<a id="odd-lots"></a>
+
 ## Odd Lots
 
 The US Composite provides data from the US Consolidated Tape, known as the SIP.
 Historically Quotes and NBBO have been provided based on round lots, and odd lot quotes have not been distributed.
 Regulation has since been updated so that odd lot quotes are additionally distributed, adding the Best Odd Lot Order (BOLO).
 OneTick combines the BOLO with the round lot data to create the `NBBO_COMP` (NBBO with odd lots) and `QTE_COMP` (exchange quotes with odd lots) tables, which are available from June 2026 onwards.
+
+<a id="us-odd-lot-nbbo-retrieval"></a>
 
 ## US Odd Lot NBBO Retrieval
 
@@ -437,6 +483,8 @@ and TIMESTAMP < '2026-07-23 16:00:00 America/New_York'
 limit 1000
 ```
 
+<a id="us-odd-lot-quote-retrieval"></a>
+
 ## US Odd Lot Quote Retrieval
 
 Retrieve the US exchange quotes including odd lots from the `QTE_COMP` table.
@@ -448,6 +496,8 @@ and TIMESTAMP >= '2026-07-23 09:30:00 America/New_York'
 and TIMESTAMP < '2026-07-23 16:00:00 America/New_York'
 limit 1000
 ```
+
+<a id="joining-nbbos-with-and-without-odd-lots"></a>
 
 ## Joining NBBOs With and Without Odd Lots
 
@@ -465,6 +515,8 @@ and TIMESTAMP >= '2026-07-23 09:30:00 America/New_York'
 and TIMESTAMP < '2026-07-23 16:00:00 America/New_York'
 limit 1000
 ```
+
+<a id="joining-nbbos-with-and-without-odd-lots-and-calculating-skews-and-liquidity"></a>
 
 ## Joining NBBOs With and Without Odd Lots and Calculating Skews and Liquidity
 
@@ -495,6 +547,8 @@ and TIMESTAMP >= '2026-07-23 09:30:00 America/New_York'
 and TIMESTAMP < '2026-07-23 16:00:00 America/New_York'
 limit 1000
 ```
+
+<a id="twap-bars-for-spreads-skews-and-added-liquidity-comparing-nbbos-with-and-without-odd-lots"></a>
 
 ## TWAP Bars for Spreads, Skews and Added Liquidity Comparing NBBOs With and Without Odd Lots
 

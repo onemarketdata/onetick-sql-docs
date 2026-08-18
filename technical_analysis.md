@@ -1,8 +1,12 @@
+<a id="technical-analysis"></a>
+
 # Technical Analysis
 
 This section contains examples of calculating financial indicators and technical analysis metrics from market data using OneTick SQL. These examples demonstrate how to compute common technical analysis indicators including momentum, volatility, trend, and volume-based metrics.
 
 Technical analysis indicators are calculated using window functions to compute rolling statistics over time or tick-based windows. Many examples include both tick-based calculations and pre-calculated bar aggregations for performance comparison.
+
+<a id="average-true-range-atr"></a>
 
 ## Average True Range (ATR)
 
@@ -72,6 +76,8 @@ Returns the Average True Range (ATR) Indicator from 1 Minute Trade Bars. The Pre
  )
 ```
 
+<a id="bollinger-bands"></a>
+
 ## Bollinger Bands
 
 Bollinger Bands consist of a moving average (middle band) and two standard deviation bands (upper and lower) calculated from price data. The bands widen during volatile periods and narrow during calm periods, providing insight into volatility and potential overbought/oversold conditions.
@@ -122,6 +128,8 @@ In the example below, the subquery calculates a moving average and moving standa
  )
 ```
 
+<a id="donchian-channels"></a>
+
 ## Donchian Channels
 
 Donchian Channels are volatility bands that track the highest high and lowest low over a specified period, with a middle channel representing the midpoint. These channels are commonly used to identify breakouts and support/resistance levels.
@@ -167,6 +175,8 @@ The most common period is 20. The Upper Donchian Channel is the rolling Maximum 
    limit 1000
  )
 ```
+
+<a id="maximum-drawdown-mdd"></a>
 
 ## Maximum Drawdown (MDD)
 
@@ -230,6 +240,8 @@ The Running High Price is calculated across the period. The percentage differenc
  )
 ```
 
+<a id="on-balance-volume-obv"></a>
+
 ## On-Balance Volume (OBV)
 
 On-Balance Volume is a momentum indicator that relates price change to volume. It accumulates volume with a positive sign when prices rise and a negative sign when prices fall, helping identify the strength of price trends.
@@ -292,6 +304,8 @@ Retrieves the LAST, VOLUME and PRIOR_LAST using `LAG()`. Calculates the Signed V
  )
 ```
 
+<a id="rate-of-change-roc"></a>
+
 ## Rate of Change (ROC)
 
 Rate of Change measures the percentage change in price over a specified time period. It indicates the speed at which prices are changing and can help identify momentum and potential reversals.
@@ -334,6 +348,8 @@ Returns the Rate of Change (ROC) Indicator from 1 Minute Trade Bars. The lookbac
    limit 1000
  )
 ```
+
+<a id="relative-strength-index-rsi"></a>
 
 ## Relative Strength Index (RSI)
 
@@ -413,6 +429,8 @@ Returns the RSI together with the RS (Average Gain over Average Loss) from 1 Min
  )
 ```
 
+<a id="stochastic-oscillator"></a>
+
 ## Stochastic Oscillator
 
 The Stochastic Oscillator compares a closing price to the price range over a specified period. It includes %K (raw value) and %D (smoothed value), with values above 80 indicating overbought and values below 20 indicating oversold conditions.
@@ -470,6 +488,8 @@ Returns the Stochastic Oscillator from 1 Minute Trade Bars. The period is set to
    )
  )
 ```
+
+<a id="realized-volatility"></a>
 
 ## Realized Volatility
 
@@ -536,6 +556,8 @@ The Log Returns are calculated by taking the natural Log of Price divided by the
  )
 ```
 
+<a id="rolling-standard-deviation"></a>
+
 ## Rolling Standard Deviation
 
 Rolling Standard Deviation calculates the standard deviation of prices within a rolling time window. It measures price volatility and adapts to changing market conditions, increasing during volatile periods and decreasing during stable ones.
@@ -567,6 +589,8 @@ Returns the Rolling Standard Deviation from 1 Minute Trade Bars. The Period is d
  and TIMESTAMP < '2024-01-03 16:30:00 America/New_York'
  limit 1000
 ```
+
+<a id="volume-bars"></a>
 
 ## Volume Bars
 
@@ -601,6 +625,8 @@ The accumulative volume is calculated across the period and divided by the requi
  )
  group by VOL_BIN
 ```
+
+<a id="volume-profile"></a>
 
 ## Volume Profile
 
@@ -664,6 +690,8 @@ Specify a Tick Size (in this case 1 cent, 0.01). Calculate the Price floored to 
  group by PRICE_BIN
 ```
 
+<a id="volume-spike-detection"></a>
+
 ## Volume Spike Detection
 
 Volume Spike Detection identifies periods of abnormally high trading volume compared to recent historical averages. This can signal significant market events, breakouts, or changes in market sentiment.
@@ -719,6 +747,8 @@ Volume is aggregated based on defined bucket period from 1 Minute Trade Bars. Av
    and TIMESTAMP < '2024-01-03 16:00:00 America/New_York'
  )
 ```
+
+<a id="volume-surge-indicator"></a>
 
 ## Volume Surge Indicator
 
@@ -776,6 +806,8 @@ Volume is aggregated based on a defined bucket period from 1-Minute Bars. Averag
  )
 ```
 
+<a id="aggressor-volume-imbalance"></a>
+
 ## Aggressor Volume Imbalance
 
 Aggressor Volume Imbalance measures the imbalance between buy-side and sell-side volume, determined by the aggressor side of trades. High imbalances can indicate directional pressure in the market and potential price movements.
@@ -810,6 +842,8 @@ Aggressor Volume Imbalance is calculated for Venues that publish the AGGRESSOR_S
    group by time_bucket(INTERVAL '1' MINUTE)
  )
 ```
+
+<a id="order-flow-imbalance"></a>
 
 ## Order Flow Imbalance
 
@@ -851,6 +885,8 @@ Order Flow Imbalance (OFI) is a quantitative metric that measures the net change
    )
  )
 ```
+
+<a id="volume-synchronized-probability-of-informed-trading-vpin"></a>
 
 ## Volume Synchronized Probability of Informed Trading (VPIN)
 

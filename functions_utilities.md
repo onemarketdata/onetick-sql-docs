@@ -1,25 +1,29 @@
+<a id="functions-utilities"></a>
+
 # Functions - Utilities
 
 The following utility functions are supported:
 
-[COMPUTE_HASH_CODE](),
-[COMPUTE_HASH_CODE_STR](),
-[GETHOSTNAME](),
-[GETUSER](),
-[GET_AUTHENTICATED_USERNAME](),
-[GET_CPU_ID](),
-[GET_ONETICK_RELEASE](),
-[GET_ONETICK_VERSION](),
-[GET_SERVER_PORT](),
-[GET_THREAD_ID](),
-[GET_THREAD_NAME](),
-[GET_TOP_LEVEL_QUERY_ID](),
-[GET_TOP_LEVEL_QUERY_NAME](),
-[GET_TYPE](),
-[GET_USER_ROLES](),
-[SELECT_MATCHING_FIELDS](),
-[UNDEFINED](),
-[UUID]().
+[COMPUTE_HASH_CODE](#compute-hash-code),
+[COMPUTE_HASH_CODE_STR](#compute-hash-code-str),
+[GETHOSTNAME](#gethostname),
+[GETUSER](#getuser),
+[GET_AUTHENTICATED_USERNAME](#get-authenticated-username),
+[GET_CPU_ID](#get-cpu-id),
+[GET_ONETICK_RELEASE](#get-onetick-release),
+[GET_ONETICK_VERSION](#get-onetick-version),
+[GET_SERVER_PORT](#get-server-port),
+[GET_THREAD_ID](#get-thread-id),
+[GET_THREAD_NAME](#get-thread-name),
+[GET_TOP_LEVEL_QUERY_ID](#get-top-level-query-id),
+[GET_TOP_LEVEL_QUERY_NAME](#get-top-level-query-name),
+[GET_TYPE](#get-type),
+[GET_USER_ROLES](#get-user-roles),
+[SELECT_MATCHING_FIELDS](#select-matching-fields),
+[UNDEFINED](#undefined),
+[UUID](#uuid).
+
+<a id="compute-hash-code"></a>
 
 ## COMPUTE_HASH_CODE
 
@@ -57,6 +61,8 @@ limit 10
 |  8 | 2024-01-03 00:13:16.630750984 | 50.49   |      3 | P          |                    80 |
 |  9 | 2024-01-03 00:14:14.187418230 | 50.49   |    100 | P          |                    80 |
 
+<a id="compute-hash-code-str"></a>
+
 ## COMPUTE_HASH_CODE_STR
 
 Returns as a string the hexadecimal encoded hash code for the specified string with the hash function provided by the hash_function parameter.
@@ -93,6 +99,8 @@ limit 10
 |  8 | 2024-01-03 00:13:16.630750984 | 50.49   |      3 | P          |          5000000000000000 |
 |  9 | 2024-01-03 00:14:14.187418230 | 50.49   |    100 | P          |          5000000000000000 |
 
+<a id="gethostname"></a>
+
 ## GETHOSTNAME
 
 Returns the name of the host where this function runs.
@@ -115,6 +123,8 @@ limit 1
 |    | Timestamp                     |   S_GETHOSTNAME |    |                              |
 |----|-------------------------------|-----------------|----|------------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |           50.56 | 17 | ip-10-36-13-161.ec2.internal |
+
+<a id="getuser"></a>
 
 ## GETUSER
 
@@ -139,6 +149,8 @@ limit 1
 |----|-------------------------------|------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | ccf_omd_ps_app_1 |
 
+<a id="get-authenticated-username"></a>
+
 ## GET_AUTHENTICATED_USERNAME
 
 Returns the authenticated login name of the user who is executing the query.
@@ -161,6 +173,8 @@ limit 1
 |    | Timestamp                     | S_GET_AUTHENTICATED_USERNAME   |
 |----|-------------------------------|--------------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | ccf_omd_ps_app_1               |
+
+<a id="get-cpu-id"></a>
 
 ## GET_CPU_ID
 
@@ -185,6 +199,8 @@ limit 1
 |----|-------------------------------|----------------|
 |  0 | 2024-01-03 00:00:40.413537416 |             11 |
 
+<a id="get-onetick-release"></a>
+
 ## GET_ONETICK_RELEASE
 
 Returns the build name of OneTick, for example, BUILD_rel_20250227_initial.
@@ -207,6 +223,8 @@ limit 1
 |    | Timestamp                     | S_GET_ONETICK_RELEASE      |
 |----|-------------------------------|----------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | BUILD_rel_20250227_update4 |
+
+<a id="get-onetick-version"></a>
 
 ## GET_ONETICK_VERSION
 
@@ -231,6 +249,8 @@ limit 1
 |----|-------------------------------|-------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |          20250227120000 |
 
+<a id="get-server-port"></a>
+
 ## GET_SERVER_PORT
 
 Returns the port number of the  server, where this function is executing.
@@ -253,6 +273,8 @@ limit 1
 |    | Timestamp                     |   N_GET_SERVER_PORT |
 |----|-------------------------------|---------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |               40001 |
+
+<a id="get-thread-id"></a>
 
 ## GET_THREAD_ID
 
@@ -277,6 +299,8 @@ limit 1
 |----|-------------------------------|-------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |   139894414652992 |
 
+<a id="get-thread-name"></a>
+
 ## GET_THREAD_NAME
 
 Returns the name of the thread that is executing this function.
@@ -299,6 +323,8 @@ limit 1
 |    | Timestamp                     | S_GET_THREAD_NAME   |
 |----|-------------------------------|---------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | OMD_PS.785          |
+
+<a id="get-top-level-query-id"></a>
 
 ## GET_TOP_LEVEL_QUERY_ID
 
@@ -323,6 +349,8 @@ limit 1
 |----|-------------------------------|------------------------------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | ip-10-36-13-227.96777.20250416093102.899.21221 |
 
+<a id="get-top-level-query-name"></a>
+
 ## GET_TOP_LEVEL_QUERY_NAME
 
 Returns the unique ID of this query.
@@ -345,6 +373,8 @@ limit 1
 |    | Timestamp                     | S_GET_TOP_LEVEL_QUERY_NAME   |
 |----|-------------------------------|------------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | File1                        |
+
+<a id="get-type"></a>
 
 ## GET_TYPE
 
@@ -369,6 +399,8 @@ limit 1
 |----|-------------------------------|---------|--------------|
 |  0 | 2024-01-03 00:00:40.413537416 |   50.56 | double       |
 
+<a id="get-user-roles"></a>
+
 ## GET_USER_ROLES
 
 Returns a comma-separated list of the roles of the user who is executing the query.
@@ -391,6 +423,8 @@ limit 1
 |    | Timestamp                     | S_GET_USER_ROLES   |
 |----|-------------------------------|--------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | OMD_PS             |
+
+<a id="select-matching-fields"></a>
 
 ## SELECT_MATCHING_FIELDS
 
@@ -421,6 +455,8 @@ limit 1
 |----|-------------------------------|----------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 | BID_PRICE                  |
 
+<a id="undefined"></a>
+
 ## UNDEFINED
 
 Returns false if a field with a given name was declared, and true otherwise. The parameter name is a string and must be quoted.
@@ -447,6 +483,8 @@ limit 1
 |  0 | 2024-01-03 00:00:40.413537416 | 50.56   |             0 |              1 |
 |    |                               |         |               |                |
 |  0 | 2024-01-03 00:00:40.413537416 | OMD_PS  |               |                |
+
+<a id="uuid"></a>
 
 ## UUID
 

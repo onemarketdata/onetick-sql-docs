@@ -1,40 +1,44 @@
+<a id="functions-date-time"></a>
+
 # Functions - Date Time
 
 The following Date Time functions are supported:
 
-[AS_YYYYMMDDHHMMSS](),
-[CURDATE](),
-[CURRENT_DATE](),
-[CURRENT_TIME](),
-[CURRENT_TIMESTAMP](),
-[CURTIME](),
-[DATEADD](),
-[DATEDIFF](),
-[DATE_TRUNC](),
-[DATENAME](),
-[DAY](),
-[DAY_OF_WEEK](),
-[DAYNAME](),
-[DAYOFMONTH](),
-[DAYOFWEEK](),
-[DAYOFYEAR](),
-[HOUR](),
-[MATCHES_TIME_FILTER](),
-[MINUTE](),
-[MONTH](),
-[MONTHNAME](),
-[NOW](),
-[NSECTIME](),
-[NSECTIME_FORMAT](),
-[NSECTIME_TO_LONG](),
-[PARSE_TIME](),
-[PARSE_NSECTIME](),
-[QUARTER](),
-[SECOND](),
-[TIME_FORMAT](),
-[TODAY](),
-[WEEK](),
-[YEAR]().
+[AS_YYYYMMDDHHMMSS](#as-yyyymmddhhmmss),
+[CURDATE](#curdate),
+[CURRENT_DATE](#current-date),
+[CURRENT_TIME](#current-time),
+[CURRENT_TIMESTAMP](#current-timestamp),
+[CURTIME](#curtime),
+[DATEADD](#dateadd),
+[DATEDIFF](#datediff),
+[DATE_TRUNC](#date-trunc),
+[DATENAME](#datename),
+[DAY](#day),
+[DAY_OF_WEEK](#day-of-week),
+[DAYNAME](#dayname),
+[DAYOFMONTH](#dayofmonth),
+[DAYOFWEEK](#dayofweek),
+[DAYOFYEAR](#dayofyear),
+[HOUR](#hour),
+[MATCHES_TIME_FILTER](#matches-time-filter),
+[MINUTE](#minute),
+[MONTH](#month),
+[MONTHNAME](#monthname),
+[NOW](#now),
+[NSECTIME](#nsectime),
+[NSECTIME_FORMAT](#nsectime-format),
+[NSECTIME_TO_LONG](#nsectime-to-long),
+[PARSE_TIME](#parse-time),
+[PARSE_NSECTIME](#parse-nsectime),
+[QUARTER](#quarter),
+[SECOND](#second),
+[TIME_FORMAT](#time-format),
+[TODAY](#today),
+[WEEK](#week),
+[YEAR](#year).
+
+<a id="as-yyyymmddhhmmss"></a>
 
 ## AS_YYYYMMDDHHMMSS
 
@@ -64,6 +68,8 @@ limit 5
 |  3 | 2024-01-03 14:00:53.553753985 |   50.17 |    250 | 20240103090053 |
 |  4 | 2024-01-03 14:02:01.214949697 |   50.47 |      1 | 20240103090201 |
 
+<a id="curdate"></a>
+
 ## CURDATE
 
 Returns the number of milliseconds since 1970/01/01 UTC to the beginning of the current day in the local timezone.
@@ -87,6 +93,8 @@ limit 1
 |    | TIMESTAMP                     |   PRICE |   SIZE | T_CURDATE           |
 |----|-------------------------------|---------|--------|---------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |   50.56 |     17 | 2025-04-15 00:00:00 |
+
+<a id="current-date"></a>
 
 ## CURRENT_DATE
 
@@ -112,6 +120,8 @@ limit 1
 |----|-------------------------------|---------|--------|---------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |   50.56 |     17 | 2025-04-15 00:00:00 |
 
+<a id="current-time"></a>
+
 ## CURRENT_TIME
 
 Returns the current time expressed as the number of milliseconds since 1970/01/01 UTC.
@@ -135,6 +145,8 @@ limit 1
 |    | TIMESTAMP                     |   PRICE |   SIZE | T_CURRENT_TIME          |
 |----|-------------------------------|---------|--------|-------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |   50.56 |     17 | 2025-04-15 12:07:18.754 |
+
+<a id="current-timestamp"></a>
 
 ## CURRENT_TIMESTAMP
 
@@ -160,6 +172,8 @@ limit 1
 |----|-------------------------------|---------|--------|-------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |   50.56 |     17 | 2025-04-15 12:07:18.754 |
 
+<a id="curtime"></a>
+
 ## CURTIME
 
 Returns the current time expressed as the number of milliseconds since 1970/01/01 UTC.
@@ -183,6 +197,8 @@ limit 1
 |    | TIMESTAMP                     |   PRICE |   SIZE | T_CURTIME               |
 |----|-------------------------------|---------|--------|-------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |   50.56 |     17 | 2025-04-15 12:07:18.754 |
+
+<a id="dateadd"></a>
 
 ## DATEADD
 
@@ -214,6 +230,8 @@ limit 5
 |  3 | 2006-06-01 11:01:41.773 |   19.65 |    300 | 2006-06-01 11:02:41.773 |
 |  4 | 2006-06-01 11:43:48.078 |   19.66 |    600 | 2006-06-01 11:44:48.078 |
 
+<a id="datediff"></a>
+
 ## DATEDIFF
 
 Returns the count (signed integer) of the specified datepart boundaries crossed between the specified start time and end time (number of milliseconds since 1970/01/01 UTC, interpreted in the specified timezone, local by default).
@@ -244,6 +262,8 @@ limit 5
 |  2 | 2024-01-03 14:00:34.459323050 |   50.17 |    200 | D          | 2024-01-03 14:00:34.457000000 |             2 |              2 |
 |  3 | 2024-01-03 14:00:53.553753985 |   50.17 |    250 | D          | 2024-01-03 14:00:53.552000000 |             1 |              1 |
 |  4 | 2024-01-03 14:02:01.214949697 |   50.47 |      1 | D          | 2024-01-03 14:01:59.771318000 |          1443 |           1443 |
+
+<a id="date-trunc"></a>
 
 ## DATE_TRUNC
 
@@ -282,6 +302,8 @@ limit 10
 |  8 | 2024-01-03 14:03:53.535607777 | 50.1702 |     24 | D          | 2024-01-03 14:00:00 | 2024-01-03 14:03:00   | 2024-01-03 14:03:53   |
 |  9 | 2024-01-03 14:05:43.010257474 | 50.19   |      2 | D          | 2024-01-03 14:00:00 | 2024-01-03 14:05:00   | 2024-01-03 14:05:43   |
 
+<a id="datename"></a>
+
 ## DATENAME
 
 Returns a number representing the specified datepart of the specified datetime, interpreted in the specified timezone, local by default).
@@ -313,6 +335,8 @@ limit 5
 |  3 | 2024-01-03 14:00:53.553753985 |   50.17 |    250 | D          | 2024-01-03 14:00:53.552000000 |                14 |                   0 |
 |  4 | 2024-01-03 14:02:01.214949697 |   50.47 |      1 | D          | 2024-01-03 14:01:59.771318000 |                14 |                   2 |
 
+<a id="day"></a>
+
 ## DAY
 
 Returns the day of the month in the given timezone for the specified time. timezone parameter is optional, by default local timezone is used.
@@ -339,6 +363,8 @@ limit 3
 |  1 | 2024-01-03 14:00:24.055585176 |   50.18 |      2 |       3 |
 |  2 | 2024-01-03 14:00:34.459323050 |   50.17 |    200 |       3 |
 
+<a id="day-of-week"></a>
+
 ## DAY_OF_WEEK
 
 Returns the day of the week (0 is Sunday, 1 is Monday, and so forth) in the given timezone , UTC by default, for the specified time.
@@ -363,6 +389,8 @@ limit 1
 |----|-------------------------------|---------|--------|-----------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 |               3 |
 
+<a id="dayname"></a>
+
 ## DAYNAME
 
 Returns the name of the weekday in the given timezone for the specified time. Timezone parameter is optional, by default local timezone is used.
@@ -385,6 +413,8 @@ LIMIT 1
 |    | TIMESTAMP                     |   PRICE |   SIZE | T_DAYNAME   |
 |----|-------------------------------|---------|--------|-------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 | Wednesday   |
+
+<a id="dayofmonth"></a>
 
 ## DAYOFMONTH
 
@@ -410,6 +440,8 @@ limit 1
 |----|-------------------------------|---------|--------|----------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 |              3 |
 
+<a id="dayofweek"></a>
+
 ## DAYOFWEEK
 
 Returns the day of the week (1 is Sunday, 2 is Monday, …, 7 is Saturday) in the given timezone for the specified time. timezone parameter is optional, by default local timezone is used.
@@ -433,6 +465,8 @@ limit 1
 |    | TIMESTAMP                     |   PRICE |   SIZE |   T_DAYOFWEEK |
 |----|-------------------------------|---------|--------|---------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 |             4 |
+
+<a id="dayofyear"></a>
 
 ## DAYOFYEAR
 
@@ -458,6 +492,8 @@ limit 1
 |----|-------------------------------|---------|--------|---------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 |             3 |
 
+<a id="hour"></a>
+
 ## HOUR
 
 Returns the hour in the given timezone of the computer that is executing this function, for the specified time. timezone parameter is optional, by default local timezone is used.
@@ -480,6 +516,8 @@ limit 1
 |    | TIMESTAMP                     |   PRICE |   SIZE |   T_HOUR |
 |----|-------------------------------|---------|--------|----------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 |        9 |
+
+<a id="matches-time-filter"></a>
 
 ## MATCHES_TIME_FILTER
 
@@ -528,6 +566,8 @@ limit 10
 |  8 | 2024-01-03 14:35:00.096063675 |   50.01 |      8 | @F I   | U          |
 |  9 | 2024-01-03 14:35:00.096269064 |   50.01 |     58 | @F I   | U          |
 
+<a id="minute"></a>
+
 ## MINUTE
 
 Returns the minute of the specified time in the given timezone.timezone parameter is optional, by default local timezone is used.
@@ -550,6 +590,8 @@ limit 1
 |    | TIMESTAMP                     |   PRICE |   SIZE |   T_MINUTE |
 |----|-------------------------------|---------|--------|------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 |          0 |
+
+<a id="month"></a>
 
 ## MONTH
 
@@ -574,6 +616,8 @@ limit 1
 |----|-------------------------------|---------|--------|-----------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 |         1 |
 
+<a id="monthname"></a>
+
 ## MONTHNAME
 
 Returns the name of the month in the given timezone for the specified time. timezone parameter is optional, by default local timezone is used.
@@ -596,6 +640,8 @@ limit 1
 |    | TIMESTAMP                     |   PRICE |   SIZE | S_MONTHNAME                   |
 |----|-------------------------------|---------|--------|-------------------------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 | 2025-04-16 07:45:43.123456789 |
+
+<a id="now"></a>
 
 ## NOW
 
@@ -621,6 +667,8 @@ limit 1
 |----|-------------------------------|---------|--------|-------------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |   50.56 |     17 | 2025-04-15 12:07:18.754 |
 
+<a id="nsectime"></a>
+
 ## NSECTIME
 
 Constructs a nanosecond-granularity timestamp from a long integer value or from a datetime.
@@ -644,6 +692,8 @@ limit 1
 |    | TIMESTAMP                     |   PRICE |   SIZE | T_NSECTIME                    |
 |----|-------------------------------|---------|--------|-------------------------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 | 2025-04-16 07:45:43.123456789 |
+
+<a id="nsectime-format"></a>
 
 ## NSECTIME_FORMAT
 
@@ -686,6 +736,8 @@ limit 3
 |  1 | 2024-01-03 14:00:24.055585176 |   50.18 |      2 | 2024-01-03T09:00:24.055585176 |
 |  2 | 2024-01-03 14:00:34.459323050 |   50.17 |    200 | 2024-01-03T09:00:34.459323050 |
 
+<a id="nsectime-to-long"></a>
+
 ## NSECTIME_TO_LONG
 
 Returns the specified nanosecond-granularity timestamp as a long integer value.
@@ -708,6 +760,8 @@ limit 1
 |    | TIMESTAMP                     |   PRICE |   SIZE |   I_NSECTIME_TO_LONG |
 |----|-------------------------------|---------|--------|----------------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 |  1704290411390056347 |
+
+<a id="parse-nsectime"></a>
 
 ## PARSE_NSECTIME
 
@@ -747,6 +801,8 @@ limit 1
 |----|-------------------------------|---------|--------|----------------------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 | 2025-04-01 14:11:12.345678 |
 
+<a id="parse-time"></a>
+
 ## PARSE_TIME
 
 Parses the formatted time string, converting it to the number of milliseconds since 1970/01/01 GMT. Timezone parameter is optional, by default UTC timezone is used.
@@ -785,6 +841,8 @@ limit 1
 |----|-------------------------------|---------|--------|-------------------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 | 2025-04-01 14:11:12.345 |
 
+<a id="quarter"></a>
+
 ## QUARTER
 
 Returns the quarter of a specified time in the given timezone. timezone parameter is optional, by default local timezone is used.
@@ -808,6 +866,8 @@ limit 1
 |----|-------------------------------|---------|--------|-------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 |           1 |
 
+<a id="second"></a>
+
 ## SECOND
 
 Returns the second of a specified time in the given timezone. timezone parameter is optional, by default local timezone is used.
@@ -830,6 +890,8 @@ limit 1
 |    | TIMESTAMP                     |   PRICE |   SIZE |   T_SECOND |
 |----|-------------------------------|---------|--------|------------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 |         11 |
+
+<a id="time-format"></a>
 
 ## TIME_FORMAT
 
@@ -878,6 +940,8 @@ LIMIT 10
 |  8 | 2024-01-03 14:03:53.535607777 | 50.1702 |     24 | 2024-01-03T09:03:53.535000000 |
 |  9 | 2024-01-03 14:05:43.010257474 | 50.19   |      2 | 2024-01-03T09:05:43.010000000 |
 
+<a id="today"></a>
+
 ## TODAY
 
 Returns the number of milliseconds since 1970/01/01 UTC to the beginning of the current day in the specified timezone. timezone parameter is optional, by default UTC timezone is used.
@@ -902,6 +966,8 @@ limit 1
 |----|-------------------------------|---------|--------|---------------------|
 |  0 | 2024-01-03 00:00:40.413537416 |   50.56 |     17 | 2025-04-15 00:00:00 |
 
+<a id="week"></a>
+
 ## WEEK
 
 Returns the week of a specified time in the given timezone. timezone parameter is optional, by default local timezone is used.
@@ -924,6 +990,8 @@ limit 1
 |    | TIMESTAMP                     |   PRICE |   SIZE |   T_WEEK |
 |----|-------------------------------|---------|--------|----------|
 |  0 | 2024-01-03 14:00:11.390056347 |   50.17 |    300 |        1 |
+
+<a id="year"></a>
 
 ## YEAR
 

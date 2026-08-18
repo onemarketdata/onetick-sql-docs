@@ -1,6 +1,10 @@
+<a id="basics"></a>
+
 # Basics
 
 A series of simple examples are provided showing how to retrieve, filter, aggregate and join datasets, using OneTick Cloud sample databases.
+
+<a id="data-retrieval"></a>
 
 ## Data Retrieval
 
@@ -21,6 +25,8 @@ and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 limit 10
 ```
 
+<a id="time-zones-for-filtering"></a>
+
 ## Time Zones for Filtering
 
 All times are assumed to be UTC.
@@ -34,6 +40,8 @@ and TIMESTAMP >= '2024-01-03 09:30:00 America/New_York'
 and TIMESTAMP < '2024-01-03 16:00:00 America/New_York'
 limit 10
 ```
+
+<a id="time-zones-for-resultsets"></a>
 
 ## Time Zones for Resultsets
 
@@ -84,6 +92,8 @@ otp.config.tz = 'America/New_York'
 result = otp.run(otp.SqlQuery(sql_statement))
 ```
 
+<a id="sample-databases-tables"></a>
+
 ## Sample Databases & Tables
 
 The full list of 200+ Global Equities, Futures, Options & Indices databases is available in
@@ -126,6 +136,8 @@ Data is stored in standardized tables
 | TRD_1M   | 1 Minute Trade Bar                                                                         |
 | QTE_1M   | 1 Minute Quote Bar                                                                         |
 
+<a id="field-selection"></a>
+
 ## Field Selection
 
 All of the fields in a table can be retrieved by using the `*` syntax.
@@ -147,6 +159,8 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 00:00:00 UTC'
 and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 ```
+
+<a id="limiting-returned-rows"></a>
 
 ## Limiting Returned Rows
 
@@ -173,6 +187,8 @@ and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 limit 10 offset 5
 ```
 
+<a id="retrieving-multiple-symbols"></a>
+
 ## Retrieving Multiple Symbols
 
 Multiple symbols can be retrieved through specifying `IN` or `LIKE`.
@@ -193,6 +209,8 @@ and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 LIMIT 10
 ```
 
+<a id="adding-calculated-fields"></a>
+
 ## Adding Calculated Fields
 
 Additional fields can be added through calculation and assigned an alias.
@@ -204,6 +222,8 @@ and TIMESTAMP >= '2024-01-03 00:00:00 UTC'
 and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 LIMIT 10
 ```
+
+<a id="adding-filters"></a>
 
 ## Adding Filters
 
@@ -218,6 +238,8 @@ and TRADE_CURRENCY = 'EUR'
 and SIZE > 100
 LIMIT 10
 ```
+
+<a id="aggregating-across-results"></a>
 
 ## Aggregating Across Results
 
@@ -258,6 +280,8 @@ and TIMESTAMP < '2024-01-04 16:00:00 UTC'
 group by TRADE_CURRENCY
 ```
 
+<a id="query-data-availability-status"></a>
+
 ## Query Data Availability Status
 
 The data availability status can be queried to determine when data loads have completed for a specific database.
@@ -275,6 +299,8 @@ WHERE SYMBOL_NAME LIKE '%'                    -- Filter for all symbols using wi
   AND EVENT_NAME = 'Load finished'            -- Filter to only successful load completion events
 ```
 
+<a id="point-in-time-trade-snapshot-across-venue"></a>
+
 ## Point in Time Trade Snapshot Across Venue
 
 Retrieves a snapshot of trade data at a specific point in time across a venue, looking back a specified number of seconds to find the prevailing trade before the selected time.
@@ -288,6 +314,8 @@ A specific point in time is selected with the TIMESTAMP equal to a specified val
  and TIMESTAMP = '2024-01-03 12:30:00 America/New_York'
  and init_lookback = 86400           --how many seconds to look back for prevailing value
 ```
+
+<a id="point-in-time-trade-and-quote-snapshot-across-venue"></a>
 
 ## Point in Time Trade and Quote Snapshot Across Venue
 
@@ -307,6 +335,8 @@ A specific point in time is selected with the TIMESTAMP equal to a specified val
  and q.init_lookback = 86400           --how many seconds to look back for prevailing Quote
 ```
 
+<a id="spread-and-mid-from-venue"></a>
+
 ## Spread and Mid from Venue
 
 Calculates bid-ask spread and mid-price from quote data at a venue, providing key pricing metrics for market analysis.
@@ -324,6 +354,8 @@ Venue datasets include Top of Book Quotes in the QTE table. SPREAD = ASK_PRICE -
  and BID_SIZE > 0 and ASK_SIZE > 0
  limit 1000
 ```
+
+<a id="spread-and-mid-statistics-from-venue"></a>
 
 ## Spread and Mid Statistics from Venue
 
@@ -353,6 +385,8 @@ Venue datasets include Top of Book Quotes in the QTE table. Statistics across th
    and BID_SIZE > 0 and ASK_SIZE > 0
  )
 ```
+
+<a id="retrieving-valid-quotes-for-specified-trading-sessions"></a>
 
 ## Retrieving Valid Quotes for Specified Trading Sessions
 

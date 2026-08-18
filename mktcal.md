@@ -1,7 +1,11 @@
+<a id="trading-hours-holidays"></a>
+
 # Trading Hours & Holidays
 
 Both Trading Hours and historic holidays are recorded in the database `OQD_MKTCAL`.
 Data is divided between Equity Markets and Futures products given that different futures products on the same venue may have different trading hours.
+
+<a id="equity-market-holiday-history"></a>
 
 ## Equity Market Holiday History
 
@@ -32,6 +36,8 @@ LIMIT 10
 | OQD_MKTCAL::CLOUD_DB_LSE | 2023-12-26 00:00:00 | OQD_MKTCAL::CLOUD_DB_LSE | MKTCAL      |      325 | 00:00        | 24:00      |                |             0 | CLOUD_DB_LSE    | ALL_HOLIDAY     | Europe/London | 2023-12-26 00:00:00 | 2023-12-26 00:00:00 |          4 |
 | OQD_MKTCAL::CLOUD_DB_LSE | 2023-12-29 00:00:00 | OQD_MKTCAL::CLOUD_DB_LSE | MKTCAL      |       98 | 08:00        | 12:30      |                |             0 | CLOUD_DB_LSE    | DAY_HOLIDAY     | Europe/London | 2023-12-29 00:00:00 | 2023-12-29 00:00:00 |         32 |
 
+<a id="equity-trading-hour-history"></a>
+
 ## Equity Trading Hour History
 
 Equity Trading Hours are retrieved by setting the `SYMBOL_NAME` to the required database prefixed with `CLOUD_DB_`.  The Time range should cover the required history of trading hours,
@@ -54,6 +60,8 @@ LIMIT 100
 | OQD_MKTCAL::CLOUD_DB_LSE | 1993-01-01 00:00:00 | OQD_MKTCAL::CLOUD_DB_LSE | MKTCAL      |      583 | 16:30        | 18:30      |                |             0 | CLOUD_DB_LSE    | POST_MARKET     | Europe/London | 1993-01-01 00:00:00 | 2068-07-19 00:00:00 |         62 |
 | OQD_MKTCAL::CLOUD_DB_LSE | 1993-01-01 00:00:00 | OQD_MKTCAL::CLOUD_DB_LSE | MKTCAL      |      584 | 07:00        | 08:00      |                |             0 | CLOUD_DB_LSE    | PRE_MARKET      | Europe/London | 1993-01-01 00:00:00 | 2068-07-19 00:00:00 |         62 |
 | OQD_MKTCAL::CLOUD_DB_LSE | 1993-01-01 00:00:00 | OQD_MKTCAL::CLOUD_DB_LSE | MKTCAL      |      585 | 08:00        | 16:30      |                |             0 | CLOUD_DB_LSE    | X_MARKET_MTF    | Europe/London | 1993-01-01 00:00:00 | 2068-07-19 00:00:00 |         62 |
+
+<a id="futures-product-holiday-history"></a>
 
 ## Futures Product Holiday History
 
@@ -84,6 +92,8 @@ LIMIT 10
 | OQD_MKTCAL::TDI_F_CL | 2023-11-23 00:00:00 | OQD_MKTCAL::TDI_F_CL | MKTCAL      |      608 | 00:00        | 24:00      |                |             0 | TDI_F_CL        | NIGHT2_HOLIDAY  | America/New_York | 2023-11-23 00:00:00 | 2023-11-23 00:00:00 |         16 |
 | OQD_MKTCAL::TDI_F_CL | 2023-11-24 00:00:00 | OQD_MKTCAL::TDI_F_CL | MKTCAL      |      540 | 09:00        | 13:45      |                |             0 | TDI_F_CL        | DAY_HOLIDAY     | America/New_York | 2023-11-24 00:00:00 | 2023-11-24 00:00:00 |         32 |
 | OQD_MKTCAL::TDI_F_CL | 2023-11-24 00:00:00 | OQD_MKTCAL::TDI_F_CL | MKTCAL      |      541 | 00:00        | 24:00      |                |             0 | TDI_F_CL        | NIGHT2_HOLIDAY  | America/New_York | 2023-11-24 00:00:00 | 2023-11-24 00:00:00 |         32 |
+
+<a id="futures-product-trading-hour-history"></a>
 
 ## Futures Product Trading Hour History
 

@@ -1,6 +1,10 @@
+<a id="options"></a>
+
 # Options
 
 A series of simple examples are provided showing how to retrieve options data, Greeks, and analytics from OneTick Cloud.
+
+<a id="options-greeks"></a>
 
 ## Options Greeks
 
@@ -14,6 +18,8 @@ and TIMESTAMP >= '2025-01-03 08:00:00 UTC'
 and TIMESTAMP < '2025-01-04 16:00:00 UTC'
 limit 1000
 ```
+
+<a id="options-volume-open-interest-and-greeks-analysis"></a>
 
 ## Options Volume, Open Interest, and Greeks Analysis
 
@@ -35,6 +41,8 @@ GROUP BY SYMBOL_NAME, TICK_TYPE
 ORDER BY SYMBOL_NAME, TICK_TYPE
 ```
 
+<a id="options-trades"></a>
+
 ## Options Trades
 
 Retrieves options trade data for a specific AAPL contract from the US Options sample feed. Shows tick-level trade records for an individual option contract. The symbol format `AAPL  250103C00155000` represents: Underlying (AAPL), Expiration (2025-01-03), Type (C for Call), and Strike (155.00). This query returns all trade ticks including price, size, venue, and trade conditions for a specific contract.
@@ -48,6 +56,8 @@ WHERE SYMBOL_NAME = 'AAPL  250103C00155000'
 LIMIT 1000
 ```
 
+<a id="opra-data-sources"></a>
+
 ## OPRA Data Sources
 
 OPRA (Options Price Reporting Authority) provides consolidated options pricing and activity data across US options exchanges.
@@ -60,6 +70,8 @@ OPRA options data is available in multiple databases and granularities:
 * `US_OPTIONS_SAMPLE.STAT` - Options contract metadata (strike, expiration, call/put indicator)
 * `US_OPTIONS_EOD_SAMPLE.DAY` - Daily aggregated options data
 * `US_OPTIONS_EOD_SAMPLE.STAT` - Static contract information
+
+<a id="opra-snapshot-prevailing-prices-at-specified-time"></a>
 
 ## OPRA Snapshot - Prevailing Prices at Specified Time
 
@@ -84,6 +96,8 @@ and s.init_lookback = 86400
 and t.init_lookback = 36000
 ```
 
+<a id="opra-snapshot-for-specific-expiration"></a>
+
 ## OPRA Snapshot for Specific Expiration
 
 Retrieve all options data for a specific underlying and expiration date at a given time.
@@ -106,6 +120,8 @@ and TIMESTAMP = '2025-01-03 16:00:00 America/New_York'
 and s.init_lookback = 86400
 and t.init_lookback = 36000
 ```
+
+<a id="opra-daily-volume-and-open-interest-by-strike"></a>
 
 ## OPRA Daily Volume and Open Interest by Strike
 
@@ -146,6 +162,8 @@ from (
 group by UNDERLYING_SYMBOL, STRIKE_PRICE
 ```
 
+<a id="opra-daily-volume-and-open-interest-by-expiration"></a>
+
 ## OPRA Daily Volume and Open Interest by Expiration
 
 Summarize daily options volume and open interest grouped by expiration date, split between calls and puts.
@@ -185,6 +203,8 @@ from (
 group by UNDERLYING_SYMBOL, EXPIRATION_DATE
 ```
 
+<a id="opra-intraday-volume-by-strike"></a>
+
 ## OPRA Intraday Volume by Strike
 
 Calculate intraday trading volume split between calls and puts, grouped by strike price.
@@ -218,6 +238,8 @@ from (
 group by UNDERLYING_SYMBOL, STRIKE_PRICE
 ```
 
+<a id="opra-intraday-volume-by-expiration"></a>
+
 ## OPRA Intraday Volume by Expiration
 
 Aggregate intraday trade volume by expiration date, showing call/put split for a given time window.
@@ -249,6 +271,8 @@ from (
 )
 group by UNDERLYING_SYMBOL, EXPIRATION_DATE
 ```
+
+<a id="opra-greeks-and-pricing-by-strike-straddle-view"></a>
 
 ## OPRA Greeks and Pricing by Strike (Straddle View)
 

@@ -1,13 +1,19 @@
+<a id="earnings-events-analysis"></a>
+
 # Earnings Events Analysis
 
 A series of examples showing how to query and analyze corporate events data from OneTick Cloud.
 Earnings annoucements are recorded in the EVENT table and can be combined with market data to analyze market reactions and trading patterns around these events.
+
+<a id="event-data-sources"></a>
 
 ## Event Data Sources
 
 Earnings annoucement events are available in the daily market data databases:
 
 * `US_COMP_DAILY.EVENT` - US earnings events
+
+<a id="event-types"></a>
 
 ## Event Types
 
@@ -17,6 +23,8 @@ The EVENT table records two primary event types:
 * `COMPANY_CONFERENCE_CALL` - Scheduled conference call dates
 
 These events are useful for analyzing market behavior around significant corporate announcements.
+
+<a id="retrieving-event-history-for-a-symbol"></a>
 
 ## Retrieving Event History for a Symbol
 
@@ -29,6 +37,8 @@ where SYMBOL_NAME = 'CSCO'
 and TIMESTAMP >= '2026-01-01 00:00:00 America/New_York'
 and TIMESTAMP < '2026-06-12 00:00:00 America/New_York'
 ```
+
+<a id="querying-event-history-for-a-time-range"></a>
 
 ## Querying Event History for a Time Range
 
@@ -43,6 +53,8 @@ and TIMESTAMP < '2026-06-12 00:00:00 America/New_York'
 and EVENT_TYPE = 'EARNING_DATE'
 order by TIMESTAMP
 ```
+
+<a id="joining-daily-pricing-to-earnings-events"></a>
 
 ## Joining Daily Pricing to Earnings Events
 
@@ -63,6 +75,8 @@ and TIMESTAMP < '2024-04-01 00:00:00 America/New_York'
 and e.EVENT_TYPE = 'EARNING_DATE'
 and d.EXCHANGE = ''
 ```
+
+<a id="combining-bars-with-earnings-events"></a>
 
 ## Combining Bars with Earnings Events
 
@@ -89,6 +103,8 @@ and TIMESTAMP < '2024-02-15 00:00:00 America/New_York'
 and EVENT_TYPE = 'EARNING_DATE'
 ```
 
+<a id="combining-daily-pricing-with-earnings-events"></a>
+
 ## Combining Daily Pricing with Earnings Events
 
 Union daily price data with earnings events, creating a combined dataset that shows both
@@ -114,6 +130,8 @@ and TIMESTAMP >= '2024-01-01 00:00:00 America/New_York'
 and TIMESTAMP < '2024-04-01 00:00:00 America/New_York'
 and EVENT_TYPE = 'EARNING_DATE'
 ```
+
+<a id="combining-trades-with-earnings-events"></a>
 
 ## Combining Trades with Earnings Events
 

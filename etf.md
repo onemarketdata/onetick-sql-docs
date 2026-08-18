@@ -1,7 +1,11 @@
+<a id="exchange-traded-fund-etf-data-retrieval"></a>
+
 # Exchange-Traded Fund (ETF) Data Retrieval
 
 A series of simple examples are provided showing how to retrieve Exchange-Traded Fund (ETF) data, including universe information, daily metrics, constituents, cash positions, and portfolio composition.
 ETF data is queried using Bloomberg symbology (`BSYM`) to access the `OQD_ETF` database.
+
+<a id="etf-tables"></a>
 
 ## ETF Tables
 
@@ -12,6 +16,8 @@ The OQD_ETF database provides data through the following tables:
 * `OQD_ETF.CONSTITUENTS` - Constituent holdings and weights
 * `OQD_ETF.CASH` - Cash and cash equivalents held in the portfolio
 * `OQD_ETF.PCF` - Portfolio composition and holding details
+
+<a id="retrieval-of-etf-universe"></a>
 
 ## Retrieval of ETF Universe
 
@@ -26,6 +32,8 @@ and TIMESTAMP < '2024-08-09 00:00:00 UTC'
 LIMIT 100
 ```
 
+<a id="retrieval-of-etf-daily-data"></a>
+
 ## Retrieval of ETF Daily Data
 
 Daily ETF price and performance metrics can be retrieved for a specific ETF.
@@ -38,6 +46,8 @@ and TIMESTAMP >= '2024-07-08 00:00:00 UTC'
 and TIMESTAMP < '2024-08-09 00:00:00 UTC'
 LIMIT 100
 ```
+
+<a id="retrieval-of-etf-constituents"></a>
 
 ## Retrieval of ETF Constituents
 
@@ -52,6 +62,8 @@ and TIMESTAMP < '2024-08-09 00:00:00 UTC'
 LIMIT 100
 ```
 
+<a id="retrieval-of-etf-cash-positions"></a>
+
 ## Retrieval of ETF Cash Positions
 
 Cash and cash equivalent holdings within an ETF portfolio can be retrieved.
@@ -64,6 +76,8 @@ and TIMESTAMP >= '2024-07-08 00:00:00 UTC'
 and TIMESTAMP < '2024-08-09 00:00:00 UTC'
 LIMIT 100
 ```
+
+<a id="retrieval-of-etf-portfolio-composition"></a>
 
 ## Retrieval of ETF Portfolio Composition
 

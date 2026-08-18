@@ -1,6 +1,10 @@
+<a id="filtering"></a>
+
 # Filtering
 
 A series of simple examples are provided showing how to filter results using the `WHERE` clause.
+
+<a id="mandatory-filters"></a>
 
 ## Mandatory Filters
 
@@ -24,6 +28,8 @@ and TIMESTAMP = '2024-01-03 14:40:05.771572791 UTC'
 LIMIT 10
 ```
 
+<a id="retrieving-multiple-symbols"></a>
+
 ## Retrieving Multiple Symbols
 
 Multiple symbols can be retrieved through specifying `IN` or `LIKE`.
@@ -44,6 +50,8 @@ and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 LIMIT 10
 ```
 
+<a id="additional-filter-fields"></a>
+
 ## Additional Filter Fields
 
 Additional filters can be added by adding additional `and` sections to the `where` clause.
@@ -57,6 +65,8 @@ and SIZE > 10          -- Trade Size Greater than 10
 and EXCHANGE = 'N'     -- Exchange is NYSE
 LIMIT 10
 ```
+
+<a id="filtering-on-specific-times-across-multiple-days"></a>
 
 ## Filtering on Specific Times across Multiple Days
 
@@ -85,6 +95,8 @@ limit 10
 |  7 | 2024-01-03 14:35:00.096058266 |   50.01 |      1 | @F I   | P          |
 |  8 | 2024-01-03 14:35:00.096063675 |   50.01 |      8 | @F I   | U          |
 |  9 | 2024-01-03 14:35:00.096269064 |   50.01 |     58 | @F I   | U          |
+
+<a id="filtering-for-trade-conditions"></a>
 
 ## Filtering for Trade Conditions
 
@@ -147,6 +159,8 @@ limit 5
 |  3 | 2024-01-03 00:47:58.373425468 |   50.48 |    200 | @ T    |
 |  4 | 2024-01-03 00:50:55.662956337 |   50.47 |    100 | @ T    |
 
+<a id="filtering-trades-on-the-trading-session"></a>
+
 ## Filtering Trades on the Trading Session
 
 Trades can be filtered to a specific trading session using the `TRADE_PERIOD` field, which identifies the session each trade belongs to:
@@ -179,6 +193,8 @@ and TIMESTAMP >= '2024-01-03 00:00:00 America/Toronto'
 and TIMESTAMP < '2024-01-04 00:00:00 America/Toronto'
 and TRADE_PERIOD='C'
 ```
+
+<a id="filtering-indicative-prices-on-the-auction"></a>
 
 ## Filtering Indicative Prices on the Auction
 

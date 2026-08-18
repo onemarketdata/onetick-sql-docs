@@ -1,7 +1,11 @@
+<a id="trade-cost-analysis-tca"></a>
+
 # Trade Cost Analysis (TCA)
 
 A series of examples are provided showing how to perform Trade Cost Analysis (TCA) by joining proprietary trade and order data with market data benchmarks.
 TCA compares executed trade prices against market conditions to measure trading performance and execution quality.
+
+<a id="tca-datasets"></a>
 
 ## TCA Datasets
 
@@ -11,6 +15,8 @@ TCA analysis uses proprietary order and trade data stored in secure sample datab
 * `S_ORDERS_US_COMP_SAMPLE` - Sample US trades dataset (encrypted and secured)
 
 These datasets are joined with market data benchmarks to calculate performance metrics.
+
+<a id="query-loaded-order-messages"></a>
 
 ## Query Loaded Order Messages
 
@@ -25,6 +31,8 @@ and TIMESTAMP < '2024-04-04 00:00:00 Europe/London'
 limit 1000
 ```
 
+<a id="query-loaded-trades"></a>
+
 ## Query Loaded Trades
 
 Proprietary trade data can be queried to retrieve all trades for a specific symbol.
@@ -37,6 +45,8 @@ and TIMESTAMP >= '2024-01-03 00:00:00 America/New_York'
 and TIMESTAMP < '2024-04-04 00:00:00 America/New_York'
 limit 1000
 ```
+
+<a id="prevailing-prices-for-supplied-trades"></a>
 
 ## Prevailing Prices for Supplied Trades
 
@@ -55,6 +65,8 @@ and TIMESTAMP >= '2024-01-03 00:00:00 America/New_York'
 and TIMESTAMP < '2024-01-04 00:00:00 America/New_York'
 limit 1000
 ```
+
+<a id="effective-spread-calculation"></a>
 
 ## Effective Spread Calculation
 

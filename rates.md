@@ -1,7 +1,11 @@
+<a id="interest-rate-data-retrieval"></a>
+
 # Interest Rate Data Retrieval
 
 A series of simple examples are provided showing how to retrieve interest rate data from the RATES database.
 The RATES database contains daily and statistical interest rate information for various rate indices and instruments.
+
+<a id="interest-rate-tables"></a>
 
 ## Interest Rate Tables
 
@@ -9,6 +13,8 @@ The RATES database provides data through the following tables:
 
 * `RATES.DAY` - Daily interest rates table containing closing rates and statistics
 * `RATES.STAT` - Statistical records for interest rates with symbol information and metadata
+
+<a id="retrieval-of-all-interest-rate-symbols"></a>
 
 ## Retrieval of All Interest Rate Symbols
 
@@ -28,6 +34,8 @@ WHERE
   AND TIMESTAMP >= '2024-01-03 00:00:00'  -- Start date: January 3, 2024
   AND TIMESTAMP < '2024-01-04 00:00:00'   -- End date: January 4, 2024
 ```
+
+<a id="retrieval-of-specific-interest-rate-data"></a>
 
 ## Retrieval of Specific Interest Rate Data
 

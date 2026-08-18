@@ -1,3 +1,5 @@
+<a id="real-time-intraday"></a>
+
 # Real Time & Intraday
 
 This section contains examples of retrieving Real time snapshots, and intraday retrieval.
@@ -6,6 +8,8 @@ Real Time data typically requires exchange agreements and associated entitlement
 The `LATEST` databases provide last value caches or Market Snapshots, storing the latest prices for each instrument.
 `_LATEST` is added as a suffix to all existing real time sources.  e.g. `US_COMP_LATEST`
 They can only be accessed by those who are entitled to access real time data.
+
+<a id="latest-trade-market-snapshot"></a>
 
 ## Latest Trade Market Snapshot
 
@@ -18,6 +22,8 @@ where symbol_name = '-'
 and TIMESTAMP = NOW()
 ```
 
+<a id="latest-quote-market-snapshot"></a>
+
 ## Latest Quote Market Snapshot
 
 The `SNAP_QTE` table includes latest quote for every symbol.  It is not available for Composite databases which use `SNAP_NBBO`.
@@ -28,6 +34,8 @@ select * from CME_GLOBEX_LATEST.SNAP_QTE
 where symbol_name = '-'
 and TIMESTAMP = NOW()
 ```
+
+<a id="latest-nbbo-market-snapshot"></a>
 
 ## Latest NBBO Market Snapshot
 
@@ -41,6 +49,8 @@ where symbol_name = '-'
 and TIMESTAMP = NOW()
 ```
 
+<a id="latest-market-snapshot"></a>
+
 ## Latest Market Snapshot
 
 The `SNAP` table includes the combined latest trade and quote or NBBO for every symbol.
@@ -52,6 +62,8 @@ select * from US_COMP_LATEST.SNAP
 where symbol_name = '-'
 and TIMESTAMP = NOW()
 ```
+
+<a id="returns-recent-trades"></a>
 
 ## Returns Recent Trades
 
@@ -71,6 +83,8 @@ and TIMESTAMP >= DATEADD('MINUTE',-15,NOW())
 and TIMESTAMP < NOW()
 limit 100
 ```
+
+<a id="returns-todays-trades"></a>
 
 ## Returns Todays Trades
 

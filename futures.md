@@ -1,6 +1,10 @@
+<a id="futures"></a>
+
 # Futures
 
 This section contains examples of querying futures market data from OneTick Cloud databases. Futures examples demonstrate how to retrieve trade and quote data for individual futures contracts, futures spreads, and aggregated market statistics.
+
+<a id="futures-symbol-structure"></a>
 
 ## Futures Symbol Structure
 
@@ -14,6 +18,8 @@ Wildcards can be used to retrieve multiple contracts:
 * `CL\____` - Returns all Crude Oil futures (4 underscores for month+year)
 * `CL\\%` - Returns all Crude Oil contracts (futures and spreads)
 * `CL________` - Returns all Crude Oil spreads (8 underscores)
+
+<a id="point-in-time-trade-snapshot-for-futures-product"></a>
 
 ## Point in Time Trade Snapshot for Futures Product
 
@@ -29,6 +35,8 @@ Calculates Point in Time Trade Snapshot for Futures Product (Futures Chain). A s
  and init_lookback = 86400           --how many seconds to look back for prevailing value
 ```
 
+<a id="futures-or-spreads-trades-for-product"></a>
+
 ## Futures or Spreads Trades for Product
 
 Retrieves all trades for a futures product, including both individual futures contracts and futures spreads trading under that product code.
@@ -42,6 +50,8 @@ Return the first 1000 trades for Crude Oil contracts, whether Futures or Spreads
  and TIMESTAMP < '2026-06-12 00:00:00 UTC'
  limit 1000
 ```
+
+<a id="futures-spreads-trades-for-product"></a>
 
 ## Futures Spreads Trades for Product
 
@@ -57,6 +67,8 @@ Return the first 1000 trades for Crude Oil Futures Spreads contracts (Futures Sp
  limit 1000
 ```
 
+<a id="futures-trades-for-product"></a>
+
 ## Futures Trades for Product
 
 Retrieves trades for individual futures contracts under a specific product code, excluding futures spreads.
@@ -70,6 +82,8 @@ Return the first 1000 trades for Crude Oil Futures contracts (Futures Chain) tra
  and TIMESTAMP < '2026-06-12 00:00:00 UTC'
  limit 1000
 ```
+
+<a id="futures-volume-and-open-interest-for-product"></a>
 
 ## Futures Volume and Open Interest for Product
 
@@ -85,6 +99,8 @@ Return the Volume and Open Interest (OI) for the first 1000 Crude Oil Futures co
  and UPDATE_TYPE = 'Summary'
  limit 1000
 ```
+
+<a id="futures-volume-and-open-interest-for-product-by-expiry"></a>
 
 ## Futures Volume and Open Interest for Product by Expiry
 

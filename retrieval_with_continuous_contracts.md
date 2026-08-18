@@ -1,3 +1,5 @@
+<a id="retrieval-with-continuous-contracts"></a>
+
 # Retrieval with Continuous Contracts
 
 A series of simple examples are provided showing how to retrieve Futures market data by continuous contract.
@@ -14,6 +16,8 @@ Continuous Contracts are also queried with the Bloomberg symbology `BSYM`:
 
 * `[Bloomberg Product Code]1` to `[Bloomberg Product Code]12`.  - Front Month to Twelfth Month
 * `[Bloomberg Product Code]A` - Front Month based on Maximum Volume
+
+<a id="retrieval-of-futures-contracts"></a>
 
 ## Retrieval of Futures Contracts
 
@@ -66,6 +70,8 @@ and UPDATE_TYPE = 'Summary'
 and symbol_date = 20240401                  -- Specifies date for cont contract lookup
 ```
 
+<a id="retrieval-of-continuous-contract-by-expiry"></a>
+
 ## Retrieval of Continuous Contract by Expiry
 
 Daily Data is retrieved by specifying:
@@ -84,6 +90,8 @@ and TIMESTAMP < '2024-04-01 00:00:00 UTC'
 and UPDATE_TYPE = 'Summary'
 and symbol_date = 20240401                  -- Specifies date for cont contract lookup
 ```
+
+<a id="retrieval-of-continuous-contract-by-max-volume"></a>
 
 ## Retrieval of Continuous Contract by Max Volume
 
@@ -104,6 +112,8 @@ and UPDATE_TYPE = 'Summary'
 and symbol_date = 20240401                  -- Specifies date for cont contract lookup
 ```
 
+<a id="retrieval-of-continuous-contract-by-max-open-interest"></a>
+
 ## Retrieval of Continuous Contract by Max Open Interest
 
 Daily Data is retrieved by specifying:
@@ -123,6 +133,8 @@ and UPDATE_TYPE = 'Summary'
 and symbol_date = 20240401                  -- Specifies date for cont contract lookup
 ```
 
+<a id="futures-contract-bloomberg-symbol-retrieval"></a>
+
 ## Futures Contract Bloomberg Symbol Retrieval
 
 Furures Contracts can be retrieved by Bloomberg Symbol with:
@@ -138,6 +150,8 @@ and TIMESTAMP < '2024-01-04 00:00:00 UTC'
 and SYMBOL_DATE = 20240104
 LIMIT 10
 ```
+
+<a id="retrieval-of-bloomberg-continuous-contract-by-expiry"></a>
 
 ## Retrieval of Bloomberg Continuous Contract by Expiry
 
@@ -156,6 +170,8 @@ and TIMESTAMP < '2024-04-01 00:00:00 UTC'
 and UPDATE_TYPE = 'Summary'
 and symbol_date = 20240401                 -- Specifies date for cont contract lookup
 ```
+
+<a id="retrieval-of-bloomberg-continuous-contract-by-max-volume"></a>
 
 ## Retrieval of Bloomberg Continuous Contract by Max Volume
 

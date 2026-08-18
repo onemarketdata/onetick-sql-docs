@@ -1,3 +1,5 @@
+<a id="corrections-and-time-travel"></a>
+
 # Corrections and Time Travel
 
 This section contains examples of handling trade corrections, deleted records, and time travel queries in OneTick SQL. These examples demonstrate how to work with the temporal aspects of market data including corrections, reversals, and audit trails.
@@ -10,6 +12,8 @@ OneTick maintains a complete audit trail of all trade data including:
 * Metadata about when corrections occurred
 
 The examples in this section show how to query and analyze this temporal data.
+
+<a id="corrected-trade-retrieval"></a>
 
 ## Corrected Trade Retrieval
 
@@ -24,6 +28,8 @@ Demonstrates how to retrieve trades with corrections already applied. Deleted tr
  limit 10
 ```
 
+<a id="hidden-records-including-corrections"></a>
+
 ## Hidden Records Including Corrections
 
 Retrieve all records, including the hidden ticks that define trade corrections, using `SHOW_HIDDEN_TICKS()` in the FROM clause. The table is specified after `SHOW_HIDDEN_TICKS()` separated by a semicolon (e.g. `OTQ_CHAIN."SHOW_HIDDEN_TICKS();TRD"`), and the `SYMBOL_NAME` filter must include the database name in `[Database]::[Symbol]` format (e.g. `LSE_SAMPLE::VOD`). Corrected trades are identified by their `DELETED_TIME` and `TICK_STATUS` fields (0=Default, 1=Deleted, 2=Updated, 3=Insert Corrected, 4=Canceled, 5=Corrected, 6=New Correction, 7=New cancellation). `DELETED_TIME` corresponds to the time the record was corrected, which may be days after the original record.
@@ -36,6 +42,8 @@ Retrieve all records, including the hidden ticks that define trade corrections, 
  and TIMESTAMP < '2024-01-06 00:00:00 UTC'
  limit 10
 ```
+
+<a id="trade-corrections"></a>
 
 ## Trade Corrections
 
@@ -50,6 +58,8 @@ Use `SHOW_CORRECTED_TICKS();TRD` syntax in the FROM clause with database and sym
  limit 10
 ```
 
+<a id="time-travel-trades-before-corrections-applied"></a>
+
 ## Time Travel: Trades Before Corrections Applied
 
 Use `CORRECT_TICK_FILTER(DISCARD_ON_MATCH='FALSE',AS_OF_TIME='<date>')` with `AS_OF_TIME` in YYYYMMDDHHMMSS format (e.g., ‘20240104000000’) to retrieve uncorrected data as it existed before corrections were applied. Include the database and symbol format `LSE_SAMPLE::VOD`.
@@ -62,6 +72,8 @@ Use `CORRECT_TICK_FILTER(DISCARD_ON_MATCH='FALSE',AS_OF_TIME='<date>')` with `AS
  and TIMESTAMP < '2024-01-06 00:00:00 UTC'
  limit 10
 ```
+
+<a id="time-travel-trades-after-corrections-applied"></a>
 
 ## Time Travel: Trades After Corrections Applied
 
