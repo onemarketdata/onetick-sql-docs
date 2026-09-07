@@ -228,6 +228,8 @@ from
 limit 1000
 ```
 
+<a id="far-touch-and-near-touch"></a>
+
 ## Far Touch and Near Touch
 
 Near Touch and Far Touch are the arrival quote prices on the passive / aggressive side, determined by the order side:
@@ -261,7 +263,7 @@ Number Spreads measures how far an order executes from the touch, expressed in u
 
 `Num_Spreads = abs((VWAP - FT) / (FT - NT))`
 
-Near Touch (NT) and Far Touch (FT) are the arrival quote prices by side (see [Far Touch and Near Touch]()); VWAP is the order fill VWAP. The prevailing LSE quote at arrival is joined as-of to the order. Rows where the arrival spread is zero are excluded to avoid division by zero.
+Near Touch (NT) and Far Touch (FT) are the arrival quote prices by side (see [Far Touch and Near Touch](#far-touch-and-near-touch)); VWAP is the order fill VWAP. The prevailing LSE quote at arrival is joined as-of to the order. Rows where the arrival spread is zero are excluded to avoid division by zero.
 
 ```sql
 select ID,

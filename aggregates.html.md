@@ -2,33 +2,35 @@
 
 The following aggregations are supported:
 
-[AT_HIGH](),
-[AT_LOW](),
-[AVG](),
-[CORR](),
-[COUNT](),
-[EXP_TW_AVERAGE](),
-[EXP_W_AVERAGE](),
-[FIRST](),
-[FIRST_TIME](),
-[HIGH_TIME](),
-[LAST](),
-[LAST_TIME](),
-[LOW_TIME](),
-[MAX](),
-[MEDIAN](),
-[MIN](),
-[PERCENTILE_CONT](),
-[PERCENTILE_DISC](),
-[STANDARDIZED_MOMENT - KURTOSIS](),
-[STANDARDIZED_MOMENT - SKEWNESS](),
-[STDDEV](),
-[STDDEVP](),
-[SUM](),
-[TW_AVG](),
-[VAR](),
-[VARP](),
-[VWAP]().
+[AT_HIGH](#at-high),
+[AT_LOW](#at-low),
+[AVG](#avg),
+[CORR](#corr),
+[COUNT](#count),
+[EXP_TW_AVERAGE](#exp-tw-average),
+[EXP_W_AVERAGE](#exp-w-average),
+[FIRST](#first),
+[FIRST_TIME](#first-time),
+[HIGH_TIME](#high-time),
+[LAST](#last),
+[LAST_TIME](#last-time),
+[LOW_TIME](#low-time),
+[MAX](#max),
+[MEDIAN](#median),
+[MIN](#min),
+[PERCENTILE_CONT](#percentile-cont),
+[PERCENTILE_DISC](#percentile-disc),
+[STANDARDIZED_MOMENT - KURTOSIS](#standardized-moment-kurtosis),
+[STANDARDIZED_MOMENT - SKEWNESS](#standardized-moment-skewness),
+[STDDEV](#stddev),
+[STDDEVP](#stddevp),
+[SUM](#sum),
+[TW_AVG](#tw-avg),
+[VAR](#var),
+[VARP](#varp),
+[VWAP](#vwap).
+
+<a id="at-high"></a>
 
 ## AT_HIGH
 
@@ -79,6 +81,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="at-low"></a>
+
 ## AT_LOW
 
 Returns the target field value at the first Low of another fields set of values. If all values inside the group are NaN the aggregate returns NaN.
@@ -127,6 +131,8 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
+
+<a id="avg"></a>
 
 ## AVG
 
@@ -177,6 +183,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="corr"></a>
+
 ## CORR
 
 Returns the correlation of non-NaN pairs of values. If all values inside the group are NaN the aggregate returns NaN.
@@ -226,6 +234,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="count"></a>
+
 ## COUNT
 
 Returns the count of values.
@@ -274,6 +284,8 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
+
+<a id="exp-w-average"></a>
 
 ## EXP_W_AVERAGE
 
@@ -325,6 +337,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="exp-tw-average"></a>
+
 ## EXP_TW_AVERAGE
 
 Returns the Exponential Time Weighted Average of a set of values.
@@ -375,6 +389,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="first"></a>
+
 ## FIRST
 
 Returns the First value of a set of values
@@ -423,6 +439,8 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
+
+<a id="first-time"></a>
 
 ## FIRST_TIME
 
@@ -473,6 +491,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="high-time"></a>
+
 ## HIGH_TIME
 
 Returns the First Timestamp of the maximum value of a set of values
@@ -521,6 +541,8 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
+
+<a id="last"></a>
 
 ## LAST
 
@@ -571,6 +593,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="last-time"></a>
+
 ## LAST_TIME
 
 Returns the Timestamp of the last value of a set of values
@@ -619,6 +643,8 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
+
+<a id="low-time"></a>
 
 ## LOW_TIME
 
@@ -669,6 +695,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="max"></a>
+
 ## MAX
 
 Returns the maximum of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
@@ -717,6 +745,8 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
+
+<a id="median"></a>
 
 ## MEDIAN
 
@@ -767,6 +797,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="min"></a>
+
 ## MIN
 
 Returns the minimum of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
@@ -816,6 +848,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="percentile-cont"></a>
+
 ## PERCENTILE_CONT
 
 Returns the percentile of non-NaN values based on a continuous distribution.  If all values inside the group are NaN the aggregate returns NaN.
@@ -833,6 +867,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="percentile-disc"></a>
+
 ## PERCENTILE_DISC
 
 Returns the percentile of non-NaN values based on a discrete distribution.  If all values inside the group are NaN the aggregate returns NaN.
@@ -849,6 +885,8 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
+
+<a id="standardized-moment-skewness"></a>
 
 ## STANDARDIZED_MOMENT - SKEWNESS
 
@@ -900,6 +938,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="standardized-moment-kurtosis"></a>
+
 ## STANDARDIZED_MOMENT - KURTOSIS
 
 Returns the Kurtosis of a set of values, using the `STANDARDIZED_MOMENT` aggregate.
@@ -950,6 +990,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="stddev"></a>
+
 ## STDDEV
 
 Returns the Sample Standard Deviation of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
@@ -998,6 +1040,8 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
+
+<a id="stddevp"></a>
 
 ## STDDEVP
 
@@ -1048,6 +1092,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="sum"></a>
+
 ## SUM
 
 Returns the sum of non-NaN values. If all values inside the group are NaN the aggregate returns 0.
@@ -1096,6 +1142,8 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
+
+<a id="tw-avg"></a>
 
 ## TW_AVG
 
@@ -1146,6 +1194,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="var"></a>
+
 ## VAR
 
 Returns the Sample Variance of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
@@ -1195,6 +1245,8 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+<a id="varp"></a>
+
 ## VARP
 
 Returns the Population Variance of non-NaN values. If all values inside the group are NaN the aggregate returns NaN.
@@ -1243,6 +1295,8 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
+
+<a id="vwap"></a>
 
 ## VWAP
 
