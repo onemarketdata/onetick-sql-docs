@@ -51,6 +51,10 @@ LIMIT 5
 Trade events are retrieved by specifying the `TRD` table, along with the specified database, symbol and time range.
 Trades are represented with `PRICE`, `SIZE`, and other fields.
 
+Enriched Trades, which add the prevailing Quote or NBBO and a set of pre-calculated mark outs to each trade, are
+available from the `TRD_TCA` table of a TCA database such as `US_COMP_TCA`.  See the Trade Cost Analysis (TCA)
+section for detail.
+
 ```sql
 SELECT * FROM US_COMP_SAMPLE.TRD
 WHERE SYMBOL_NAME='AAPL'

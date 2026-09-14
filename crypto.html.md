@@ -297,8 +297,8 @@ Retrieve the end-of-day metrics for every symbol on the venue for a single day. 
 select *
 from BINANCE_DAILY.DAY
 where SYMBOL_NAME LIKE '%'
-and TIMESTAMP >= '2026-08-20 00:00:00 UTC'
-and TIMESTAMP < '2026-08-21 00:00:00 UTC'
+and TIMESTAMP >= '2026-08-26 00:00:00 UTC'
+and TIMESTAMP < '2026-08-27 00:00:00 UTC'
 limit 100000
 ```
 
@@ -316,8 +316,8 @@ sum(d.SELL_VOLUME) as SELL_VOLUME
 from DERIBIT_DAILY.DAY d, DERIBIT_DAILY.STAT s
 where d.SYMBOL_NAME LIKE '%'
 and d.SYMBOL_NAME = s.SYMBOL_NAME
-and TIMESTAMP >= '2026-08-20 00:00:00 UTC'
-and TIMESTAMP < '2026-08-21 00:00:00 UTC'
+and TIMESTAMP >= '2026-08-26 00:00:00 UTC'
+and TIMESTAMP < '2026-08-27 00:00:00 UTC'
 group by s.SEC_TYPE
 limit 100000
 ```

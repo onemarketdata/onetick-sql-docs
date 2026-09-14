@@ -193,6 +193,30 @@ LIMIT 10
 | LSE_SAMPLE::VOD | 2024-01-03 08:45:00 |      70.65   |       70.55   |      70.72   |      0.8195 |    926,490 |           138 | 2024-01-03 08:40:03.746 | 2024-01-03 08:43:02.677 | 2024-01-03 08:41:00.810 | 2024-01-03 08:44:26.284 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:50:00 |      70.63   |       70.67   |      70.7    |     70.62   |    130,943 |            47 | 2024-01-03 08:45:20.921 | 2024-01-03 08:46:04.406 | 2024-01-03 08:47:56.618 | 2024-01-03 08:49:28.304 |
 
+By default the `Timestamp` associated with a time bucket represents the end of the bucket.
+This can be changed to represent the start of the time bucket by adding `bucket_start` as an additional optional argument to the `time_bucket` function.
+
+Bars are usually built from the trades that contribute to the official price formation, so a trade condition filter is normally applied alongside the bucketing.
+`IS_CHARACTER_PRESENT(COND,'IBCGHLMNPQRVWZ479') = FALSE` excludes the trade conditions that should not contribute to bar generation.
+See the Filtering section for more detail on trade condition filtering.
+
+```sql
+select
+FIRST(PRICE) as first_price,
+MAX(PRICE) as high_price,
+MIN(PRICE) as low_price,
+LAST(PRICE) as last_price,
+SUM(SIZE) as sum_size,
+COUNT(*) as trade_count
+from US_COMP_SAMPLE.TRD
+where symbol_name = 'CSCO'
+and TIMESTAMP >= '2024-01-03 08:00:00 America/New_York'
+and TIMESTAMP < '2024-01-04 16:00:00 America/New_York'
+and IS_CHARACTER_PRESENT(COND,'IBCGHLMNPQRVWZ479') = FALSE
+group by time_bucket(INTERVAL '5' MINUTE)
+limit 1000
+```
+
 ## Ranking & Row Numbering
 
 Both the `RANK` and `ROW_NUMBER` aggregates can be used to rank results.  They both use the `over` clause to define the field and sort order to rank over.

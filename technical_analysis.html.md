@@ -168,6 +168,83 @@ The most common period is 20. The Upper Donchian Channel is the rolling Maximum 
  )
 ```
 
+## MACD (Moving Average Convergence Divergence)
+
+MACD is a trend-following momentum indicator built from three exponential moving averages. It returns:
+
+* `MACD Line` - the core line, calculated by subtracting the 26-period Exponential Moving Average (EMA) from the 12-period EMA. It reacts quickly to short-term price changes.
+* `Signal Line` - typically a 9-period EMA of the MACD line itself. It moves slower and helps smooth out fluctuations, acting as a trigger for trades.
+* `Histogram` - the distance (or difference) between the MACD line and the signal line. When the bars grow larger, momentum is strengthening.
+
+Each EMA is calculated with the `EXP_W_AVERAGE` aggregate using `DECAY_VALUE_TYPE='NUM_LOOKBACK_PERIODS'`, so that `DECAY` is the conventional EMA period N.
+The calculation is built up through nested queries: the innermost query retrieves the price and the 12 and 26 period EMAs, the next calculates the MACD line from them, the next calculates the signal line as a 9 period EMA of the MACD line, and the outermost calculates the histogram.
+
+Calculates the MACD Indicator on 1 Minute Trade Bars, using the bar `LAST` price.
+
+```sql
+ -- Calculates MACD Indicator on 1 Min Bars
+
+ --Calculate the Histogram from the MACD and Signal
+ select TIMESTAMP, SYMBOL_NAME, LAST,
+ EMA12, EMA26, MACD, SIGNAL,
+ MACD-SIGNAL as HISTOGRAM
+ from (
+   -- Calculate Signal from the MACD Line, as a 9-Period EMA
+   select TIMESTAMP, SYMBOL_NAME, LAST,
+   EMA12, EMA26, MACD,
+   EXP_W_AVERAGE(MACD,DECAY=9,DECAY_VALUE_TYPE='NUM_LOOKBACK_PERIODS') OVER(order by TIMESTAMP asc) as SIGNAL
+   from (
+     -- Calculate MACD Line by comparing 12 and 26 Period EMA
+     select TIMESTAMP, SYMBOL_NAME, LAST, EMA12, EMA26,
+     EMA12-EMA26 as MACD
+     from (
+       -- Retrieve 1 Minute Bar Last Price and 2 Exponential Moving Averages based on a 12 and 26 period
+       select TIMESTAMP, SYMBOL_NAME, LAST,
+       EXP_W_AVERAGE(LAST,DECAY=12,DECAY_VALUE_TYPE='NUM_LOOKBACK_PERIODS') OVER(order by TIMESTAMP asc) as EMA12,
+       EXP_W_AVERAGE(LAST,DECAY=26,DECAY_VALUE_TYPE='NUM_LOOKBACK_PERIODS') OVER(order by TIMESTAMP asc) as EMA26
+       from US_COMP_SAMPLE_BARS.TRD_1M
+       where SYMBOL_NAME = 'CSCO'
+       and TIMESTAMP >= '2024-01-03 00:00:00 America/New_York'
+       and TIMESTAMP < '2024-01-04 00:00:00 America/New_York'
+     )
+   )
+ )
+```
+
+Calculates the MACD Indicator on Daily Bars, using the daily `CLOSE` price.
+As the data is retrieved from the US Composite, the data is filtered with `EXCHANGE = ''` to receive the composite close, and not include each individual exchange.
+
+```sql
+ -- Calculates MACD Indicator on Daily Bars
+
+ --Calculate the Histogram from the MACD and Signal
+ select TIMESTAMP, SYMBOL_NAME, CLOSE,
+ EMA12, EMA26, MACD, SIGNAL,
+ MACD-SIGNAL as HISTOGRAM
+ from (
+   -- Calculate Signal from the MACD Line, as a 9-Period EMA
+   select TIMESTAMP, SYMBOL_NAME, CLOSE,
+   EMA12, EMA26, MACD,
+   EXP_W_AVERAGE(MACD,DECAY=9,DECAY_VALUE_TYPE='NUM_LOOKBACK_PERIODS') OVER(order by TIMESTAMP asc) as SIGNAL
+   from (
+     -- Calculate MACD Line by comparing 12 and 26 Period EMA
+     select TIMESTAMP, SYMBOL_NAME, CLOSE, EMA12, EMA26,
+     EMA12-EMA26 as MACD
+     from (
+       -- Retrieve Daily Bar Close Price and 2 Exponential Moving Averages based on a 12 and 26 period
+       select TIMESTAMP, SYMBOL_NAME, CLOSE,
+       EXP_W_AVERAGE(CLOSE,DECAY=12,DECAY_VALUE_TYPE='NUM_LOOKBACK_PERIODS') OVER(order by TIMESTAMP asc) as EMA12,
+       EXP_W_AVERAGE(CLOSE,DECAY=26,DECAY_VALUE_TYPE='NUM_LOOKBACK_PERIODS') OVER(order by TIMESTAMP asc) as EMA26
+       from US_COMP_SAMPLE_DAILY.DAY
+       where SYMBOL_NAME = 'CSCO'
+       and TIMESTAMP >= '2024-01-03 00:00:00 America/New_York'
+       and TIMESTAMP < '2024-04-01 00:00:00 America/New_York'
+       and EXCHANGE = ''  -- Filter on the Composite Exchange
+     )
+   )
+ )
+```
+
 ## Maximum Drawdown (MDD)
 
 Maximum Drawdown measures the largest peak-to-trough decline from the highest price to the lowest subsequent price, expressed as a percentage. It quantifies the worst-case loss that could have occurred during a trading period.
@@ -890,4 +967,108 @@ VPIN is an advanced metric that estimates the probability of informed trading ba
    )
    group by VOL_BIN
  )
+```
+
+## Moving Average Crossovers (Golden & Death Cross)
+
+A Moving Average Crossover compares a short and a long period moving average of the closing
+price. A `Golden Cross` occurs when the short average crosses *above* the long average
+(a bullish trend signal), and a `Death Cross` occurs when it crosses *below* (a bearish
+signal). The classic periods are 50 and 200 days, calculated from daily data.
+
+The crossover is detected by comparing the current relationship of the two averages against
+their relationship on the prior day. `LAG()` returns the prior day’s averages, and a
+`CASE` statement flags the bar where the ordering flips.
+
+Returns the daily closes with the 50 and 200 day moving averages, their prior values, and a
+`GOLDEN_CROSS_PRICE` / `DEATH_CROSS_PRICE` that carries the close on a cross day and
+`NaN()` otherwise. The moving averages are calculated as day-ranged rolling `AVG()` windows,
+the prior values with `LAG()` partitioned by symbol, and the crosses with `CASE` statements.
+
+```sql
+ -- Identify the Golden and Death Crosses for HD across a 2 year period from Daily Data
+
+ select SYMBOL_NAME, CLOSE, VOLUME, SMA50_CLOSE, SMA200_CLOSE, PRIOR_SMA50_CLOSE, PRIOR_SMA200_CLOSE,
+ case when SMA50_CLOSE > SMA200_CLOSE and PRIOR_SMA50_CLOSE < PRIOR_SMA200_CLOSE then CLOSE else NaN() end as GOLDEN_CROSS_PRICE,
+ case when SMA50_CLOSE < SMA200_CLOSE and PRIOR_SMA50_CLOSE > PRIOR_SMA200_CLOSE then CLOSE else NaN() end as DEATH_CROSS_PRICE
+ from
+ (
+   -- Calculate the prior values for the moving averages
+   select SYMBOL_NAME, CLOSE, VOLUME, SMA50_CLOSE, SMA200_CLOSE,
+   LAG(SMA50_CLOSE) OVER(PARTITION BY SYMBOL_NAME ORDER BY TIMESTAMP) as PRIOR_SMA50_CLOSE,
+   LAG(SMA200_CLOSE) OVER(PARTITION BY SYMBOL_NAME ORDER BY TIMESTAMP) as PRIOR_SMA200_CLOSE
+   from
+   (
+     -- Calculate the short (50 day) and long (200 day) moving averages
+     select SYMBOL_NAME, CLOSE, VOLUME,
+     AVG(CLOSE) over (PARTITION BY SYMBOL_NAME order by TIMESTAMP asc range interval '50' day preceding) as SMA50_CLOSE,
+     AVG(CLOSE) over (PARTITION BY SYMBOL_NAME order by TIMESTAMP asc range interval '200' day preceding) as SMA200_CLOSE
+     from US_COMP_DAILY.DAY
+     where SYMBOL_NAME = 'HD'
+     and TIMESTAMP >= '2024-01-01 00:00:00 America/New_York'
+     and TIMESTAMP < '2026-01-01 00:00:00 America/New_York'
+     and EXCHANGE = ''
+   )
+ )
+```
+
+The same moving average logic extends to a basket of symbols by using an `IN` list and
+partitioning the window functions by `SYMBOL_NAME`. Filtering the outer query to the cross
+condition returns only the Golden Cross events across the Magnificent 7.
+
+```sql
+ -- Calculate the Golden Cross Events for the Mag7
+
+ select * from
+ (
+   -- Calculate the prior values for the moving averages
+   select SYMBOL_NAME, CLOSE, VOLUME, SMA50_CLOSE, SMA200_CLOSE,
+   LAG(SMA50_CLOSE) OVER(PARTITION BY SYMBOL_NAME ORDER BY TIMESTAMP) as PRIOR_SMA50_CLOSE,
+   LAG(SMA200_CLOSE) OVER(PARTITION BY SYMBOL_NAME ORDER BY TIMESTAMP) as PRIOR_SMA200_CLOSE
+   from
+   (
+     -- Calculate the short (50 day) and long (200 day) moving averages
+     select SYMBOL_NAME, CLOSE, VOLUME,
+     AVG(CLOSE) over (PARTITION BY SYMBOL_NAME order by TIMESTAMP asc range interval '50' day preceding) as SMA50_CLOSE,
+     AVG(CLOSE) over (PARTITION BY SYMBOL_NAME order by TIMESTAMP asc range interval '200' day preceding) as SMA200_CLOSE
+     from US_COMP_DAILY.DAY
+     where SYMBOL_NAME in ('AAPL','MSFT','AMZN','GOOG','META','NVDA','TSLA')
+     and TIMESTAMP >= '2024-01-01 00:00:00 America/New_York'
+     and TIMESTAMP < '2026-01-01 00:00:00 America/New_York'
+     and EXCHANGE = ''
+   )
+ )
+ -- filter on when the short average crosses above the long average
+ where SMA50_CLOSE > SMA200_CLOSE
+ and PRIOR_SMA50_CLOSE < PRIOR_SMA200_CLOSE
+```
+
+Reversing the final filter to `SMA50_CLOSE < SMA200_CLOSE` (short crossing *below* long)
+returns the Death Cross events for the same basket.
+
+```sql
+ -- Calculate the Death Cross Events for the Mag7
+
+ select * from
+ (
+   -- Calculate the prior values for the moving averages
+   select SYMBOL_NAME, CLOSE, VOLUME, SMA50_CLOSE, SMA200_CLOSE,
+   LAG(SMA50_CLOSE) OVER(PARTITION BY SYMBOL_NAME ORDER BY TIMESTAMP) as PRIOR_SMA50_CLOSE,
+   LAG(SMA200_CLOSE) OVER(PARTITION BY SYMBOL_NAME ORDER BY TIMESTAMP) as PRIOR_SMA200_CLOSE
+   from
+   (
+     -- Calculate the short (50 day) and long (200 day) moving averages
+     select SYMBOL_NAME, CLOSE, VOLUME,
+     AVG(CLOSE) over (PARTITION BY SYMBOL_NAME order by TIMESTAMP asc range interval '50' day preceding) as SMA50_CLOSE,
+     AVG(CLOSE) over (PARTITION BY SYMBOL_NAME order by TIMESTAMP asc range interval '200' day preceding) as SMA200_CLOSE
+     from US_COMP_DAILY.DAY
+     where SYMBOL_NAME in ('AAPL','MSFT','AMZN','GOOG','META','NVDA','TSLA')
+     and TIMESTAMP >= '2024-01-01 00:00:00 America/New_York'
+     and TIMESTAMP < '2026-01-01 00:00:00 America/New_York'
+     and EXCHANGE = ''
+   )
+ )
+ -- filter on when the short average crosses below the long average
+ where SMA50_CLOSE < SMA200_CLOSE
+ and PRIOR_SMA50_CLOSE > PRIOR_SMA200_CLOSE
 ```

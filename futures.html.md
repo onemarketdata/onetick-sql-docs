@@ -29,6 +29,22 @@ Calculates Point in Time Trade Snapshot for Futures Product (Futures Chain). A s
  and init_lookback = 86400           --how many seconds to look back for prevailing value
 ```
 
+## Point in Time On Book Trade Snapshot for Futures Product
+
+Many futures venues publish off book (negotiated) trades and the individual legs of spread trades alongside the on book lit trades.
+Adding a `BOOK_TYPE = '0'` filter restricts the snapshot to on book lit trades only, ignoring off book trades and spread trade legs.
+
+Calculates Point in Time On Book Trade Snapshot for Futures Product (Futures Chain). A specific point in time is selected with the TIMESTAMP equal to a specified value. All Futures Symbols are retrieved with SYMBOL_NAME LIKE ‘[Product Code]\\_\_\_’. A Lookback is defined in seconds, to check for the prevailing trade before the selected time, upto the lookback period.
+
+```sql
+ select *
+ from ICE_EU_COM_SAMPLE.TRD
+ where SYMBOL_NAME LIKE 'BRN\\___'     -- Retrieve All Futures Symbols for the Futures Product BRN (Brent Crude)
+ and TIMESTAMP = '2024-01-03 12:30:00 Europe/London'
+ and BOOK_TYPE = '0'                 -- Filters for On Book Trades, ignoring Off Book and Spread Trade Legs
+ and init_lookback = 86400           -- How many seconds to look back for prevailing value
+```
+
 ## Futures or Spreads Trades for Product
 
 Retrieves all trades for a futures product, including both individual futures contracts and futures spreads trading under that product code.

@@ -136,12 +136,47 @@ Exponential moving averages are calculated using specialized window functions th
 Two types of exponential moving averages are available: record-based exponential weighting (`EXP_W_AVERAGE`) and time-based exponential weighting (`EXP_TW_AVERAGE`).
 
 * `EXP_W_AVERAGE` - Applies exponential weighting based on record decay factor
-* `EXP_TW_AVERAGE` - Applies exponential weighting based on time decay factor (in milliseconds)
+* `EXP_TW_AVERAGE` - Applies exponential weighting based on time decay factor
+
+Both aggregates take a `DECAY` value, which is the numeric value determining the exponential curve, and an optional `DECAY_VALUE_TYPE`, which determines how that `DECAY` value is interpreted.
+
+`EXP_W_AVERAGE` supports three decay value types:
+
+* `LAMBDA` - Default.  Weights of data points in a bucket decrease exponentially in the direction from the most recent tick to the most aged one, being equal to `exp(-Lambda * N)` for a fixed weight decay value Lambda.
+* `HALF_LIFE_INDEX` - `DECAY` specifies the necessary number of consecutive ticks, the first one of which would have twice less the weight of the last one.
+* `NUM_LOOKBACK_PERIODS` - `DECAY` specifies the EMA period N, matching the conventional smoothing-factor formula `alpha = 2/(N+1)` used by common EMA implementations, for example pandas `ewm(span=N, adjust=False)`.
+
+`NUM_LOOKBACK_PERIODS` is the decay value type to use when an N-period EMA is required, such as the 12, 26 and 9 period EMAs used to build MACD in the Technical Analysis section.
 
 ```sql
+-- Returns price with three types of Exponential Moving Averages
+
 select PRICE,
-EXP_W_AVERAGE(PRICE,DECAY=0.01) OVER(order by TIMESTAMP asc) as ewa_price,
-EXP_TW_AVERAGE(PRICE,DECAY=300) OVER(order by TIMESTAMP asc) as etwa_price
+EXP_W_AVERAGE(PRICE,DECAY=0.01) OVER(order by TIMESTAMP asc) as ewa_price, -- Using the default decay value type of LAMBDA
+EXP_W_AVERAGE(PRICE,DECAY=0.01,DECAY_VALUE_TYPE='LAMBDA') OVER(order by TIMESTAMP asc) as ewa_lambda_price,
+EXP_W_AVERAGE(PRICE,DECAY=2,DECAY_VALUE_TYPE='HALF_LIFE_INDEX') OVER(order by TIMESTAMP asc) as ewa_halflife_price,
+EXP_W_AVERAGE(PRICE,DECAY=10,DECAY_VALUE_TYPE='NUM_LOOKBACK_PERIODS') OVER(order by TIMESTAMP asc) as ewa_lookback_periods_price
+from LSE_SAMPLE.TRD
+where symbol_name = 'VOD'
+and TIMESTAMP >= '2024-01-03 08:00:00 UTC'
+and TIMESTAMP < '2024-01-04 16:00:00 UTC'
+```
+
+## Exponential Time Weighted Moving Average
+
+`EXP_TW_AVERAGE` weights each data point by elapsed time rather than by tick position, so gaps between ticks affect the result.
+It supports two decay value types:
+
+* `HALF_LIFE_INDEX` - Default.  `DECAY` specifies the half life in seconds, the time interval after which a data point has half the weight of the later one.
+* `LAMBDA` - Weights of data points in a bucket decrease exponentially in the direction from the most recent tick to the most aged one, being equal to `exp(-Lambda * N)` for a fixed weight decay value Lambda.
+
+```sql
+-- Returns price with Time Weighted Moving Average
+
+select PRICE,
+EXP_TW_AVERAGE(PRICE,DECAY=300) OVER(order by TIMESTAMP asc) as etwa_price, -- Using the default decay value type of HALF_LIFE_INDEX
+EXP_TW_AVERAGE(PRICE,DECAY=0.01,DECAY_VALUE_TYPE='LAMBDA') OVER(order by TIMESTAMP asc) as etwa_lambda_price,
+EXP_TW_AVERAGE(PRICE,DECAY=300,DECAY_VALUE_TYPE='HALF_LIFE_INDEX') OVER(order by TIMESTAMP asc) as etwa_halflife_price
 from LSE_SAMPLE.TRD
 where symbol_name = 'VOD'
 and TIMESTAMP >= '2024-01-03 08:00:00 UTC'

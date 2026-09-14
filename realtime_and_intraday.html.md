@@ -7,6 +7,9 @@ The `LATEST` databases provide last value caches or Market Snapshots, storing th
 `_LATEST` is added as a suffix to all existing real time sources.  e.g. `US_COMP_LATEST`
 They can only be accessed by those who are entitled to access real time data.
 
+Snapshot tables are queried across a time range covering the current day, from `TODAY()` up to `NOW()`, rather than at a single instant.
+The `TODAY` function accepts an optional time zone, e.g. `TODAY('America/New_York')`.
+
 ## Latest Trade Market Snapshot
 
 The `SNAP_TRD` table includes latest trade for every symbol.
@@ -15,7 +18,8 @@ Querying by `SYMBOL_NAME` returns all symbols.  To filter by symbol, please use 
 ```sql
 select * from US_COMP_LATEST.SNAP_TRD
 where symbol_name = '-'
-and TIMESTAMP = NOW()
+and TIMESTAMP >= TODAY()
+and TIMESTAMP < NOW()
 ```
 
 ## Latest Quote Market Snapshot
@@ -26,7 +30,8 @@ Querying by `SYMBOL_NAME` returns all symbols.  To filter by symbol, please use 
 ```sql
 select * from CME_GLOBEX_LATEST.SNAP_QTE
 where symbol_name = '-'
-and TIMESTAMP = NOW()
+and TIMESTAMP >= TODAY()
+and TIMESTAMP < NOW()
 ```
 
 ## Latest NBBO Market Snapshot
@@ -38,7 +43,8 @@ Querying by `SYMBOL_NAME` returns all symbols.  To filter by symbol, please use 
 ```sql
 select * from US_COMP_LATEST.SNAP_NBBO
 where symbol_name = '-'
-and TIMESTAMP = NOW()
+and TIMESTAMP >= TODAY()
+and TIMESTAMP < NOW()
 ```
 
 ## Latest Market Snapshot
@@ -50,7 +56,8 @@ The latest trade time is stored in field `LAST_TRADE_TIME`, and the latest Quote
 ```sql
 select * from US_COMP_LATEST.SNAP
 where symbol_name = '-'
-and TIMESTAMP = NOW()
+and TIMESTAMP >= TODAY()
+and TIMESTAMP < NOW()
 ```
 
 ## Returns Recent Trades
@@ -88,4 +95,49 @@ where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= TODAY('America/New_York')
 and TIMESTAMP < NOW()
 limit 100
+```
+
+## Returns Todays Trade Bars
+
+Data will only be returned for those who are entitled to access real time data.
+Pre-calculated 1 minute trade bars for the current day are retrieved from the `TRD_1M` table of the bar database,
+filtering on a time range covering the start of day until the present, using the `TODAY` and `NOW` functions.
+
+The `TODAY` function allows specification of the required Time Zone.
+
+```sql
+select *
+from US_COMP_BARS.TRD_1M
+where SYMBOL_NAME='CSCO'
+and TIMESTAMP >= TODAY('America/New_York')
+and TIMESTAMP < NOW()
+limit 100
+```
+
+## Dynamic Bar Calculation for Today
+
+Bars can also be generated on the fly from todays trades rather than read from a pre-calculated bar database.
+Data is grouped by time bucket / time bin / time bar, with the `time_bucket` function, which specifies an interval, e.g. `time_bucket(INTERVAL '5' MINUTE)`.
+Intervals can be `MILLISECOND`, `SECOND`, `MINUTE`, `HOUR`, `DAY` or `WEEK`.
+
+By default the `Timestamp` associated with a time bucket represents the end of the bucket.
+This can be changed to represent the start of the time bucket by adding `bucket_start` as an additional optional argument to the `time_bucket` function.
+
+Additionally a filter is applied using `IS_CHARACTER_PRESENT(COND,'IBCGHLMNPQRVWZ479') = FALSE` to ensure certain trade conditions are ignored, and do not contribute to the bar generation.
+
+```sql
+select
+FIRST(PRICE) as first_price,
+MAX(PRICE) as high_price,
+MIN(PRICE) as low_price,
+LAST(PRICE) as last_price,
+SUM(SIZE) as sum_size,
+COUNT(*) as trade_count
+from US_COMP.TRD
+where symbol_name = 'CSCO'
+and TIMESTAMP >= TODAY('America/New_York')
+and TIMESTAMP < NOW()
+and IS_CHARACTER_PRESENT(COND,'IBCGHLMNPQRVWZ479') = FALSE
+group by time_bucket(INTERVAL '5' MINUTE)
+limit 1000
 ```

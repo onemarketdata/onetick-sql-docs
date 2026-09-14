@@ -64,3 +64,58 @@ LIMIT 10
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:09.944 | 70.1097 |     214 |       70.08 |       70.18 | 2024-01-03 08:00:08.234 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:10.119 | 70.146  |     840 |       70.08 |       70.18 | 2024-01-03 08:00:08.234 |
 | LSE_SAMPLE::VOD | 2024-01-03 08:00:10.933 | 70.132  |     344 |       70.08 |       70.18 | 2024-01-03 08:00:08.234 |
+
+## As Of Join to Prevailing NBBO
+
+For a US Composite database, trades and quotes are consolidated across multiple exchanges, so
+the prevailing National Best Bid and Offer is taken from the `NBBO` table rather than a
+single venue `QTE` table. The join is otherwise identical - `sametime_as_existing` matches
+each trade to the prevailing NBBO record.
+
+```sql
+select t.PRICE, t.SIZE, q.BID_PRICE, q.ASK_PRICE
+from US_COMP_SAMPLE.TRD t, US_COMP_SAMPLE.NBBO q
+where t.symbol_name = 'CSCO' and t.symbol_name = q.symbol_name
+and sametime_as_existing(t.timestamp, q.timestamp, 0) = TRUE
+and TIMESTAMP >= '2024-01-03 00:00:00 UTC'
+and TIMESTAMP < '2024-01-04 00:00:00 UTC'
+limit 100
+```
+
+## As Of Join on Exchange (Prevailing Quote per Venue)
+
+Because the US Composite contains trades and quotes across multiple exchanges, an unqualified
+join can match a trade to a prevailing quote from a *different* venue. Adding `USING (EXCHANGE)`
+to the join constrains the match so that each trade is joined to the prevailing quote from the
+*same exchange* as the trade.
+
+```sql
+select t.PRICE, t.SIZE, EXCHANGE, q.BID_PRICE, q.ASK_PRICE, q.EXCHANGE
+from US_COMP_SAMPLE.TRD t join US_COMP_SAMPLE.QTE q USING (EXCHANGE)
+where t.symbol_name = 'CSCO' and t.symbol_name = q.symbol_name
+and sametime_as_existing(t.timestamp, q.timestamp, 0) = TRUE
+and TIMESTAMP >= '2024-01-03 09:30:00 America/New_York'
+and TIMESTAMP < '2024-01-04 16:00:00 America/New_York'
+limit 100
+```
+
+## As Of Join Across Multiple Tables
+
+Several tables can be joined in a single query by listing them together and matching each with
+its own `sametime_as_existing` condition. The example below joins trades to two quote tables:
+`NBBO` provides the standard National Best Bid and Offer, while `NBBO_COMP` provides an
+improved NBBO that additionally includes the Best Odd Lot Order (BOLO), allowing the two to be
+compared side by side at the time of each trade.
+
+```sql
+select t.PRICE as PRICE, t.SIZE as SIZE,
+n.TIMESTAMP as NBBO_TIME, n.BID_PRICE as BID_PRICE, n.ASK_PRICE as ASK_PRICE, n.BID_SIZE as BID_SIZE, n.ASK_SIZE as ASK_SIZE,
+c.TIMESTAMP as NBBO_COMP_TIME, c.BID_PRICE as BID_PRICE_COMP, c.ASK_PRICE as ASK_PRICE_COMP, c.BID_SIZE as BID_SIZE_COMP, c.ASK_SIZE as ASK_SIZE_COMP
+from US_COMP.TRD t, US_COMP.NBBO n, US_COMP.NBBO_COMP c
+where t.SYMBOL_NAME='CSCO' and t.SYMBOL_NAME = n.SYMBOL_NAME and t.SYMBOL_NAME = c.SYMBOL_NAME
+and sametime_as_existing(t.timestamp, n.timestamp, 0) = TRUE
+and sametime_as_existing(t.timestamp, c.timestamp, 0) = TRUE
+and TIMESTAMP >= '2026-07-23 09:30:00 America/New_York'
+and TIMESTAMP < '2026-07-23 16:00:00 America/New_York'
+limit 10
+```

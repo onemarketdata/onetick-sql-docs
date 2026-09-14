@@ -12,6 +12,31 @@ TCA analysis uses proprietary order and trade data stored in secure sample datab
 
 These datasets are joined with market data benchmarks to calculate performance metrics.
 
+TCA databases such as `US_COMP_TCA` additionally provide the `TRD_TCA` table of Enriched Trades,
+where the market data benchmarks have already been joined to every trade.
+
+## Enriched Trades
+
+Enriched Trades include the full Trade Record plus the Quote, or the NBBO for Composites, with Bid Price, Ask Price and Mid Price.
+
+Enriched Trades additionally include 21 mark outs, recording the Mid Price back and forward relative to the trade execution:
+
+* Mid Price back 60s, 30s, 10s, 1s, 100ms and 10ms
+* Mid Price forward 10ms, 100ms, 500ms, 1s, 2s, 5s, 10s, 30s, 60s, 90s, 2min, 3min, 5min, 10min and 15min
+
+Because the prevailing quote and the mark outs are pre-calculated, Enriched Trades avoid the need to join trades to quotes at query time for common execution quality measures.
+
+```sql
+-- Retrieves Enriched Trades from the TRD_TCA table
+
+select *
+from US_COMP_TCA.TRD_TCA
+where SYMBOL_NAME='CSCO'
+and TIMESTAMP >= '2026-09-03 00:00:00 America/New_York'
+and TIMESTAMP < '2026-09-04 00:00:00 America/New_York'
+limit 10000
+```
+
 ## Query Loaded Order Messages
 
 Proprietary order flow data can be queried to retrieve all order messages for a specific symbol.

@@ -290,19 +290,33 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ## EXP_W_AVERAGE
 
 Returns the Exponential Weighted Average of a set of values.
-It expects the field to aggregate upon, plus the `DECAY` value, which has a decay value type of Lambda.
+It expects the field to aggregate upon, plus the `DECAY` value, which is the numeric value determining the exponential curve.
+
+The optional `DECAY_VALUE_TYPE` argument determines how the `DECAY` value is interpreted:
+
+* `LAMBDA` - Default.  Weights of data points in a bucket decrease exponentially in the direction from the most recent tick to the most aged one, being equal to `exp(-Lambda * N)` for a fixed weight decay value Lambda.
+* `HALF_LIFE_INDEX` - `DECAY` specifies the necessary number of consecutive ticks, the first one of which would have twice less the weight of the last one.  The Lambda value is derived from this number.
+* `NUM_LOOKBACK_PERIODS` - `DECAY` specifies the EMA period N, matching the conventional smoothing-factor formula `alpha = 2/(N+1)` used by common EMA implementations, for example pandas `ewm(span=N, adjust=False)`.
+
+`LAMBDA` and `HALF_LIFE_INDEX` are two equivalent ways of expressing the same normalised weighted average.
+`NUM_LOOKBACK_PERIODS` selects a different, unnormalised accumulation (`value = alpha*price + (1-alpha)*value`), so it can differ during the warm-up period immediately after a bucket reset and converges to the other two only asymptotically.
+`NUM_LOOKBACK_PERIODS` is the decay value type to use when reproducing a conventional N-period EMA, such as the EMAs underlying MACD in the Technical Analysis section.
 
 Simple Syntax:
 <br/>
-`EXP_W_AVERAGE([Field Name],DECAY=[Lambda Value])`
+`EXP_W_AVERAGE([Field Name],DECAY=[Decay Value])`
+<br/>
+Simple Syntax with Decay Value Type:
+<br/>
+`EXP_W_AVERAGE([Field Name],DECAY=[Decay Value],DECAY_VALUE_TYPE='[LAMBDA | HALF_LIFE_INDEX | NUM_LOOKBACK_PERIODS]')`
 <br/>
 Window Syntax:
 <br/>
-`EXP_W_AVERAGE([Field Name],DECAY=[Lambda Value]) OVER(order by TIMESTAMP asc)`
+`EXP_W_AVERAGE([Field Name],DECAY=[Decay Value]) OVER(order by TIMESTAMP asc)`
 <br/>
 Moving Window Syntax:
 <br/>
-`EXP_W_AVERAGE([Field Name],DECAY=[Lambda Value]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
+`EXP_W_AVERAGE([Field Name],DECAY=[Decay Value]) OVER(order by TIMESTAMP asc range interval '[Interval Value]' [Interval Period] preceding)`
 <br/>
 ```sql
 select EXP_W_AVERAGE(PRICE,DECAY=0.1) as EXP_W_AVG_PRICE
@@ -337,16 +351,38 @@ and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
 and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 ```
 
+```sql
+select PRICE,
+EXP_W_AVERAGE(PRICE,DECAY=0.01) OVER(order by TIMESTAMP asc) as ewa_price, -- Using the default decay value type of LAMBDA
+EXP_W_AVERAGE(PRICE,DECAY=0.01,DECAY_VALUE_TYPE='LAMBDA') OVER(order by TIMESTAMP asc) as ewa_lambda_price,
+EXP_W_AVERAGE(PRICE,DECAY=2,DECAY_VALUE_TYPE='HALF_LIFE_INDEX') OVER(order by TIMESTAMP asc) as ewa_halflife_price,
+EXP_W_AVERAGE(PRICE,DECAY=10,DECAY_VALUE_TYPE='NUM_LOOKBACK_PERIODS') OVER(order by TIMESTAMP asc) as ewa_lookback_periods_price
+from US_COMP_SAMPLE.TRD
+where SYMBOL_NAME='CSCO'
+and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
+and TIMESTAMP < '2024-01-04 15:00:00 UTC'
+```
+
 <a id="exp-tw-average"></a>
 
 ## EXP_TW_AVERAGE
 
 Returns the Exponential Time Weighted Average of a set of values.
-It expects the field to aggregate upon, plus the `DECAY` value, which has a decay value type of half life in seconds.
+Unlike `EXP_W_AVERAGE`, which weights by tick position, the weight of each point is computed from elapsed time, so gaps between ticks affect the result.
+It expects the field to aggregate upon, plus the `DECAY` value, which is the numeric value determining the exponential curve.
+
+The optional `DECAY_VALUE_TYPE` argument determines how the `DECAY` value is interpreted:
+
+* `HALF_LIFE_INDEX` - Default.  `DECAY` specifies the half life in seconds, the time interval after which a data point has half the weight of the later one.
+* `LAMBDA` - Weights of data points in a bucket decrease exponentially in the direction from the most recent tick to the most aged one, being equal to `exp(-Lambda * N)` for a fixed weight decay value Lambda.
 
 Simple Syntax:
 <br/>
 `EXP_TW_AVERAGE([Field Name],DECAY=[Half life in seconds])`
+<br/>
+Simple Syntax with Decay Value Type:
+<br/>
+`EXP_TW_AVERAGE([Field Name],DECAY=[Decay Value],DECAY_VALUE_TYPE='[HALF_LIFE_INDEX | LAMBDA]')`
 <br/>
 Window Syntax:
 <br/>
@@ -383,6 +419,17 @@ and TIMESTAMP < '2024-01-04 15:00:00 UTC'
 
 ```sql
 select EXP_TW_AVERAGE(PRICE,DECAY=0.1) OVER(order by TIMESTAMP asc range interval '1' minute preceding) as EXP_TW_AVERAGE_MOVING_PRICE
+from US_COMP_SAMPLE.TRD
+where SYMBOL_NAME='CSCO'
+and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
+and TIMESTAMP < '2024-01-04 15:00:00 UTC'
+```
+
+```sql
+select PRICE,
+EXP_TW_AVERAGE(PRICE,DECAY=300) OVER(order by TIMESTAMP asc) as etwa_price, -- Using the default decay value type of HALF_LIFE_INDEX
+EXP_TW_AVERAGE(PRICE,DECAY=0.01,DECAY_VALUE_TYPE='LAMBDA') OVER(order by TIMESTAMP asc) as etwa_lambda_price,
+EXP_TW_AVERAGE(PRICE,DECAY=300,DECAY_VALUE_TYPE='HALF_LIFE_INDEX') OVER(order by TIMESTAMP asc) as etwa_halflife_price
 from US_COMP_SAMPLE.TRD
 where SYMBOL_NAME='CSCO'
 and TIMESTAMP >= '2024-01-03 14:00:00 UTC'
