@@ -265,67 +265,83 @@ limit 1000
 Time-Weighted Average Price calculates the average price weighted by the time intervals between trades.
 Useful for trade execution analysis and as a benchmark for algorithm performance evaluation.
 
+The `TW_AVG` aggregate produces the time-weighted average. Selecting `AVG` alongside it shows the
+difference: `AVG` treats every tick equally, while `TW_AVG` weights each value by how long it stood.
+
 ```sql
-select * from US_COMP_SAMPLE.TRD
-where symbol_name = 'CSCO'
-and TIMESTAMP >= '2024-01-03 09:30:00 America/New_York'
-and TIMESTAMP < '2024-01-03 16:00:00 America/New_York'
-LIMIT 1000
+select
+AVG(PRICE) as avg_price,
+TW_AVG(PRICE) as twap_price
+from LSE_SAMPLE.TRD
+where symbol_name = 'VOD'
+and TIMESTAMP >= '2024-01-03 08:00:00 UTC'
+and TIMESTAMP < '2024-01-04 16:00:00 UTC'
+group by time_bucket(INTERVAL '5' MINUTE)
+limit 1000
 ```
 
-## Time-Weighted Average Size (TWAS)
+## Time-Weighted Average Spread (TWAS)
 
-Time-Weighted Average Size calculates the average trade size weighted by the time intervals between trades across a specified period.
-Unlike a simple arithmetic average of trade sizes, TWAS accounts for how long each trade size persists in the market.
-A trade size that exists for longer periods has greater influence on the final TWAS value.
+Time-Weighted Average Spread calculates the average bid-ask spread weighted by how long each spread stood,
+rather than by how many quotes were published.
+Unlike a simple arithmetic average, TWAS accounts for how long each spread persists in the market, so a wide
+spread that lasted a second counts for more than one that was corrected immediately.
 
-The calculation weights each trade size by the time interval until the next trade, providing insight into typical execution sizes over different time windows.
+The spread is derived from the quote table as `ASK_PRICE - BID_PRICE`, and `TW_AVG` applies the time
+weighting. The difference is substantial in practice: over a single VOD session, `AVG` returns 0.016 while
+`TW_AVG` returns 1.105 on the same quotes.
 
 Calculates TWAS for the entire specified time range.
 
 ```sql
-select avg(SIZE) as TWAS
-from US_COMP_SAMPLE.TRD
-where symbol_name = 'CSCO'
-and TIMESTAMP >= '2024-01-03 09:30:00 America/New_York'
-and TIMESTAMP < '2024-01-03 16:00:00 America/New_York'
+select
+TW_AVG(ASK_PRICE - BID_PRICE) as SPREAD
+from LSE_SAMPLE.QTE
+where symbol_name = 'VOD'
+and TIMESTAMP >= '2024-01-03 08:00:00 UTC'
+and TIMESTAMP < '2024-01-04 16:00:00 UTC'
+limit 1000
 ```
 
-Aggregates TWAS grouped by exchange venue to analyze size distribution across different markets.
+Aggregates TWAS grouped by exchange venue to analyze spread differences across markets.
 
 ```sql
-select EXCHANGE, avg(SIZE) as TWAS
-from US_COMP_SAMPLE.TRD
+select EXCHANGE,
+TW_AVG(ASK_PRICE - BID_PRICE) as SPREAD
+from US_COMP_SAMPLE.QTE
 where symbol_name = 'CSCO'
-and TIMESTAMP >= '2024-01-03 09:30:00 America/New_York'
-and TIMESTAMP < '2024-01-03 16:00:00 America/New_York'
+and TIMESTAMP >= '2024-01-03 08:00:00 UTC'
+and TIMESTAMP < '2024-01-04 16:00:00 UTC'
 group by EXCHANGE
 ```
 
-Divides the time range into equal intervals and calculates TWAS for each bucket to show size trends over time.
+Divides the time range into equal intervals with `time_bucket` and calculates TWAS for each bucket, to show
+how the spread moves over the session.
 
 ```sql
 select
-floor(TIMESTAMP, 1 minute) as BUCKET_TIME,
-avg(SIZE) as TWAS
-from US_COMP_SAMPLE.TRD
-where symbol_name = 'CSCO'
-and TIMESTAMP >= '2024-01-03 09:30:00 America/New_York'
-and TIMESTAMP < '2024-01-03 16:00:00 America/New_York'
-group by BUCKET_TIME
+TW_AVG(ASK_PRICE - BID_PRICE) as SPREAD
+from LSE_SAMPLE.QTE
+where symbol_name = 'VOD'
+and TIMESTAMP >= '2024-01-03 08:00:00 UTC'
+and TIMESTAMP < '2024-01-04 16:00:00 UTC'
+group by time_bucket(INTERVAL '5' MINUTE)
+limit 1000
 ```
 
-Calculates TWAS using a rolling time window to show how average size changes as time advances.
+Calculates TWAS over a rolling time window, so each row carries the time-weighted spread for the preceding
+minute. The spread is computed in a sub-query first, as the window function aggregates an existing column.
 
 ```sql
-select
-TIMESTAMP,
-avg(SIZE) over(order by TIMESTAMP asc range interval '1' minute preceding) as ROLLING_TWAS
-from US_COMP_SAMPLE.TRD
-where symbol_name = 'CSCO'
-and TIMESTAMP >= '2024-01-03 09:30:00 America/New_York'
-and TIMESTAMP < '2024-01-03 16:00:00 America/New_York'
-LIMIT 1000
+select TW_AVG(SPREAD) over(order by TIMESTAMP asc range interval '60' second preceding) as ROLLING_SPREAD_1_MIN
+from (
+  select
+  ASK_PRICE-BID_PRICE as SPREAD
+  from LSE_SAMPLE.QTE
+  where symbol_name = 'VOD'
+  and TIMESTAMP >= '2024-01-03 08:00:00 UTC'
+  and TIMESTAMP < '2024-01-04 16:00:00 UTC'
+)
 ```
 
 ## Dynamic Bar Creation with Fill Forward
